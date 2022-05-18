@@ -18,7 +18,7 @@ import lombok.Setter;
  *
  */
 @Entity
-@Table(name="orderManagement")
+@Table(name="order")
 
 @Getter
 @Setter
