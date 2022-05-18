@@ -2,6 +2,7 @@ package com.bourntec.aaplearning.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
@@ -20,13 +21,14 @@ public class DateFields {
 	    private String createdBy;
 
 	    @CreatedDate
-	    //@Temporal(TIMESTAMP)
+	    @Column(name="created_date",nullable = false, updatable=false)
+	    
 	    LocalDateTime createdDate;
 
 	    @LastModifiedBy
 	    private String lastModifiedBy;
 
 	    @LastModifiedDate
-	    //@Temporal(TIMESTAMP)
+	 
 	    LocalDateTime lastModifiedDate;
 }
