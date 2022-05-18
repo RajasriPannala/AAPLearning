@@ -27,7 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 
-public class Order {
+public class Order extends DateFields {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
