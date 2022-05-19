@@ -18,7 +18,7 @@ import lombok.Setter;
  *
  */
 @Entity
-@Table(name="order")
+@Table(name="orderData")
 
 @Getter
 @Setter
@@ -27,7 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 
 
-public class Order extends DateFields {
+public class OrderData extends DateFields {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

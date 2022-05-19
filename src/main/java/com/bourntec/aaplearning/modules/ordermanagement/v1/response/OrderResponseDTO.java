@@ -2,7 +2,7 @@ package com.bourntec.aaplearning.modules.ordermanagement.v1.response;
 
 import org.springframework.beans.BeanUtils;
 
-import com.bourntec.aaplearning.entity.Order;
+import com.bourntec.aaplearning.entity.OrderData;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,7 +32,7 @@ public class OrderResponseDTO {
 		/**
 		 * @param order : order
 		 */
-		public void OrderResponseDto(Order order)  {
+		public void OrderResponseDto(OrderData order)  {
 
 			BeanUtils.copyProperties(order,this);
 		}

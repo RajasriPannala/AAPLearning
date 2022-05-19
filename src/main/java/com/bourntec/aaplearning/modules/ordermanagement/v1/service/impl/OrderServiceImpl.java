@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bourntec.aaplearning.entity.Order;
+import com.bourntec.aaplearning.entity.OrderData;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.repository.OrderRepository;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.request.OrderRequestDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
 //		OrderRequestDTO orderRequestDTO=new OrderRequestDTO();
-		Order order = orderRepository.findByOrderIdAndOrderStatus(orderId, Constants.OPEN);
+		OrderData order = orderRepository.findByOrderIdAndOrderStatus(orderId, Constants.OPEN);
 		if (order != null) {
 
 			orderResponseDTO.setPaylod(order);
@@ -81,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
 	public OrderResponseDTO save(OrderRequestDTO orderRequestDTO) {
 
 		OrderResponseDTO ordersDTO = new OrderResponseDTO();
-		Order order = orderRequestDTO.convertToModel();
+		OrderData order = orderRequestDTO.convertToModel();
 		order.setOrderStatus(Constants.OPEN);
 		order = orderRepository.save(order);
 		ordersDTO.setPaylod(order);
@@ -97,10 +97,10 @@ public class OrderServiceImpl implements OrderService {
 	public OrderResponseDTO updateById(Integer id, OrderRequestDTO orderRequestDTO) {
 		OrderResponseDTO ordersDTO = new OrderResponseDTO();
 
-		Optional<Order> orderOptional = orderRepository.findById(id);
+		Optional<OrderData> orderOptional = orderRepository.findById(id);
 		if (orderOptional.isPresent()) {
 
-			Order order = orderRequestDTO.convertToModel();
+			OrderData order = orderRequestDTO.convertToModel();
 			order.setOrderId(id);
 			order = orderRepository.save(order);
 			ordersDTO.setPaylod(order);

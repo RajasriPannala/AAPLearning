@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 import org.springframework.beans.BeanUtils;
 
-import com.bourntec.aaplearning.entity.Order;
+import com.bourntec.aaplearning.entity.OrderData;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,9 +44,9 @@ public class OrderRequestDTO {
 	
 	private String orderStatus;
 	
-	  public Order convertToModel() {
+	  public OrderData convertToModel() {
 			
-		 Order order=new Order();
+		 OrderData order=new OrderData();
 //			coffee.setId(id);
 //			coffee.setName(name);
 //			coffee.setBrandName(brandName);

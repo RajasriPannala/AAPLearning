@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import com.bourntec.aaplearning.entity.Order;
+import com.bourntec.aaplearning.entity.OrderData;
 
 /**
  * @author Karthika J
@@ -13,7 +13,7 @@ import com.bourntec.aaplearning.entity.Order;
  */
 @Repository
 
-public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpecificationExecutor<Order> {
+public interface OrderRepository extends JpaRepository<OrderData, Integer>, JpaSpecificationExecutor<OrderData> {
 
 	
 
@@ -22,7 +22,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer>, JpaSpeci
 	 * @param orderStatus : orderStatus
 	 * @return
 	 */
-	Order findByOrderIdAndOrderStatus(Integer orderId, String orderStatus);
+	OrderData findByOrderIdAndOrderStatus(Integer orderId, String orderStatus);
 
 	
 
