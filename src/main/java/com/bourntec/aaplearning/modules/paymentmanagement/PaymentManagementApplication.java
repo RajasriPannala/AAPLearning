@@ -9,10 +9,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 @EnableJpaAuditing         //for automatically create the created and modified date
 //@EnableScheduling
-public class AapApplication {
+public class PaymentManagementApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AapApplication.class, args);
+		SpringApplication.run(PaymentManagementApplication.class, args);
 	}
 
 }
