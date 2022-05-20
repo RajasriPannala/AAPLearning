@@ -37,12 +37,12 @@ public class InvoiceController {
 	/**
 	 * @return
 	 */
-//	@GetMapping
-//	public List<InvoiceResponseDTO> getAll() {
-//		
-//	return  invoiceService.findAll();
-//
-//	}
+	@GetMapping
+	public List<Invoice> getAll() {
+		
+	return  invoiceService.findAll();
+
+	}
 	/**
 	 * @param invoiceId
 	 */
