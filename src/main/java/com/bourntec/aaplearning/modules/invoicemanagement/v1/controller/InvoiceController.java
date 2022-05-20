@@ -66,17 +66,31 @@ public class InvoiceController {
 	 * @param invoice
 	 * @return
 	 */
-	@PostMapping("/save")
+	@PostMapping
 	public ResponseEntity<InvoiceResponseDTO> save(@RequestBody InvoiceRequestDTO invoiceRequestDTO) {
 
 		InvoiceResponseDTO invoiceResDTO=invoiceService.save(invoiceRequestDTO);
 
 		return ResponseEntity.ok(invoiceResDTO);
 }
+	/**
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping("/{id}")
 	public InvoiceResponseDTO get(@PathVariable int id) throws Exception {
 		
 	return  invoiceService.findById(id);
+
+	}
+	@GetMapping("/invoice/{pageNo}")
+
+	public List<Invoice> getInvoiceList(@PathVariable("pageNo")int pageNo, Integer pageSize){
+		pageSize=5;
+
+		 List<Invoice> invoice = invoiceService.getInvoiceList(pageNo-1,pageSize);
+		return invoice;
 
 	}
 }
