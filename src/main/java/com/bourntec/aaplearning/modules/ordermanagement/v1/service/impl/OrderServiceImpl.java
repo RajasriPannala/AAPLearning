@@ -27,8 +27,11 @@ public class OrderServiceImpl implements OrderService {
 
 	
 	/**
-	 *
+	 * find order by id
+	 * @param id:order id
+	 * @return :responsedto
 	 */
+
 	@Override
 	public OrderResponseDTO findByOrderId(Integer orderId) {
 
@@ -51,9 +54,10 @@ public class OrderServiceImpl implements OrderService {
 		return orderResponseDTO;
 	}
 
-	
 	/**
-	 *
+	 *Delete order by id
+	 * @param id:order id
+	 * @return :responsedto
 	 */
 	@Override
 	public OrderResponseDTO deleteById(Integer id) {
@@ -75,8 +79,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	/**
-	 *
+	 *save order by id 
+	 * @param orderRequestDTO
+	 * @return
 	 */
+	
 	@Override
 	public OrderResponseDTO save(OrderRequestDTO orderRequestDTO) {
 
@@ -91,7 +98,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	/**
-	 *
+	 * update order by id
+	 * @param id ::order id
+	 * @param orderRequestDTO
+	 * @return
+	 * @throws Exception
 	 */
 	@Override
 	public OrderResponseDTO updateById(Integer id, OrderRequestDTO orderRequestDTO) {

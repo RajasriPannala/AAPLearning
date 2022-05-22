@@ -51,6 +51,8 @@ public class PaymentServiceImpl implements PaymentService {
 		return paymentRepository.findAll();
 
 	}
+	
+	
 
 	@Override
 	public PaymentResponseDTO deleteById(int id) {
@@ -90,7 +92,7 @@ public class PaymentServiceImpl implements PaymentService {
 														// mapper.convertValue(map, MyPojo.class);
 
 		/**
-		 * update invoice database
+		 * update invoice database and set payment
 		 */
 		
 		
@@ -117,7 +119,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 		
 		/**
-		 * update order data base
+		 * update order data base and change status to confirmed after payment
 		 */
 		
 		
@@ -134,7 +136,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 		
 		/**
-		 * update inventory table
+		 * update inventory table decrement item count after payment
 		 */
 
 		Inventory inventory = restTemplate.getForObject("http://localhost:8084/inventory/" + invoice.getOrderId(),
