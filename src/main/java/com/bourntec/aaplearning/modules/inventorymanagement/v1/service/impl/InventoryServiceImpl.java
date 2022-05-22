@@ -116,7 +116,7 @@ public class InventoryServiceImpl implements InventoryService {
 
 
 			Inventory inventory = inventoryRequestDTO.convertToModel();
-			inventory.setId(id);
+			inventory.setInventoryId(id);
 			inventory = inventoryRepository.save(inventory);
 		invresDTO.setPaylod(inventory);
 

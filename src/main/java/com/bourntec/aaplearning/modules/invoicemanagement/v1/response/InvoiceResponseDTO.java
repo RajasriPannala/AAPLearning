@@ -4,10 +4,9 @@ package com.bourntec.aaplearning.modules.invoicemanagement.v1.response;
 
 
 
-
-
 import org.springframework.beans.BeanUtils;
 
+import com.bourntec.aaplearning.entity.DateFields;
 import com.bourntec.aaplearning.entity.Invoice;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +21,7 @@ public class InvoiceResponseDTO {
 
 String responsemessage;
 Object payload;
+
 String Status;
 //private Integer invoiceId ;
 //private Integer custId;
