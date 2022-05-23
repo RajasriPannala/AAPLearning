@@ -5,6 +5,7 @@ import java.util.List;
 import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequestDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
+import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchRequest;
 
 public interface PaymentService {
 
@@ -18,4 +19,7 @@ public interface PaymentService {
 
 	PaymentResponseDTO findByPaymentId(Integer id);
 
+	List<Payment> search(SearchRequest searchRequest);
+
+	
 }

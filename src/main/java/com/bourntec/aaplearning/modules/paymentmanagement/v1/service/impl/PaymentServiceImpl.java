@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.repository.PaymentRepository;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequestDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
+import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.GenericSpecification;
+import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchRequest;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.PaymentService;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
 
@@ -112,87 +115,16 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 		return paymentResponseDTO;
 	}
-	/*
-	 * Optional<Payment> paymentOptional = paymentRepository.findById(id); if
-	 * (paymentOptional.isPresent()) {
-	 * 
-	 * Payment alreadyExsist = paymentOptional.get(); payment.setPaymentId(id);
-	 * 
-	 * return paymentRepository.save(payment); } else throw new
-	 * Exception("Record does not exist"); }
-	 */
+	
+
+	@Override
+	public List<Payment> search(SearchRequest searchRequest) {
+		
+		return paymentRepository.findAll(new GenericSpecification<Payment>(searchRequest));	
+		
+	}
+
+	
 
 }
-/*
- * public CustomerResponseDTO updateById(Integer customerId, CustomerRequestDTO
- * customerRequestDTO) { CustomerResponseDTO CustomerResponseDTO = new
- * CustomerResponseDTO(); Optional<Customer> customerOptional =
- * customerRepository.findById(customerId); if (customerOptional.isPresent()) {
- * 
- * 
- * 
- * Customer customer = customerRequestDTO.convertToModel(); Customer
- * existingcustomer = customerOptional.get();
- * 
- * 
- * 
- * customer.setCustomerId(customerId); customerRepository.save(customer);
- * CustomerResponseDTO.setPayLoad(customer);
- * CustomerResponseDTO.setResponseMessage(" data save sucessfully");
- * CustomerResponseDTO.setStatus("Sucess"); return CustomerResponseDTO; } else
- * 
- * 
- * 
- * CustomerResponseDTO.setResponseMessage(" id not present");
- * CustomerResponseDTO.setStatus("failed"); return CustomerResponseDTO;
- * 
- * 
- * 
- * }
- */
 
-/*
- * PaymentResponseDTO paymentResDTO = new PaymentResponseDTO(); Payment payment
- * =paymentRepository.findByPaymentIdAndStatus(id,Constant.ACTIVE); if(payment
- * != null) { //payable=paymentRepository.save(payment);
- * paymentResDTO.setPayload(payment);
- * paymentResDTO.setResponsemessage("Id is present");
- * paymentResDTO.setStatus("Sucess");
- * 
- * } else {
- * 
- * paymentResDTO.setResponsemessage("Data not found");
- * paymentResDTO.setStatus("Failure");
- * 
- * } return payable; }
- */
-//public Payment updateById(Integer id, Payment payment) throws Exception {
-/*
- * PaymentResponseDTO payresDTO = new PaymentResponseDTO();
- * 
- * Payment payment = paymentRequestDTO.convertToModel();
- * payment.setStatus(Constant.ACTIVE); payment =
- * paymentRepository.findById(payment, id); payresDTO.setPayload(payment);
- * payresDTO.setResponsemessage("Payment data save sucessfully");
- * payresDTO.setStatus("Sucess"); return payresDTO; }
- */
-/*
- * public void findById(int id) {
- * 
- * Optional < Payment > optional = paymentRepository.findById(id);
- * 
- * if (optional.isPresent()) { System.out.println(optional.get()); } else {
- * System.out.printf("No employee found with id %d%n", id);
- * 
- * } //return null;} } }
- * 
- * /* Patient patient =
- * patientRepository.findByRecordStatusAndId(Constatnts.ACTIVE, id);
- * 
- * if (patient != null) { patient.setRecordStatus(Constatnts.DELETED);
- * 
- * patientRepository.save(patient); } else { throw new
- * RecordNotFoundException("Not found"); }
- * 
- * }
- */
