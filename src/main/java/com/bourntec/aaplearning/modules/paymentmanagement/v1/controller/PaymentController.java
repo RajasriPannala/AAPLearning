@@ -41,7 +41,7 @@ public class PaymentController {
 	 *
 	 */
 
-	@PostMapping("")
+	@PostMapping
 	public ResponseEntity<PaymentResponseDTO> save(@RequestBody PaymentRequestDTO paymentReqDTO) {
 
 		PaymentResponseDTO payresDTO = paymentService.save(paymentReqDTO);
