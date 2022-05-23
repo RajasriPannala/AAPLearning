@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.repository.InvoiceRepository;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceRequestDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.CsvOperationService;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.InvoiceService;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.util.Constants;
 
@@ -23,14 +25,20 @@ import com.bourntec.aaplearning.modules.invoicemanagement.v1.util.Constants;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService{
+	
+	@Value("${csv.download.path}")
+	String fileName;
+	
 	@Autowired
 	InvoiceRepository invoiceRepository;
+	@Autowired
+	CsvOperationService csvOperationService;
 
-//	@Override
-//	public List<InvoiceResponseDTO> findAll() {
-//	
-//		return invoiceRepository.findAll();
-//	}
+	@Override
+	public List<Invoice> findAll() {
+	
+		return invoiceRepository.findAll();
+	}
 //	
 
 //	@Override
@@ -184,6 +192,19 @@ public class InvoiceServiceImpl implements InvoiceService{
 ////		return (List<InvoiceResponseDTO>) invresDTO;
 //   }
 
+	@Override
+	public void downloadAsCsv() {
+		try {
+			csvOperationService.write(findAll(), fileName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			}
+		
+	}
+
 
 
 
@@ -192,4 +213,4 @@ public class InvoiceServiceImpl implements InvoiceService{
 
 	
 
-}
+

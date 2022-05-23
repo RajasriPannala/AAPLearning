@@ -11,7 +11,7 @@ import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceRes
 //@Service
 public interface InvoiceService {
 	
-//	 List<InvoiceResponseDTO> findAll();
+	 List<Invoice> findAll();
 
 	 InvoiceResponseDTO  deleteById(int id);
 //	 Invoice save(InvoiceResponseDTO invoiceReqDTO);
@@ -24,6 +24,18 @@ public interface InvoiceService {
 	InvoiceResponseDTO save(InvoiceRequestDTO invoice);
 
 	InvoiceResponseDTO findById(int id) throws Exception;
+
+
+
+	void downloadAsCsv();
+
+
+
+	
+
+
+
+	
 
 
 
