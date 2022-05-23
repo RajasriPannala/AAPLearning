@@ -34,12 +34,13 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	
-	private Integer Itemcode;
-	private String Specifiaction;
-	private String Description;
-	private String Manufacturer;
-	private Integer Price;
-	private Integer Discount;
-	private String Pieces;
+	private Integer itemCount;
+	private Integer itemCode;
+	private String specifiaction;
+	private String description;
+	private String manufacturer;
+	private Integer price;
+	private Integer discount;
+	private Integer pieces;
 	
 }
