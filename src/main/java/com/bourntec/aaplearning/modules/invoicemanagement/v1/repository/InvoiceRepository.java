@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 //import com.bourntec.AAPLearning.request.InvoiceRequestDTO;
@@ -15,8 +16,12 @@ import com.bourntec.aaplearning.entity.Invoice;
 
 
 
+/**
+ * @author Esther Tomy
+ *
+ */
 @Repository
-public interface InvoiceRepository extends JpaRepository<Invoice,Integer>,JpaSpecificationExecutor<Invoice> {
+public interface InvoiceRepository extends JpaRepository<Invoice,Integer>,JpaSpecificationExecutor<Invoice>,PagingAndSortingRepository<Invoice, Integer>{
 //	 List<Invoice> findAll();
 
 	 Invoice save(Invoice invoice);
