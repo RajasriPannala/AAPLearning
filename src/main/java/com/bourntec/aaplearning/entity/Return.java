@@ -26,6 +26,8 @@ public class Return {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Integer returnId;
+	
+	private Integer itemCount;
 	private Integer invoiceId;
 	private Integer custId;
 	private Integer itemCode;
