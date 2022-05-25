@@ -94,7 +94,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 	InvoiceResponseDTO invresDTO=new InvoiceResponseDTO();
 
 	Invoice invoice= invoiceRequestDTO.converToModel();
-	invoice.setStatus(Constants.Active);
+	invoice.setStatus(Constants.ACTIVE);
 	invoice = invoiceRepository.save(invoice);
 	invresDTO.setPayload(invoice);
 	invresDTO.setResponsemessage(" data save sucessfully");
