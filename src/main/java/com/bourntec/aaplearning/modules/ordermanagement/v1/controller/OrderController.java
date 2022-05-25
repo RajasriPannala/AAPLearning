@@ -33,7 +33,7 @@ public class OrderController {
 	
 	OrderService orderService;
 
-	Logger logger =LoggerFactory.getLogger(OrderController.class);
+	
 	/**
 	 * @param id:order id
 	 * @return :responsedto
@@ -41,7 +41,7 @@ public class OrderController {
 	@GetMapping("/{id}")
 	public ResponseEntity<OrderResponseDTO> findByOrderId(@PathVariable Integer id) {
 		OrderResponseDTO ordersDTO = orderService.findByOrderId(id);
-		logger.info("order found with id number :{}",id);
+		
 		return ResponseEntity.ok(ordersDTO);
 	}
 

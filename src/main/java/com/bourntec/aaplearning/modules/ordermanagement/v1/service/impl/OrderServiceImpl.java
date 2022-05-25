@@ -2,10 +2,13 @@ package com.bourntec.aaplearning.modules.ordermanagement.v1.service.impl;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.OrderData;
+import com.bourntec.aaplearning.modules.ordermanagement.v1.controller.OrderController;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.repository.OrderRepository;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.request.OrderRequestDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
@@ -26,6 +29,8 @@ public class OrderServiceImpl implements OrderService {
 
 
 	
+	Logger logger =LoggerFactory.getLogger(OrderController.class);
+	
 	/**
 	 * find order by id
 	 * @param id:order id
@@ -44,12 +49,13 @@ public class OrderServiceImpl implements OrderService {
 			orderResponseDTO.setPaylod(order);
 			orderResponseDTO.setResponseMessage("Data found");
 			orderResponseDTO.setStatus("Sucess");
+			logger.info("order found with id number :{}",orderId);
 
 //			return orderResponseDTO;
 		} else {
 			orderResponseDTO.setResponseMessage("Data not found");
 			orderResponseDTO.setStatus("Failure");
-
+			logger.info(" No order found with id number :{}",orderId);
 		}
 		return orderResponseDTO;
 	}
@@ -66,14 +72,17 @@ public class OrderServiceImpl implements OrderService {
 		if (orderRepository.existsById(id) == true) {
 			orderRepository.deleteById(id);
 			orderResponseDTO.setResponseMessage("Deleted successfully");
+			
 
 			orderResponseDTO.setStatus("Sucess");
+			logger.info("order deleted by id number :{}",id);
 			return orderResponseDTO;
 
 		} else
 
 			orderResponseDTO.setResponseMessage("Data not found");
 		orderResponseDTO.setStatus("Failure");
+		logger.info("order deletion failured");
 		return orderResponseDTO;
 
 	}
@@ -92,8 +101,10 @@ public class OrderServiceImpl implements OrderService {
 		order.setOrderStatus(Constants.OPEN);
 		order = orderRepository.save(order);
 		ordersDTO.setPaylod(order);
-		ordersDTO.setResponseMessage("order data save sucessfully");
+		ordersDTO.setResponseMessage("order data saved sucessfully");
 		ordersDTO.setStatus("Sucess");
+		logger.info("order saved");
+		
 		return ordersDTO;
 	}
 
@@ -118,6 +129,8 @@ public class OrderServiceImpl implements OrderService {
 
 			ordersDTO.setResponseMessage("Fetched data successfully");
 			ordersDTO.setStatus("Sucess");
+			
+			logger.info("order updated");
 
 			return ordersDTO;
 
