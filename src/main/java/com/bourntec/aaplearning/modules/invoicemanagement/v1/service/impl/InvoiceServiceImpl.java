@@ -8,6 +8,7 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +22,7 @@ import com.bourntec.aaplearning.modules.customermanagement.v1.service.impl.Custo
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.repository.InvoiceRepository;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceRequestDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.CsvOperationService;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.InvoiceService;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.util.Constants;
 
@@ -32,9 +34,28 @@ import com.bourntec.aaplearning.modules.invoicemanagement.v1.util.Constants;
  */
 @Service
 public class InvoiceServiceImpl implements InvoiceService{
+	
+	@Value("${csv.download.path}")
+	String fileName;
+	
 	@Autowired
 	InvoiceRepository invoiceRepository;
 	Logger logger = LoggerFactory.getLogger(InvoiceServiceImpl.class);
+
+	@Autowired
+	CsvOperationService csvOperationService;
+
+	
+
+
+
+	@Override
+	public List<Invoice> findAll() {
+	
+		return invoiceRepository.findAll();
+	}
+//	
+
 
 
 	/**
@@ -73,7 +94,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 	InvoiceResponseDTO invresDTO=new InvoiceResponseDTO();
 
 	Invoice invoice= invoiceRequestDTO.converToModel();
-	invoice.setStatus(Constants.Active);
+	invoice.setStatus(Constants.ACTIVE);
 	invoice = invoiceRepository.save(invoice);
 	invresDTO.setPayload(invoice);
 	invresDTO.setResponsemessage(" data save sucessfully");
@@ -149,11 +170,27 @@ public class InvoiceServiceImpl implements InvoiceService{
 		}
 	}
 
+	@Override
+	public void downloadAsCsv() {
+		try {
+			csvOperationService.write(findAll(), fileName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			}
+		
+	
+
 
 
 	/**
 	 *paging and sorting
 	 */
+	
+
+	
 	public List<Invoice> getInvoiceList(int pageNo, Integer pageSize) {
 
 
@@ -174,10 +211,10 @@ public class InvoiceServiceImpl implements InvoiceService{
             return invoiceList;
         }
 
-
-
-	}
+	}}
 
 	
 
-}
+	
+
+

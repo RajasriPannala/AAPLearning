@@ -1,33 +1,18 @@
 package com.bourntec.aaplearning.modules.paymentmanagement.v1.service.impl;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.bourntec.aaplearning.entity.Inventory;
-import com.bourntec.aaplearning.entity.Invoice;
-import com.bourntec.aaplearning.entity.OrderData;
 import com.bourntec.aaplearning.entity.Payment;
-import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.InventoryResponseDTO;
-import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
-import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.InvoiceService;
-import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
-import com.bourntec.aaplearning.modules.ordermanagement.v1.util.Constants;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.repository.PaymentRepository;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequestDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.PaymentService;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Sandra Diraj

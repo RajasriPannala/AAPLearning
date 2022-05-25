@@ -11,15 +11,14 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Data;
-/**
- * @author Esther Tomy
- *
- */
+
+
+
 @Table(name="Invoice")
 @Entity
-
 @EntityListeners(AuditingEntityListener.class)
 @Data
+
 public class Invoice extends DateFields {
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)

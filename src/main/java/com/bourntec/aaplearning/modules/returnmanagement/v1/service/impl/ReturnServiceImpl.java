@@ -52,55 +52,7 @@ public class ReturnServiceImpl implements ReturnService{
 	Return returnValue = returnRequestDTO.convertToModel();
 	returnValue.setStatus(Constants.ACTIVE);
 	returnValue = returnRepository.save(returnValue);
-	
-	
-	final ObjectMapper mapper = new ObjectMapper(); 
-/*
- * Invoice DB update method 
- */
-	InvoiceResponseDTO impResponse= restTemplate.getForObject("http://localhost:8085/invoice/"+returnValue.getInvoiceId(),InvoiceResponseDTO.class);
-	
-	// Invoice invoice = (Invoice) impResponse.getInvpayload();
 
-	Invoice invoice = mapper.convertValue(impResponse.getPayload(),Invoice.class);
-	
-	//Invoice[] invoices= restTemplate.getForObject("localhost:8082/invoice/save",Invoice[].class);
-    //for(Invoice invoice:invoices) {
-		
-	//System.out.println(invoice);
-	
-	//Invoice invoice=restTemplate.getForObject("http://localhost:8085/invoice/save"+returnValue.getInvoiceId(), Invoice.class);
-	
-	invoice.setPaidAmnt(returnValue.getRetAmt());
-	
-	
-	
-	
-	HttpEntity<Invoice> requestEntity = new HttpEntity<>(invoice);
-	HttpEntity<InvoiceResponseDTO> response = restTemplate.exchange("http://localhost:8085/invoice/"+returnValue.getInvoiceId(), HttpMethod.PUT, requestEntity,InvoiceResponseDTO .class);
-	
-	
-	/*
-	 * Inventory DB update method
-	 */
-	
-	InventoryResponseDTO impResponse1= restTemplate.getForObject("http://localhost:8082/inventory/"+returnValue.getReturnId(),InventoryResponseDTO.class);
-	
-	Inventory inventory=mapper.convertValue(impResponse1.getPaylod(), Inventory.class);
-	
-	//inventory.setPieces(returnValue.getQty());
-	
-	
-	inventory.setItemCount(inventory.getItemCount() + returnValue.getItemCount());
-
-
-
-	HttpEntity<Inventory> requestEntity1 = new HttpEntity<>(inventory);
-	HttpEntity<InventoryResponseDTO> response1 = restTemplate.exchange("http://localhost:8082/inventory/"+returnValue.getReturnId(), HttpMethod.PUT, requestEntity,InventoryResponseDTO .class);
-	
-	//inventory.setItemCount(inventory.getItemCount() - orderData.getItemcount());
-	
-	
 	retresDTO.setPayload(returnValue);
 	retresDTO.setResponsemessage("Data save sucessfully");
 	retresDTO.setStatus("Success");

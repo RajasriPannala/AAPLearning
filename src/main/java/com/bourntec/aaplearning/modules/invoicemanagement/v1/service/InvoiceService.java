@@ -16,7 +16,7 @@ import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceRes
  */
 public interface InvoiceService {
 	
-//	 List<InvoiceResponseDTO> findAll();
+	 List<Invoice> findAll();
 
 	 InvoiceResponseDTO  deleteById(int id);
 //	 Invoice save(InvoiceResponseDTO invoiceReqDTO);
@@ -32,6 +32,22 @@ public interface InvoiceService {
 
 
 	List<Invoice> getInvoiceList(int i, Integer j);
+
+	void downloadAsCsv();
+
+
+
+	
+
+
+
+	
+
+
+
+
+	
+
 //	List<InvoiceResponseDTO> findAll();
 
 
