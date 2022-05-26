@@ -90,13 +90,15 @@ public class CustomPaymentServiceImpl implements CustomPaymentService{
         
 		
 		invoice.setPaidAmnt(payment.getPaidAmount());
+		
+		 if(invoice.getInvoiceId() != null ) {
 
 		HttpEntity<Invoice> requestEntity = new HttpEntity<>(invoice);
 		HttpEntity<InvoiceResponseDTO> response = restTemplate.exchange(
 		"http://localhost:8085/invoice/" + invoice.getInvoiceId(), HttpMethod.PUT, requestEntity,
 		InvoiceResponseDTO.class);
 		
-
+		 }
 		/**
 		* update order data base and change status to confirmed after payment
 		*/
