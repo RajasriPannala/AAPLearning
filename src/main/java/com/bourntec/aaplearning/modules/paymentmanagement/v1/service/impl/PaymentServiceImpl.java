@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import com.bourntec.aaplearning.commontoall.GenericSpesification;
+import com.bourntec.aaplearning.commontoall.SearchCriteria;
+import com.bourntec.aaplearning.commontoall.SearchOperations;
 import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.repository.PaymentRepository;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequestDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.GenericSpecification;
-import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchRequest;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.PaymentService;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
 
@@ -118,11 +119,46 @@ public class PaymentServiceImpl implements PaymentService {
 	
 
 	@Override
-	public List<Payment> search(SearchRequest searchRequest) {
+	public List<Payment> search(SearchCriteria searchRequest) {
 		
+	
 		return paymentRepository.findAll(new GenericSpecification<Payment>(searchRequest));	
 		
 	}
+
+	@Override
+	public List<Payment> searchmultiple(PaymentRequestDTO paymentRequestDTO) {
+		
+		GenericSpecification genericspecification = new GenericSpecification<PaymentRequestDTO>();
+		//Payment payment=new Payment();
+		
+		if(paymentRequestDTO.getPaidAmount() != null  )
+		{
+		genericspecification.add(new SearchCriteria( "paidAmount",paymentRequestDTO.getPaidAmount(),SearchOperations.GREATER_THAN_EQUAL));
+		
+		}
+		if(paymentRequestDTO.getPaidAmount() != null )
+		{
+		genericspecification.add(new SearchCriteria( "paidAmount",paymentRequestDTO.getPaidAmount(),SearchOperations.EQUAL));
+		
+		}
+	/*	if(paymentRequestDTO.getStatus() !=null)
+		{
+		genericspecification.add(new SearchCriteria( "status",paymentRequestDTO.getStatus(),SearchOperations.EQUAL));
+		
+		}*/
+	
+     if(paymentRequestDTO.getPaymentId() !=null || paymentRequestDTO.getPaidAmount()>paymentRequestDTO.getPaidAmount())
+	{
+	genericspecification.add(new SearchCriteria( "paymentId",paymentRequestDTO.getPaymentId(),SearchOperations.EQUAL));
+	
+	}
+		
+		return paymentRepository.findAll(genericspecification);
+		
+	}
+
+	
 
 	
 

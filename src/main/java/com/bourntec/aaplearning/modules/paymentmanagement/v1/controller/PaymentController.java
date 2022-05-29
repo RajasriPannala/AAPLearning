@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequestDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
-import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchRequest;
+import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchCriteria;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.PaymentService;
 
 /**
@@ -79,16 +79,24 @@ public class PaymentController {
 	public PaymentResponseDTO findByPaymentId(@PathVariable Integer id) {
 		return paymentService.findByPaymentId(id);
 	}
+	/**
+	 * @Request Search using generic specification,based on a single criteria.
+	 *
+	 */
 	
 	@PostMapping("/search/dynamic")
-	public List<Payment> search(@RequestBody SearchRequest searchRequest)
+	public List<Payment> search(@RequestBody SearchCriteria searchRequest)
 	{
 	return paymentService.search(searchRequest);
 	}
-	/*@PostMapping("/search/dynamic")
-	public List<Payment> searchmultiple(@RequestBody SearchRequest searchRequest)
+	/**
+	 * @Request Dynamic search on multiple criteria.
+	 *
+	 */
+	@PostMapping("/dynamic")
+	public List<Payment> searchmultiple(@RequestBody PaymentRequestDTO searchRequest)
 	{
 	return paymentService.searchmultiple(searchRequest);
-	}*/
+	}
 
 }

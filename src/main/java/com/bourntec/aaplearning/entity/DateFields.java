@@ -12,8 +12,16 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Data
+
+
 public class DateFields {
 	
 	
@@ -22,6 +30,7 @@ public class DateFields {
 
 	    @CreatedDate
 	    @Column(name="created_date",nullable = false, updatable=false)
+	    @JsonFormat( pattern = "yyyy-MM-dd")
 	    
 	    LocalDateTime createdDate;
 
