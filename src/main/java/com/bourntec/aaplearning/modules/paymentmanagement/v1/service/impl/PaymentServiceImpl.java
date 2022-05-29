@@ -5,15 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import com.bourntec.aaplearning.commontoall.GenericSpesification;
-import com.bourntec.aaplearning.commontoall.SearchCriteria;
-import com.bourntec.aaplearning.commontoall.SearchOperations;
 import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.repository.PaymentRepository;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequestDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
-import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.GenericSpecification;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.PaymentService;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
 
@@ -27,12 +24,20 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	PaymentRepository paymentRepository;
 
+	@Autowired
+	RestTemplate restTemplate;
+
+//	@Autowired
+//	InvoiceService invoiceService;
+
 	@Override
 	public List<Payment> findAll() {
 
 		return paymentRepository.findAll();
 
 	}
+	
+	
 
 	@Override
 	public PaymentResponseDTO deleteById(int id) {
@@ -56,13 +61,20 @@ public class PaymentServiceImpl implements PaymentService {
 	 * Request Param: Payment DTO
 	 */
 
+	
 	@Override
 	public PaymentResponseDTO save(PaymentRequestDTO paymentRequestDTO) {
 		PaymentResponseDTO payresDTO = new PaymentResponseDTO();
 
 		Payment payment = paymentRequestDTO.convertToModel();
 		payment.setStatus(Constant.ACTIVE);
+
 		payment = paymentRepository.save(payment);
+
+		
+		
+		
+
 		payresDTO.setPayload(payment);
 		payresDTO.setResponsemessage("Payment data saved sucessfully");
 		payresDTO.setStatus("Sucess");
@@ -116,51 +128,32 @@ public class PaymentServiceImpl implements PaymentService {
 		}
 		return paymentResponseDTO;
 	}
-	
+	/*
+	 * Optional<Payment> paymentOptional = paymentRepository.findById(id); if
+	 * (paymentOptional.isPresent()) {
+	 * 
+	 * Payment alreadyExsist = paymentOptional.get(); payment.setPaymentId(id);
+	 * 
+	 * return paymentRepository.save(payment); } else throw new
+	 * Exception("Record does not exist"); }
+	 */
+
+
 
 	@Override
-	public List<Payment> search(SearchCriteria searchRequest) {
-		
-	
-		return paymentRepository.findAll(new GenericSpecification<Payment>(searchRequest));	
-		
+	public List<Payment> search(
+			com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchCriteria searchRequest) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+
 
 	@Override
 	public List<Payment> searchmultiple(PaymentRequestDTO paymentRequestDTO) {
-		
-		GenericSpecification genericspecification = new GenericSpecification<PaymentRequestDTO>();
-		//Payment payment=new Payment();
-		
-		if(paymentRequestDTO.getPaidAmount() != null  )
-		{
-		genericspecification.add(new SearchCriteria( "paidAmount",paymentRequestDTO.getPaidAmount(),SearchOperations.GREATER_THAN_EQUAL));
-		
-		}
-		if(paymentRequestDTO.getPaidAmount() != null )
-		{
-		genericspecification.add(new SearchCriteria( "paidAmount",paymentRequestDTO.getPaidAmount(),SearchOperations.EQUAL));
-		
-		}
-	/*	if(paymentRequestDTO.getStatus() !=null)
-		{
-		genericspecification.add(new SearchCriteria( "status",paymentRequestDTO.getStatus(),SearchOperations.EQUAL));
-		
-		}*/
-	
-     if(paymentRequestDTO.getPaymentId() !=null || paymentRequestDTO.getPaidAmount()>paymentRequestDTO.getPaidAmount())
-	{
-	genericspecification.add(new SearchCriteria( "paymentId",paymentRequestDTO.getPaymentId(),SearchOperations.EQUAL));
-	
+		// TODO Auto-generated method stub
+		return null;
 	}
-		
-		return paymentRepository.findAll(genericspecification);
-		
-	}
-
-	
-
-	
 
 }
 

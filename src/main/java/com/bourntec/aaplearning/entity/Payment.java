@@ -23,7 +23,7 @@ public class Payment extends DateFields {
 	private Integer customerId;
 	private Integer invoiceId;
 	private Integer paidAmount;
-	private String  status;
+	private String status;
 	private String paymentType;
 	
 	
