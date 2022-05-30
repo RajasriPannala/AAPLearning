@@ -40,7 +40,7 @@ public class MailServiceImpl implements MailService {
 			mailMessage.setSubject(details.getSubject());
 			if (details.getModule().equalsIgnoreCase(Constant.PAYMENT)) {
 				PaymentResponseDTO payrsdto = restTemplate.getForObject(
-						"http://localhost:8080/payments/" + details.getKeyValue(), PaymentResponseDTO.class);
+						"http://localhost:8081/payments/" + details.getKeyValue(), PaymentResponseDTO.class);
 				Payment payment = mapper.convertValue(payrsdto.getPayload(), Payment.class);
 				mailMessage.setText(details.getMessage() + payment.getPaymentType() + payment.getPaidAmount());
 			}
