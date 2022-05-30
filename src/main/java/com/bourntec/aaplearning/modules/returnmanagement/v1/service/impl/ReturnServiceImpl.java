@@ -3,14 +3,22 @@ package com.bourntec.aaplearning.modules.returnmanagement.v1.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import com.bourntec.aaplearning.entity.Inventory;
+import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.entity.Return;
+import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.InventoryResponseDTO;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.repository.ReturnRepository;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.request.ReturnRequestDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.response.ReturnResponseDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.service.ReturnService;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.util.Constants;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Rohini P M
@@ -21,6 +29,8 @@ public class ReturnServiceImpl implements ReturnService{
 	
 	@Autowired
 	ReturnRepository returnRepository;
+	
+	RestTemplate restTemplate;
 
 	/**
 	 *
@@ -39,18 +49,17 @@ public class ReturnServiceImpl implements ReturnService{
 	public ReturnResponseDTO save(ReturnRequestDTO returnRequestDTO) {
 	ReturnResponseDTO retresDTO=new ReturnResponseDTO();
 
-	Return returnManagement = returnRequestDTO.convertToModel();
-	returnManagement.setStatus(Constants.ACTIVE);
-	returnManagement = returnRepository.save(returnManagement);
-	retresDTO.setPayload(returnManagement);
+	Return returnValue = returnRequestDTO.convertToModel();
+	returnValue.setStatus(Constants.ACTIVE);
+	returnValue = returnRepository.save(returnValue);
+
+	retresDTO.setPayload(returnValue);
 	retresDTO.setResponsemessage("Data save sucessfully");
 	retresDTO.setStatus("Success");
 	return retresDTO;
 	}
 
-	/**
-	 *
-	 */
+	
 	public ReturnResponseDTO deleteById(Integer id) {
 		ReturnResponseDTO returnResponseDTO = new ReturnResponseDTO();
 
@@ -65,7 +74,6 @@ public class ReturnServiceImpl implements ReturnService{
 		returnResponseDTO.setResponsemessage("Data not found");
 	returnResponseDTO.setStatus("Failure");
 	return returnResponseDTO;
-
 
 
 	}
@@ -95,9 +103,8 @@ public class ReturnServiceImpl implements ReturnService{
 
 	}
 	
-	/**
-	 *
-	 */
+	
+	
 	@Override
 	public ReturnResponseDTO findById(int id) throws Exception {
 

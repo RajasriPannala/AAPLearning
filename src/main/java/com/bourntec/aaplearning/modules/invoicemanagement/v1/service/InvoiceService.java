@@ -8,10 +8,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceRequestDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
-//@Service
+
+
+/**
+ * @author Esther Tomy
+ *
+ */
 public interface InvoiceService {
 	
-//	 List<InvoiceResponseDTO> findAll();
+	 List<Invoice> findAll();
 
 	 InvoiceResponseDTO  deleteById(int id);
 //	 Invoice save(InvoiceResponseDTO invoiceReqDTO);
@@ -26,6 +31,22 @@ public interface InvoiceService {
 	InvoiceResponseDTO findById(int id) throws Exception;
 
 
+	List<Invoice> getInvoiceList(int i, Integer j);
+
+	void downloadAsCsv();
+
+
+
+	
+
+
+
+	
+
+
+
+
+	
 
 //	List<InvoiceResponseDTO> findAll();
 

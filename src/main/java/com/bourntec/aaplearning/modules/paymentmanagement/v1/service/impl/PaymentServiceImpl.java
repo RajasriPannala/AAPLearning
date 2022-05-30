@@ -8,7 +8,9 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-//import org.springframework.web.client.RestTemplate;
+
+import org.springframework.web.client.RestTemplate;
+
 
 import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.repository.PaymentRepository;
@@ -30,7 +32,13 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	PaymentRepository paymentRepository;
 
-	
+
+	@Autowired
+	RestTemplate restTemplate;
+
+//	@Autowired
+//	InvoiceService invoiceService;
+
 
 	@Override
 	public List<Payment> findAll() {

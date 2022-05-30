@@ -34,6 +34,7 @@ public class OrderData extends DateFields {
 
 
 	private Integer orderId;
+	private Integer inventoryId;
 	private Integer custId;
 	private Integer itemCode;
 	private String address;
