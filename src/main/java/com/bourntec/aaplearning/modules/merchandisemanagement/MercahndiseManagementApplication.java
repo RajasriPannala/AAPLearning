@@ -1,13 +1,13 @@
-package com.bourntec.aaplearning;
+package com.bourntec.aaplearning.modules.merchandisemanagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@EnableEurekaClient
-public class AAPLearningApplication {
+public class MercahndiseManagementApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AAPLearningApplication.class, args);
+		SpringApplication.run(MercahndiseManagementApplication.class, args);
 	}
+
 }
