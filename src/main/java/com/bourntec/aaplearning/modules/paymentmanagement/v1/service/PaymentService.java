@@ -5,6 +5,7 @@ import java.util.List;
 import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequestDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
+import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchCriteria;
 
 public interface PaymentService {
 
@@ -17,5 +18,10 @@ public interface PaymentService {
 	PaymentResponseDTO deleteById(int id);
 
 	PaymentResponseDTO findByPaymentId(Integer id);
+
+	List<Payment> search(SearchCriteria searchRequest);
+
+	List<Payment> searchmultiple(PaymentRequestDTO paymentRequestDTO);
+
 
 }

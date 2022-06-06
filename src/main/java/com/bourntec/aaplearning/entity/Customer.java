@@ -9,8 +9,11 @@ import javax.persistence.Id;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Table;
@@ -23,6 +26,9 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "aapcustomer")
 public class Customer {
 
@@ -35,8 +41,8 @@ public class Customer {
 	private Long phoneNumber;
 	private String email;
 	private String password;
-	@Column(length = 1)
+	//@Column(length = 1)
 	private String status;
-	@Column(length = 1)
+	//@Column(length = 1)
 	private String recordStatus;
 }
