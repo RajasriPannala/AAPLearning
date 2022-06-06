@@ -28,7 +28,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Inventory {
+public class Inventory extends DateFields{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

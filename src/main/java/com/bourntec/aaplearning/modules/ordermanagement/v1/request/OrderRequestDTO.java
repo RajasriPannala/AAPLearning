@@ -47,12 +47,7 @@ public class OrderRequestDTO {
 	  public OrderData convertToModel() {
 			
 		 OrderData order=new OrderData();
-//			coffee.setId(id);
-//			coffee.setName(name);
-//			coffee.setBrandName(brandName);
-//			coffee.setPrice(price);
-//			coffee.setOrderDate(orderDate);
-//			coffee.setType(type);
+
 			BeanUtils.copyProperties(this, order);
 			return order;
 

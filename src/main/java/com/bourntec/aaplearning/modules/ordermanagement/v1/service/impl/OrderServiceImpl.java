@@ -1,5 +1,9 @@
 package com.bourntec.aaplearning.modules.ordermanagement.v1.service.impl;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -8,12 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.OrderData;
+import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.controller.OrderController;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.repository.OrderRepository;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.request.OrderRequestDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.service.OrderService;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.util.Constants;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 
 /**
@@ -35,7 +48,18 @@ public class OrderServiceImpl implements OrderService {
 	 * find order by id
 	 * @param id:order id
 	 * @return :responsedto
+	 * 
 	 */
+	
+	
+	
+
+	@Override
+	public List<OrderData> findAll() {
+
+		return orderRepository.findAll();
+
+	}
 
 	@Override
 	public OrderResponseDTO findByOrderId(Integer orderId) {
@@ -43,10 +67,13 @@ public class OrderServiceImpl implements OrderService {
 		
 		OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
 //		OrderRequestDTO orderRequestDTO=new OrderRequestDTO();
-		OrderData order = orderRepository.findByOrderIdAndOrderStatus(orderId, Constants.OPEN);
-		if (order != null) {
+		
+		Optional<OrderData> orderList = orderRepository.findById(orderId);
+		
+		
+		if (orderList != null) {
 
-			orderResponseDTO.setPaylod(order);
+			orderResponseDTO.setPaylod(orderList.get());
 			orderResponseDTO.setResponseMessage("Data found");
 			orderResponseDTO.setStatus("Sucess");
 			logger.info("order found with id number :{}",orderId);
@@ -124,6 +151,7 @@ public class OrderServiceImpl implements OrderService {
 
 			OrderData order = orderRequestDTO.convertToModel();
 			order.setOrderId(id);
+			
 			order = orderRepository.save(order);
 			ordersDTO.setPaylod(order);
 
@@ -142,5 +170,20 @@ public class OrderServiceImpl implements OrderService {
 		}
 
 	}
+	
+	@Override
+	public String generatePdf()throws JRException, IOException{
+	JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(orderRepository.findAll());
+	JasperReport compileReport=JasperCompileManager.compileReport(new FileInputStream("src/main/resources/OrderData.jrxml"));
+	HashMap<String, Object> map = new HashMap<>();
+	JasperPrint report  =  JasperFillManager.fillReport(compileReport, map,beanCollectionDataSource);
+	JasperExportManager.exportReportToPdfFile(report,"orderdata.pdf");
 
+	logger.info("order pdf generated");
+	return "generated";
+
+	
+
+
+}
 }
