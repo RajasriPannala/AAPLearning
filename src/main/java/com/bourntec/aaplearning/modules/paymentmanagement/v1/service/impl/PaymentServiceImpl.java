@@ -128,6 +128,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 			Payment payment = paymentRequestDTO.convertToModel();
 			payment.setPaymentId(id);
+		
 			paymentRepository.save(payment);
 			paymentResponseDTO.setPayload(payment);
 			paymentResponseDTO.setResponsemessage(" data save sucessfully");

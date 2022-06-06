@@ -24,6 +24,8 @@ public interface OrderRepository extends JpaRepository<OrderData, Integer>, JpaS
 	 */
 	OrderData findByOrderIdAndOrderStatus(Integer orderId, String orderStatus);
 
+	OrderData findByOrderId(Integer orderId);
+
 	
 
 	

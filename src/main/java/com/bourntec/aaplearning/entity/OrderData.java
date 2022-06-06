@@ -9,6 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +33,8 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+//@Where(clause="order_id=:orderId")
 
 public class OrderData extends DateFields {
 	
@@ -39,6 +48,9 @@ public class OrderData extends DateFields {
 	private Integer itemCode;
 	private String address;
 	private Integer itemcount;
+	
+	 @JsonSerialize(using = LocalDateTimeSerializer.class)
+	    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDate orderDate;
 	private Integer trackingId;
 	
