@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 
 public class InvoiceRequestDTO {
 	
-	 private Integer invoiceId ;
+	private Integer invoiceId ;
 	private Integer custId;
 	private Integer orderId;
 	private Integer itemCode;
