@@ -116,6 +116,7 @@ public class PaymentServiceImpl implements PaymentService {
 		if (paymentOptional.isPresent()) {
 			Payment foundPayment = paymentOptional.orElseThrow(() -> null);
 
+<<<<<<< HEAD
 			paymentRequestDTO.setPaymentId(id);
 			// BeanUtils.copyProperties(
 			// paymentRequestDTO,foundPayment,getNullPropertyNames(paymentRequestDTO));
@@ -123,6 +124,11 @@ public class PaymentServiceImpl implements PaymentService {
 			Payment payment = paymentRequestDTO.convertToModel(foundPayment);
 			foundPayment.setPaymentId(id);
 			// foundPayment.setPaymentId(paymentRequestDTO.getPaymentId()!=null?paymentRequestDTO.getPaymentId(),this.);
+=======
+			Payment payment = paymentRequestDTO.convertToModel();
+			payment.setPaymentId(id);
+		
+>>>>>>> branch 'master' of https://github.com/RajasriPannala/AAPLearning.git
 			paymentRepository.save(payment);
 			paymentResponseDTO.setPayload(payment);
 			paymentResponseDTO.setResponsemessage(" data save sucessfully");

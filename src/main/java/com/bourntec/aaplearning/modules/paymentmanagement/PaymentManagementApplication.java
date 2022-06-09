@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @EntityScan("com.bourntec.aaplearning.entity")
+@ComponentScan({"com.bourntec.aaplearning.modules.paymentmanagement","com.bourntec.aaplearning.utility"})
 @SpringBootApplication
 @EnableJpaAuditing         //for automatically create the created and modified date
 //@EnableScheduling
