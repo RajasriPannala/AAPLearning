@@ -26,16 +26,15 @@ import lombok.Setter;
 @Table(name="inventory")
 @EntityListeners(AuditingEntityListener.class)
 @Data
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Inventory extends DateFields{
-
-	@Id
+@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
 	private Integer itemCode;
 	private Integer itemCount;
 	private String specifiaction;
