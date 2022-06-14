@@ -14,7 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+//import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +36,8 @@ import com.bourntec.aaplearning.modules.invoicemanagement.v1.util.Constants;
 @Service
 
 public class InvoiceServiceImpl implements InvoiceService{
-	
 	@Value("${csv.download.path}")
+
 	String fileName;
 	
 	@Autowired
@@ -117,14 +117,16 @@ public class InvoiceServiceImpl implements InvoiceService{
 		// order.setId(id);
 		InvoiceResponseDTO invresDTO=new InvoiceResponseDTO();
 		Optional<Invoice> invoiceOptional = invoiceRepository.findById(id);
+		invoiceOptional.get();
 		if (invoiceOptional.isPresent()) {
 
 
 		Invoice invoice= invoiceRequestDTO.converToModel();
-		Invoice existinginvoice = invoiceOptional.get();
+//		Invoice existinginvoice = invoiceOptional.get();
 
 		
 		invoice.setInvoiceId(id);
+		
 		invoiceRepository.save(invoice);
 		invresDTO.setPayload(invoice);
 		invresDTO.setResponsemessage(" data save sucessfully");

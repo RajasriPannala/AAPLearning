@@ -104,6 +104,7 @@ public class CustomerServiceImpl implements CustomerService {
 			logger.info("data updated");
 			CustomerResponseDTO.setStatus("Sucess");
 			return CustomerResponseDTO;
+
 		} else
 
 			CustomerResponseDTO.setResponseMessage(" id not present");

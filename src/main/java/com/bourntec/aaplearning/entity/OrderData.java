@@ -14,7 +14,9 @@ import org.hibernate.annotations.Where;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import lombok.AllArgsConstructor;
@@ -49,8 +51,8 @@ public class OrderData extends DateFields {
 	private String address;
 	private Integer itemcount;
 	
-	 @JsonSerialize(using = LocalDateTimeSerializer.class)
-	    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	 @JsonSerialize(using = LocalDateSerializer.class)
+	 @JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate orderDate;
 	private Integer trackingId;
 	

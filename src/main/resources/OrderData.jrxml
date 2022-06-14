@@ -36,7 +36,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textField isBlankWhenNull="true">
-					<reportElement style="Column header" x="0" y="0" width="104" height="73" forecolor="#000000" uuid="0f40ce36-78f2-49e5-adf5-8855d6516e74"/>
+					<reportElement style="Column header" x="0" y="6" width="104" height="73" forecolor="#000000" uuid="0f40ce36-78f2-49e5-adf5-8855d6516e74"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="58" isBold="true"/>
 					</textElement>
@@ -138,7 +138,7 @@
 				<textFieldExpression><![CDATA[$F{itemCode}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="247" y="-9" width="90" height="30" uuid="4142a01d-a13c-4f67-b01e-48282885e37d"/>
+				<reportElement x="247" y="-16" width="90" height="30" uuid="4142a01d-a13c-4f67-b01e-48282885e37d"/>
 				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
 			</textField>
 			<textField>
