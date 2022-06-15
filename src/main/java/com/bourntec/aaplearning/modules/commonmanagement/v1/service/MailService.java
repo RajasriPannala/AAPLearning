@@ -7,5 +7,7 @@ public interface MailService {
 	
 	
 	 String sendSimpleMail(EmailRequestDTO details);
+	 String sendSimpleMails(EmailRequestDTO details);
+
 
 }

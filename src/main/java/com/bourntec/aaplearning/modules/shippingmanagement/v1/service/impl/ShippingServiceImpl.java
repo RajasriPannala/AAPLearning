@@ -43,7 +43,7 @@ public class ShippingServiceImpl implements ShippingService {
 			Shipping shipping = shippingRequestDTO.convertToModel();
 			shipping.setShippingId(shippingId);
 			shipping = shippingRepository.save(shipping);
-			shippingResponseDTO.setPaylod(shipping);
+			shippingResponseDTO.setPayload(shipping);
 
 			shippingResponseDTO.setResponseMessage("Fetched data successfully");
 			shippingResponseDTO.setStatus("Sucess");
@@ -96,7 +96,7 @@ public class ShippingServiceImpl implements ShippingService {
 		// shipping.setDeliveryStatus(Constants.CONFIRMED);
 		// shipping.setDeliveryStatus(shippingRequestDTO.getDeliveryStatus());
 		shipping = shippingRepository.save(shipping);
-		shippingsDTO.setPaylod(shipping);
+		shippingsDTO.setPayload(shipping);
 		shippingsDTO.setResponseMessage("shipping data save sucessfully");
 		logger.info("Sucess");
 		shippingsDTO.setStatus("Sucess");
@@ -112,7 +112,7 @@ public class ShippingServiceImpl implements ShippingService {
 			Optional<Shipping> shipping = shippingRepository.findById(shippingId);
 			if (shipping.isPresent()) {
 
-				shippingResponseDTO.setPaylod(shipping.get());
+				shippingResponseDTO.setPayload(shipping.get());
 				shippingResponseDTO.setResponseMessage("Data is present");
 				logger.info("Successfully fetched");
 				shippingResponseDTO.setStatus("Sucess");

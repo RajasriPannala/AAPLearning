@@ -14,12 +14,14 @@ import lombok.NoArgsConstructor;
 
 public class ShippingResponseDTO {
 	String responseMessage;
-	Object paylod;
+	Object payload;
 	String status;
 
 	public void ShippingResponseDTO(Shipping shipping) {
 
 		BeanUtils.copyProperties(shipping, this);
 	}
+
+	
 
 }

@@ -1,8 +1,13 @@
 package com.bourntec.aaplearning.modules.paymentmanagement.v1.service.impl;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -11,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.bourntec.aaplearning.entity.Payment;
+import com.bourntec.aaplearning.modules.paymentmanagement.v1.controller.PaymentController;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.repository.PaymentRepository;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequestDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
@@ -19,6 +25,14 @@ import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchCriter
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchOperations;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.PaymentService;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  * @author Sandra Diraj
@@ -36,6 +50,7 @@ public class PaymentServiceImpl implements PaymentService {
 //	@Autowired
 //	InvoiceService invoiceService;
 
+	Logger logger =LoggerFactory.getLogger(PaymentController.class);
 	@Override
 	public List<Payment> findAll() {
 
@@ -121,15 +136,16 @@ public class PaymentServiceImpl implements PaymentService {
 			// BeanUtils.copyProperties(
 			// paymentRequestDTO,foundPayment,getNullPropertyNames(paymentRequestDTO));
 			// foundPayment.get();
-			Payment payment = paymentRequestDTO.convertToModel(foundPayment);
+			Payment payment = paymentRequestDTO.convertToModel();
 			foundPayment.setPaymentId(id);
 			// foundPayment.setPaymentId(paymentRequestDTO.getPaymentId()!=null?paymentRequestDTO.getPaymentId(),this.);
 
-			Payment payment = paymentRequestDTO.convertToModel();
-			payment.setPaymentId(id);
+			Payment payment1 = paymentRequestDTO.convertToModel();
+			payment1.setPaymentId(id);
 		
-			paymentRepository.save(payment);
-			paymentResponseDTO.setPayload(payment);
+
+			paymentRepository.save(payment1);
+			paymentResponseDTO.setPayload(payment1);
 			paymentResponseDTO.setResponsemessage(" data save sucessfully");
 			paymentResponseDTO.setStatus("Sucess");
 
@@ -188,4 +204,22 @@ public class PaymentServiceImpl implements PaymentService {
 
 	}
 
+	@Override
+	public String generatePdf() throws JRException, IOException {
+		
+		
+		
+	
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(paymentRepository.findAll());
+		JasperReport compileReport=JasperCompileManager.compileReport(new FileInputStream("src/main/resources/PaymentDetails.jrxml"));
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report  =  JasperFillManager.fillReport(compileReport, map,beanCollectionDataSource);
+		JasperExportManager.exportReportToPdfFile(report,"paymentdetails.pdf");
+
+		logger.info("payment details pdf generated");
+		return "generated";
+	
+	}
+
+	
 }
