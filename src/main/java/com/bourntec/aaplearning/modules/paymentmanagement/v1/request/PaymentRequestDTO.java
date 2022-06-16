@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PaymentRequestDTO {
 	
+	
 	private Integer paymentId;
 	private Integer customerId;
 	private Integer invoiceId;
@@ -43,7 +44,7 @@ public class PaymentRequestDTO {
 	
 	public Payment convertToModel(Payment payment ) {
 		
-	
+
 		
 		BeanUtils.copyProperties(this, payment,getNullPropertyNames(this));
 
@@ -65,3 +66,4 @@ public class PaymentRequestDTO {
 	
 
 	}
+

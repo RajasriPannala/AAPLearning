@@ -11,6 +11,7 @@ import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchCriter
 import net.sf.jasperreports.engine.JRException;
 
 public interface PaymentService {
+	
 
 	List<Payment> findAll();
 
