@@ -136,16 +136,16 @@ public class PaymentServiceImpl implements PaymentService {
 			// BeanUtils.copyProperties(
 			// paymentRequestDTO,foundPayment,getNullPropertyNames(paymentRequestDTO));
 			// foundPayment.get();
-			Payment payment = paymentRequestDTO.convertToModel();
+			Payment payment = paymentRequestDTO.convertToModel(foundPayment);
 			foundPayment.setPaymentId(id);
 			// foundPayment.setPaymentId(paymentRequestDTO.getPaymentId()!=null?paymentRequestDTO.getPaymentId(),this.);
 
-			Payment payment1 = paymentRequestDTO.convertToModel();
-			payment1.setPaymentId(id);
+			Payment payments = paymentRequestDTO.convertToModel();
+			payment.setPaymentId(id);
 		
 
-			paymentRepository.save(payment1);
-			paymentResponseDTO.setPayload(payment1);
+			paymentRepository.save(payment);
+			paymentResponseDTO.setPayload(payment);
 			paymentResponseDTO.setResponsemessage(" data save sucessfully");
 			paymentResponseDTO.setStatus("Sucess");
 

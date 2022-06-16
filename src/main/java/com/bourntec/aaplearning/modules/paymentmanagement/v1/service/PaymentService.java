@@ -25,7 +25,7 @@ public interface PaymentService {
 	List<Payment> search(SearchCriteria searchRequest);
 
 	List<Payment> searchmultiple(PaymentRequestDTO paymentRequestDTO);
-
+	
 	String generatePdf() throws JRException, IOException;
 
 
