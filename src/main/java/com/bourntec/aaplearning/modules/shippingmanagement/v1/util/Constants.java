@@ -5,7 +5,8 @@ public class Constants {
 public static final String OPEN="O";
 	
 public static final String CONFIRMED="C";
+public static final String INVOICE="I";
  
-
+public static final String SHIPPING = "S";
 
 }
