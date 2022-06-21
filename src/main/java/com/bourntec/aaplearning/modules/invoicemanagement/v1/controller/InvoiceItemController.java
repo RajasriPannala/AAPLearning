@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.bourntec.aaplearning.entity.InvoiceItem;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceItemRequestDto;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceItemResponseDto;
@@ -28,6 +29,8 @@ public class InvoiceItemController {
 	
 	@Autowired
 	InvoiceItemService invoiceItemService;
+	
+
 
 	/**
 	 * @param invoice
@@ -41,6 +44,7 @@ public class InvoiceItemController {
 
 		return ResponseEntity.ok(invoiceResDTO);
 }
+	
 	/**
 	 * @return
 	 */
@@ -78,6 +82,18 @@ public class InvoiceItemController {
 	return  invoiceItemService.findById(id);
 
 	}
+	
+//	@PutMapping("/{Id}/{itemCode}")
+//void invoiceItemInventory(@PathVariable Integer Id, @PathVariable Integer itemCode) {
+//		InvoiceItem invoiceItem=invoiceItemRepository.getOne(Id);
+//		Inventory inventory=inventoryRepository.getOne(itemCode);
+//		
+//	}
 
+	@PostMapping("/bulk")
+	public List<InvoiceItemResponseDto> createAll(@RequestBody List<InvoiceItemRequestDto> invoiceItemRequestDTO )
+	{
+		return invoiceItemService.saveAll(invoiceItemRequestDTO);
+	}
 
 }

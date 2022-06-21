@@ -1,9 +1,18 @@
 package com.bourntec.aaplearning.entity;
 
-import javax.persistence.*;
-
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceCustomRequestDto;
 
 import lombok.Data;
 
@@ -11,27 +20,25 @@ import lombok.Data;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Data
-
 public class InvoiceItem {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
- private Integer Id;
-private Integer invoiceId ;
+
+private Integer itemId;
+private Integer inventoryId ;
  
-//@ManyToMany(fetch = FetchType.LAZY)
-//@JoinTable(
-//name = "inventory", 
-//joinColumns = @JoinColumn(name = "id"), 
-//inverseJoinColumns = @JoinColumn(name = "item_code"))
-//inverseJoinColumns = @JoinColumn(name = "item_code"))
  private Integer itemCode;
  private Integer itemCost;
  private Integer itemCount;
  
+ @JoinColumn(name = "invoiceId")
+ @ManyToOne(fetch = FetchType.EAGER)
+ private Invoice invoice;
+
+
+
  
- 
- 
-	
+
+
 
 }
-

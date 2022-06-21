@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 //import com.bourntec.AAPLearning.request.InvoiceRequestDTO;
 //import com.bourntec.aap.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.entity.Invoice;
+import com.bourntec.aaplearning.entity.InvoiceItem;
 
 
 
@@ -22,8 +23,10 @@ import com.bourntec.aaplearning.entity.Invoice;
 public interface InvoiceRepository extends JpaRepository<Invoice,Integer>,JpaSpecificationExecutor<Invoice>,PagingAndSortingRepository<Invoice, Integer>{
 	// List<InvoiceItem> findAll();
 
-	 Invoice save(Invoice invoice);
-//	 InvoiceResponseDTO findById(int id) throws Exception;
+	 InvoiceItem save(InvoiceItem invoice);
+// InvoiceResponseDTO findById(int id);
+
+	// Invoice save(InvoiceRequestDto invoice);
 
 //	 void updateById(int id);
 //	 InvoiceResponseDTO findAll();

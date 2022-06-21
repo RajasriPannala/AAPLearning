@@ -22,6 +22,7 @@ public class InvoiceItemRequestDto {
 	 private Integer itemCode;
 	 private Integer itemCost;
 	 private Integer itemCount;
+	
 	 
 	 public InvoiceItem converToModel() {
 		 InvoiceItem invoice=new InvoiceItem();

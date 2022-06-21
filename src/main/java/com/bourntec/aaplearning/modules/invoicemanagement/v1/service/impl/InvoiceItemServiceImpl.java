@@ -1,5 +1,6 @@
 package com.bourntec.aaplearning.modules.invoicemanagement.v1.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.entity.InvoiceItem;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.repository.InvoiceItemRepository;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.repository.InvoiceRepository;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceItemRequestDto;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceItemResponseDto;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.InvoiceItemService;
@@ -19,11 +22,13 @@ import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.InvoiceItem
  */
 @Service
 public class InvoiceItemServiceImpl implements InvoiceItemService {
+	Logger logger = LoggerFactory.getLogger(InvoiceServiceImpl.class);
 	@Autowired
 	InvoiceItemRepository invoiceItemRepository;
-	Logger logger = LoggerFactory.getLogger(InvoiceServiceImpl.class);
-
 	
+	
+    @Autowired
+	InvoiceRepository invoiceRepository;
 
 	
 
@@ -40,14 +45,17 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 			
 
 			InvoiceItem invoiceItem= invoiceItemRequestDto.converToModel();
+			Optional<Invoice> invoice = invoiceRepository.findById(invoiceItemRequestDto.getInvoiceId());
+			invoiceItem.setInvoice(invoice.get());
 			invoiceItem = invoiceItemRepository.save(invoiceItem);
 			invresDTO.setPayload(invoiceItem);
-			invresDTO.setResponsemessage(" data save sucessfully");
+			invresDTO.setResponseMessage(" data save sucessfully");
 			invresDTO.setStatus("Sucess");
 			logger.info("data saved successfully");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			invresDTO.setResponseMessage(" data not saved");
 		}
 		return invresDTO;
 		}
@@ -80,7 +88,7 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 
 		if (invoiceItemRepository.existsById(id) == true) {
 			invoiceItemRepository.deleteById(id);
-			invoiceItemResponseDto.setResponsemessage("Deleted successfully");
+			invoiceItemResponseDto.setResponseMessage("Deleted successfully");
 			//invoiceItemRepository.setStatus("Sucess");
 		logger.info("deleted");
 		return invoiceItemResponseDto;
@@ -88,7 +96,7 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 
 		} else
 
-			invoiceItemResponseDto.setResponsemessage("Data not found");
+			invoiceItemResponseDto.setResponseMessage("Data not found");
 		invoiceItemResponseDto.setStatus("Failure");
 			logger.error("User Not Found");
 		return invoiceItemResponseDto;
@@ -105,10 +113,10 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 	 */
 
 	@Override
-	public InvoiceItemResponseDto updateById(Integer invoiceId, InvoiceItemRequestDto invoiceItemRequestDTO) {
+	public InvoiceItemResponseDto updateById(Integer itemId, InvoiceItemRequestDto invoiceItemRequestDTO) {
 		// TODO Auto-generated method stub
 		InvoiceItemResponseDto invresDTO=new InvoiceItemResponseDto();
-			Optional<InvoiceItem> invoiceOptional = invoiceItemRepository.findById(invoiceId);
+			Optional<InvoiceItem> invoiceOptional = invoiceItemRepository.findById(itemId);
 			if (invoiceOptional.isPresent()) {
 
 
@@ -116,15 +124,15 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 			InvoiceItem existinginvoice = invoiceOptional.get();
 
 			
-			invoiceItem.setInvoiceId(invoiceId);
+			invoiceItem.setItemId(itemId);
 			invoiceItemRepository.save(invoiceItem);
 			invresDTO.setPayload(invoiceItem);
-			invresDTO.setResponsemessage(" data updated sucessfully");
+			invresDTO.setResponseMessage(" data updated sucessfully");
 			logger.info("data updated");
 			return invresDTO;
 			} else
 
-            invresDTO.setResponsemessage(" id not present");
+            invresDTO.setResponseMessage(" id not present");
 			logger.error("User Not Found");
 			return invresDTO;
 			
@@ -147,18 +155,50 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 
 			
 			invresDTO.setPayload(invoiceOptional.get());
-			invresDTO.setResponsemessage(" data got sucessfully");
+			invresDTO.setResponseMessage(" data got sucessfully");
 			logger.info("Successfully fetched");
 			return invresDTO;
 			
 		}
 		else {
-			invresDTO.setResponsemessage(" Given id does not exists");
+			invresDTO.setResponseMessage(" Given id does not exists");
 			invresDTO.setStatus("failed");
 			logger.error("invoice item Not Found");
 			return invresDTO;
 		}
 	}
+
+
+
+
+	@Override
+	public List<InvoiceItem> getAll() {
+		// TODO Auto-generated method stub
+		return invoiceItemRepository.findAll();
+	}
+
+
+
+
+	@Override
+	public List<InvoiceItemResponseDto> saveAll(List<InvoiceItemRequestDto> invoiceItemRequestDTO) {
+		// TODO Auto-generated method stub
+		List<InvoiceItem> invoiceItemList=new ArrayList<>();
+		InvoiceItem invoiceItem=null;
+		InvoiceItemRequestDto invoiceItemRequestDto=new InvoiceItemRequestDto();
+		for(InvoiceItemRequestDto invoiceItemDTO:invoiceItemRequestDTO )
+		{
+
+		Optional<Invoice> invoice = invoiceRepository.findById(invoiceItemDTO.getInvoiceId());
+		invoiceItem=invoiceItemDTO.converToModel();
+        invoiceItem.setInvoice(invoice.get());
+        invoiceItemList.add(invoiceItem);
+		}
+        List<InvoiceItemResponseDto> res= invoiceItemRepository.saveAll(invoiceItemList).stream().
+		map(InvoiceItemResponseDto::new).toList();
+		return res;
+}
+	
 	}
 
 

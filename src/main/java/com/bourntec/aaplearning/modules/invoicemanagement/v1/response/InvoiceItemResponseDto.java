@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class InvoiceItemResponseDto {
 	
 
-String responsemessage;
+String responseMessage;
 Object payload;
 
 String Status;
@@ -27,12 +27,16 @@ String Status;
 /**
  * @param invoice
  */
-public InvoiceItemResponseDto(InvoiceItem invoice)
-{
-BeanUtils.copyProperties(invoice, this);
-}
+//public InvoiceItemResponseDto(InvoiceItem invoice)
+//{
+//BeanUtils.copyProperties(invoice, this);
+//}
 
 
-	 
+public InvoiceItemResponseDto(InvoiceItem invoice) {
+
+payload=invoice;
+responseMessage="data saved succefully";
+}	 
 
 }
