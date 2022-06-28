@@ -1,5 +1,7 @@
 package com.bourntec.aaplearning.modules.customermanagement.v1.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bourntec.aaplearning.entity.Customer;
 import com.bourntec.aaplearning.modules.customermanagement.v1.request.CustomerRequestDTO;
 import com.bourntec.aaplearning.modules.customermanagement.v1.response.CustomerResponseDTO;
 import com.bourntec.aaplearning.modules.customermanagement.v1.service.CustomerService;
+
 
 /**
  * @author Sarath G Krishnan
@@ -68,6 +72,10 @@ public class CustomerController {
 	@GetMapping("/{customerId}")
 	public CustomerResponseDTO findById(@PathVariable int customerId) throws Exception {
 		return customerService.findById(customerId);
-	}
+		}
+	
+	
+	
 
 }
+	

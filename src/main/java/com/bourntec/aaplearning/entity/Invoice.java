@@ -10,7 +10,9 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 
@@ -18,6 +20,8 @@ import lombok.Data;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class Invoice extends DateFields {
  @Id

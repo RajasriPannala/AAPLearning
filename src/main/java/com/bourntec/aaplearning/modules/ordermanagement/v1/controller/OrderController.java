@@ -1,8 +1,11 @@
 package com.bourntec.aaplearning.modules.ordermanagement.v1.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bourntec.aaplearning.entity.OrderData;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.request.OrderRequestDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.service.OrderService;
+
 
 
 
@@ -39,7 +44,7 @@ public class OrderController {
 	 * @return :responsedto
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<OrderResponseDTO> findByOrderId(@PathVariable Integer id) {
+	public ResponseEntity<OrderResponseDTO> findByOrderLineId(@PathVariable Integer id) {
 		OrderResponseDTO ordersDTO = orderService.findByOrderId(id);
 		
 		return ResponseEntity.ok(ordersDTO);
@@ -88,6 +93,10 @@ public class OrderController {
 
 
 
-	
+	@GetMapping("/details")
+	public List<OrderData> findAllOrderData(@Param("customer_id") int customer_id)
+	{
+		return orderService.findAllOrderData(customer_id);
+	}
 
 }

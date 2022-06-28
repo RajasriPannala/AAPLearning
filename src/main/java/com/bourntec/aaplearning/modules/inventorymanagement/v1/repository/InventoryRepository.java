@@ -21,11 +21,11 @@ public interface InventoryRepository extends JpaRepository<Inventory,Integer>,Jp
 	
 	//Inventory findByRecordStatus(String recordStatus);
 	
-	InventoryResponseDTO save(InventoryRequestDTO inventoryRequestDTO);
+//	InventoryResponseDTO save(InventoryRequestDTO inventoryRequestDTO);
 	
 	//void deleteById(Integer id);
 	
-	Optional<Inventory> findById(Integer id);
+	//Optional<Inventory> findById(Integer id);
 	
 	
 }

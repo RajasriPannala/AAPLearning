@@ -1,12 +1,16 @@
 package com.bourntec.aaplearning.modules.customermanagement.v1.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.bourntec.aaplearning.entity.Customer;
 import com.bourntec.aaplearning.modules.customermanagement.v1.request.CustomerRequestDTO;
 import com.bourntec.aaplearning.modules.customermanagement.v1.response.CustomerResponseDTO;
+
 
 /**
  * @author Sarath G Krishnan
@@ -29,4 +33,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>, Jp
 	 * @return
 	 */
 	Customer findByCustomerIdAndRecordStatus(Integer customerId, String active);
+	
+	
+	
+	
+		
 	}
