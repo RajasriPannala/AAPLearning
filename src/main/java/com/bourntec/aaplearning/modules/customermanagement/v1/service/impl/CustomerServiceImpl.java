@@ -115,10 +115,37 @@ public class CustomerServiceImpl implements CustomerService {
 
 	}
 
-//	@Override
-//	public String findPincode(int id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
+	@Override
+	public String findPincode(int id) {
+	String pincodeRange = null;
+	Optional<Customer> Optional = customerRepository.findById(id);
+	if (Optional.isPresent()) {
+	int pincode = Optional.get().getPinCode();
+
+	if (pincode == 123456)
+		pincodeRange = "thiruvalla";
+	else if (pincode == 689101)
+		pincodeRange = "pathanmthitta";
+	else if (pincode == 689115)
+		pincodeRange = "thirumoolapuram";
+	else if (pincode == 689106)
+		pincodeRange = "thengeli";
+	else
+		pincodeRange = "not found";
+
+
+
+
+
+	}
+	return pincodeRange;
+
+
+
+
+
+	}
+
 
 }

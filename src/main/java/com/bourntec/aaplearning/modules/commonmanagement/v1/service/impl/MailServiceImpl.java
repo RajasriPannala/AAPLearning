@@ -15,16 +15,20 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.retry.annotation.CircuitBreaker;
+//import org.springframework.retry.annotation.CircuitBreaker;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.bourntec.aaplearning.entity.Payment;
+import com.bourntec.aaplearning.entity.Shipping;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.request.EmailRequestDTO;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.service.MailService;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
+import com.bourntec.aaplearning.modules.shippingmanagement.v1.dto.response.ShippingResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
 public class MailServiceImpl implements MailService {
@@ -118,4 +122,39 @@ return "---RESPONSE FROM FALLBACK METHOD !---";
 
 
 
+
+
+
+//	@Override
+//	public String sendSimpleMails(EmailRequestDTO details) {
+//		// TODO Auto-generated method stub
+//		RestTemplate restTemplate = new RestTemplate();
+//
+//		Shipping shippings = new Shipping();
+//
+//		final ObjectMapper mapper = new ObjectMapper();
+//		try {
+//
+//			SimpleMailMessage mailMessage = new SimpleMailMessage();
+//			mailMessage.setFrom(sender);
+//			mailMessage.setTo(details.getToMail());
+//			mailMessage.setSubject(details.getSubject());
+//			if (details.getModule().equalsIgnoreCase(Constant.SHIPPING)) {
+//				ShippingResponseDTO shypsdto = restTemplate.getForObject(
+//						"http://localhost:8081/shippings/" + details.getKeyValue(), ShippingResponseDTO.class);
+//				Shipping shipping = mapper.convertValue(shypsdto.getPayload(), Shipping.class);
+//				mailMessage.setText(details.getMessage() + shipping.getShipDate() + shipping.getShipStatus());
+//			}
+//						javaMailSender.send(mailMessage);
+//			
+//			return "Mail Sent Successfully...";
+//
+//		}
+//
+//		catch (Exception e) {
+//			throw e;
+//
+//		}
+//	}
+//}
 

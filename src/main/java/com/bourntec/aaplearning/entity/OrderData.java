@@ -18,12 +18,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 /**
  * @author Karthika J
  *
  */
 @Entity
-@Table(name="orderData")
+@Table(name = "orderData")
 
 @Getter
 @Setter
@@ -33,31 +34,25 @@ import lombok.Setter;
 //@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 //@Where(clause="order_id=:orderId")
 
-public class OrderData  extends DateFields{
-	
+public class OrderData extends DateFields {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	 
-  
 	private Integer orderId;
 	private Integer inventoryId;
 	private Integer custId;
 	private Integer itemCode;
 	private String address;
 	private Integer itemcount;
-	
-	 @JsonSerialize(using = LocalDateSerializer.class)
-	    @JsonDeserialize(using = LocalDateDeserializer.class)
+
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
 //	@JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
 	private LocalDate orderDate;
 	private Integer trackingId;
-	
-	
-	 @Column(length=1)
-	    String orderStatus;
 
-
-	
+	@Column(length = 1)
+	String orderStatus;
 
 }

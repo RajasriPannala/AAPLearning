@@ -18,6 +18,7 @@ public class PaymentResponseDTO {
 	String status;
 
 	public PaymentResponseDTO(Payment payment) {
+		
 		BeanUtils.copyProperties(payment, this);
 
 	}

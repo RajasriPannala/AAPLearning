@@ -39,11 +39,15 @@ public interface CustomerService {
 	 */
 	CustomerResponseDTO findById(int customerId) throws Exception;
 
+
 //	String findPincode(int id);
 	
 	
 
 	
+
+	String findPincode(int id);
+
 }
 
 	

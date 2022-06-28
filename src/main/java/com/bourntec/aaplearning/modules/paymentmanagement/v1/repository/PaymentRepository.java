@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bourntec.aaplearning.entity.Payment;
 
+
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Integer>,JpaSpecificationExecutor<Payment> {
 

@@ -1,4 +1,6 @@
-package com.bourntec.aaplearning.modules.customermanagement.v1.repository;
+ package com.bourntec.aaplearning.modules.customermanagement.v1.repository;
+
+import java.util.Optional;
 
 import java.util.List;
 
@@ -33,9 +35,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>, Jp
 	 * @return
 	 */
 	Customer findByCustomerIdAndRecordStatus(Integer customerId, String active);
-	
-	
-	
-	
-		
+
+	Optional<Customer> findById(Integer customerId);
+
 	}
