@@ -35,7 +35,7 @@ public class TestCustomerServiceImpl {
 
 		Customer customer=Customer.builder()
 				//.customerId(2)
-				.name("user101")
+				.customerName("user101")
 				.address("pathanamthitta")
 				.pinCode(689101)
 				.phoneNumber((long) 983456782)
@@ -47,7 +47,7 @@ public class TestCustomerServiceImpl {
 
 		customerRepository.save(customer);
 		Assertions.assertThat(customer).isNotNull();
-		Assertions.assertThat(customer.getCustomerId());
+		Assertions.assertThat(customer.getCustId());
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class TestCustomerServiceImpl {
 		// given - precondition or setup
 		// when -  action or the behaviour that we are going test
 		Customer     customer = Customer.builder()
-				.name("user1")
+				.customerName("user1")
 				.address("pathanamthitta")
 				.pinCode(689101)
 				.phoneNumber((long) 983456782)
@@ -90,7 +90,7 @@ public class TestCustomerServiceImpl {
 		// when - action or the behaviour that we are going test
 		Customer saveCustomer = customerRepository.save(customer);
 
-		Optional<Customer> Optional = customerRepository.findById(customer.getCustomerId());
+		Optional<Customer> Optional = customerRepository.findById(customer.getCustId());
 
 
 
@@ -107,7 +107,7 @@ public class TestCustomerServiceImpl {
 
 
 		Customer     customer = Customer.builder()
-				.name("user1")
+				.customerName("user1")
 				.address("pathanamthitta")
 				.pinCode(689101)
 				.phoneNumber((long) 983456782)
@@ -121,8 +121,8 @@ public class TestCustomerServiceImpl {
 
 
 		// when -  action or the behaviour that we are going test
-		customerRepository.deleteById(customer.getCustomerId());
-		Optional<Customer> Optional = customerRepository.findById(customer.getCustomerId());
+		customerRepository.deleteById(customer.getCustId());
+		Optional<Customer> Optional = customerRepository.findById(customer.getCustId());
 
 		// then - verify the output
 		Assertions.assertThat(Optional).isEmpty();
