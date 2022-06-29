@@ -1,6 +1,5 @@
 package com.bourntec.aaplearning.modules.paymentmanagement.v1.controller;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,29 +17,16 @@ import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.CustomPayme
 public class CustomPaymentController {
 	
 	
-	Logger logger = LoggerFactory.getLogger(getClass());
-	
 	@Autowired
 	CustomPaymentService custPaymentService;
 	
 	@PostMapping
-	
-	
-	 public ResponseEntity<PaymentResponseDTO> saveCustomPayment(@RequestBody PaymentRequestDTO paymentReqDTO) {
+	public ResponseEntity<PaymentResponseDTO> saveCustomPayment(@RequestBody PaymentRequestDTO paymentReqDTO) {
 
 		PaymentResponseDTO payresDTO = custPaymentService.saveCustomPayment(paymentReqDTO);
 
 		return ResponseEntity.ok(payresDTO);
 	}
 
-	
-   
 
-
- 
-   
-    
-  
 }
-
-

@@ -26,8 +26,6 @@ import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.CustomPayme
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-
 /**
  * @author Karthika J
  *
@@ -49,7 +47,6 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 	@Override
 
 //@Transactional(rollbackFor = Exception.class)
-	
 	public PaymentResponseDTO saveCustomPayment(PaymentRequestDTO paymentRequestDTO) {
 		PaymentResponseDTO payresDTO = new PaymentResponseDTO();
 
@@ -72,9 +69,6 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 		 */
 
 //	    if(payment.getPaidAmount() != null) {
-		
-		
-		 logger.info("saveCustomPayment() call starts here");
 
 		InvoiceResponseDTO invResponse = restTemplate
 
@@ -100,9 +94,6 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 					"http://localhost:8085/invoice/" + invoice.getInvoiceId(), HttpMethod.PUT, requestEntity,
 					InvoiceResponseDTO.class);
 
-			
-			
-			
 		}
 		/**
 		 * update order data base and change status to confirmed after payment
@@ -154,8 +145,5 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 		return payresDTO;
 
 	}
-	
-	
-	
-    
+
 }

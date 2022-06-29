@@ -1,17 +1,11 @@
 package com.bourntec.aaplearning.modules.ordermanagement.v1.controller;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.hibernate.criterion.Order;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,15 +20,8 @@ import com.bourntec.aaplearning.entity.OrderData;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.request.OrderRequestDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.service.OrderService;
-import com.bourntec.aaplearning.modules.ordermanagement.v1.util.Constants;
 
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 
 
@@ -44,7 +31,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  */
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("orders")
 
 public class OrderController {
 	
@@ -52,7 +39,7 @@ public class OrderController {
 	
 	OrderService orderService;
 
-	
+	Logger logger =LoggerFactory.getLogger(OrderController.class);
 	
 	
 	@GetMapping()
@@ -68,6 +55,7 @@ public class OrderController {
 	@GetMapping("/{id}")
 	public ResponseEntity<OrderResponseDTO> findByOrderId(@PathVariable Integer id) {
 		OrderResponseDTO ordersDTO = orderService.findByOrderId(id);
+		logger.info("fasdsd");
 		
 		return ResponseEntity.ok(ordersDTO);
 	}
