@@ -11,6 +11,10 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Karthika J
+ *
+ */
 @Component
 public class HeaderInterceptor implements ClientHttpRequestInterceptor {
 

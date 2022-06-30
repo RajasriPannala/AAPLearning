@@ -10,10 +10,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * @author Karthika J
+ *
+ */
 @Configuration
 	public class RestTemplateConfig {
 
 	   
+	    
+	    /**
+	     * interceptor added
+	     */
 	    @Autowired
 	    private HeaderInterceptor headerInterceptor;
 

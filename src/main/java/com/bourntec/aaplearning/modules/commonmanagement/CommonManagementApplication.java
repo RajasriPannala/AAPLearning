@@ -8,6 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
 
+/**
+ * @author Karthika J
+ *
+ */
 @EntityScan("com.bourntec.aaplearning.entity")
 @EnableJpaAuditing
 @SpringBootApplication
