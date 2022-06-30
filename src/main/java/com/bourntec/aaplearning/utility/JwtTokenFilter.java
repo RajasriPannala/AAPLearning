@@ -3,6 +3,8 @@ package com.bourntec.aaplearning.utility;
 
 
 import java.io.IOException;
+
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -13,6 +15,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+import org.json.XML;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,10 +31,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+
+
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
-
-
+    @Autowired
+	JwtSecurityContextUtil contextUtil;
 
     RestTemplate restTemplate=new RestTemplate();
 
@@ -62,14 +69,20 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 			HttpEntity<Void> entity= new HttpEntity<>(headers);
 			ResponseEntity<String> decodeResponse=restTemplate.exchange( uri, HttpMethod.GET,entity, String.class);
             System.out.println(decodeResponse.getBody());
-
+            
+            String claims=decodeResponse.getBody();
             
            
-			if (decodeResponse.getBody().equals("success")){
+			if (claims.contains("success")){
 			//if (Objects.nonNull(decodeResponse)) {
+				JSONObject json = XML.toJSONObject(decodeResponse.getBody());
+				String userName=json.getJSONObject("Claims").getString("username");
+				
 
 				final List<GrantedAuthority> grantedAuthorities=new ArrayList<GrantedAuthority>();
 				String username=getFilterName() != null ? getFilterName().trim() : "";
+				contextUtil.setCurrentUser(userName);
+			
 			UsernamePasswordAuthenticationToken authentication =new UsernamePasswordAuthenticationToken(username,null, grantedAuthorities);
 			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
 			SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -78,6 +91,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 				httpServletResponse.setStatus(401);
 					return;
 			}
+			
 			//			return;
 				
 

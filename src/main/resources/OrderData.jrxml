@@ -24,6 +24,7 @@
 	<field name="itemcount" class="java.lang.Integer"/>
 	<field name="orderDate" class="java.time.LocalDate"/>
 	<field name="trackingId" class="java.lang.Integer"/>
+	<field name="Field_1" class="java.time.LocalDate"/>
 	<background>
 		<band height="822" splitType="Stretch">
 			<frame>
@@ -36,7 +37,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textField isBlankWhenNull="true">
-					<reportElement style="Column header" x="0" y="0" width="104" height="73" forecolor="#000000" uuid="0f40ce36-78f2-49e5-adf5-8855d6516e74"/>
+					<reportElement style="Column header" x="0" y="6" width="104" height="73" forecolor="#000000" uuid="0f40ce36-78f2-49e5-adf5-8855d6516e74"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="58" isBold="true"/>
 					</textElement>
@@ -54,10 +55,14 @@
 					<reportElement mode="Transparent" x="42" y="73" width="20" height="1" uuid="ab96a4b0-8a0d-4ae2-8695-16868926ec2b"/>
 				</line>
 			</frame>
+			<staticText>
+				<reportElement x="5" y="29" width="100" height="30" uuid="214ae8cc-e86d-4372-b6e2-1b63589a3081"/>
+				<text><![CDATA[Static Text]]></text>
+			</staticText>
 		</band>
 	</background>
 	<title>
-		<band height="70" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<staticText>
 				<reportElement style="Title" x="60" y="-14" width="380" height="64" forecolor="#3B3434" backcolor="rgba(240, 152, 151, 0.3882353)" uuid="524767a9-e7e5-4041-9b08-5a7210b38e22"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -75,7 +80,7 @@
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="83" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="-10" width="555" height="30" uuid="2a96b471-ab1e-4600-bd3c-9ab00ccfd547"/>
 				<text><![CDATA[orderId]]></text>
@@ -107,7 +112,7 @@
 			<frame>
 				<reportElement x="97" y="1" width="458" height="15" uuid="5d75be3e-ea39-4b96-baf8-b49497315044"/>
 				<staticText>
-					<reportElement x="150" y="-99" width="93" height="30" uuid="7d277700-ef15-4fd6-9dfb-d1400d744981"/>
+					<reportElement x="150" y="-31" width="93" height="30" uuid="7d277700-ef15-4fd6-9dfb-d1400d744981"/>
 					<text><![CDATA[address]]></text>
 				</staticText>
 				<textField>
@@ -138,7 +143,7 @@
 				<textFieldExpression><![CDATA[$F{itemCode}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="247" y="-9" width="90" height="30" uuid="4142a01d-a13c-4f67-b01e-48282885e37d"/>
+				<reportElement x="247" y="-16" width="90" height="30" uuid="4142a01d-a13c-4f67-b01e-48282885e37d"/>
 				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
 			</textField>
 			<textField>
