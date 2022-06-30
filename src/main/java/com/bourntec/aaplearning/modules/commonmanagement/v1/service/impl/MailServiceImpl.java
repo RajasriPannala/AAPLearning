@@ -132,6 +132,7 @@ public class MailServiceImpl implements MailService {
 			return sender;
 
 	}
+	
 public String getPaymentFallback(Exception e) {
 logger.info("---RESPONSE FROM FALLBACK METHOD---");
 

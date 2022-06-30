@@ -1,4 +1,4 @@
- package com.bourntec.aaplearning.modules.customermanagement.v1.repository;
+package com.bourntec.aaplearning.modules.customermanagement.v1.repository;
 
 import java.util.Optional;
 
@@ -16,20 +16,19 @@ import com.bourntec.aaplearning.modules.customermanagement.v1.response.CustomerR
  */
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer>, JpaSpecificationExecutor<Customer> {
-	
+
 	/**
 	 * @param customerRequestDTO
-	 * @return
-	 * save customer details
+	 * @return save customer details
 	 */
 	CustomerResponseDTO save(CustomerRequestDTO customerRequestDTO);
 
 	/**
 	 * @param customerId
-	 * @param active
-	 * find customer using customer id and record status
+	 * @param active     find customer using customer id and record status
 	 * @return
 	 */
 	Customer findByCustomerIdAndRecordStatus(Integer customerId, String active);
+
 	Optional<Customer> findById(Integer customerId);
-	}
+}

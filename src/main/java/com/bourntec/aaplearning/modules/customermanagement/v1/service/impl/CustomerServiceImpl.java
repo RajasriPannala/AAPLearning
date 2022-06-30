@@ -110,13 +110,12 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		return customerResponseDTO;
 	}
-	
+
 	@Override
 	public List<Customer> CustomerFilter() throws Exception {
 		List<Customer> customer = new ArrayList<>();
-		customer=customerRepository.findAll();
-		return customer.stream()
-			    .filter(c -> "vayanad".equals(c.getAddress())).collect(Collectors.toList());
+		customer = customerRepository.findAll();
+		return customer.stream().filter(c -> "vayanad".equals(c.getAddress())).collect(Collectors.toList());
 	}
 
 	/**
@@ -144,12 +143,11 @@ public class CustomerServiceImpl implements CustomerService {
 		return pincodeRange;
 
 	}
+
 	@Override
 	public List<Customer> findAll() {
 		return customerRepository.findAll();
-	
-	}
 
-	
+	}
 
 }
