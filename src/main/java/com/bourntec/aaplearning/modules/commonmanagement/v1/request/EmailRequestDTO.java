@@ -15,7 +15,7 @@ public class EmailRequestDTO {
 	private String toMail;
 	private String subject;
 	private String message;
-	private String module;//payment
+	private String module;//payment//Shipping
 	private String  keyValue;//id
 	
 

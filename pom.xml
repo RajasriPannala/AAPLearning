@@ -172,8 +172,7 @@
     <artifactId>spring-boot-starter-remote-shell</artifactId>
     <version>1.2.0.RELEASE</version>
 </dependency> 
-	
-	</dependencies>
+</dependencies>
 
 <dependencyManagement>
 		<dependencies>

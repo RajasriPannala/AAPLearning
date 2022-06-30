@@ -17,7 +17,6 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	
 	<field name="orderId" class="java.lang.Integer"/>
 	<field name="custId" class="java.lang.Integer"/>
 	<field name="itemCode" class="java.lang.Integer"/>

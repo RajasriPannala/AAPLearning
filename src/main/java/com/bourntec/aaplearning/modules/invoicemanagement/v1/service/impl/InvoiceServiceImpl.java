@@ -179,6 +179,5 @@ public class InvoiceServiceImpl implements InvoiceService {
 		} else {
 			return invoiceList;
 		}
-
 	}
 }

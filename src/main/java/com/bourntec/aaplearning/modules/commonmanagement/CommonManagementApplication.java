@@ -1,4 +1,4 @@
-package com.bourntec.aaplearning.modules.ordermanagement;
+package com.bourntec.aaplearning.modules.commonmanagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,14 +13,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  *
  */
 @EntityScan("com.bourntec.aaplearning.entity")
-@ComponentScan({"com.bourntec.aaplearning.modules.ordermanagement","com.bourntec.aaplearning.utility"})
-@SpringBootApplication
 @EnableJpaAuditing
-
-public class OrderManagementApplication {
+@SpringBootApplication
+//@EnableEurekaClient
+@ComponentScan({"com.bourntec.aaplearning.modules.commonmanagement","com.bourntec.aaplearning.utility"})
+public class CommonManagementApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OrderManagementApplication.class, args);
+		SpringApplication.run(CommonManagementApplication.class, args);
 	}
 
 }

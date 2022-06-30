@@ -2,7 +2,6 @@ package com.bourntec.aaplearning.modules.paymentmanagement.v1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +15,10 @@ import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.CustomPayme
 @RequestMapping("/custompayments")
 
 public class CustomPaymentController {
-	
-	
+
 	@Autowired
 	CustomPaymentService custPaymentService;
-	
+
 	@PostMapping
 	public ResponseEntity<PaymentResponseDTO> saveCustomPayment(@RequestBody PaymentRequestDTO paymentReqDTO) {
 
@@ -28,6 +26,5 @@ public class CustomPaymentController {
 
 		return ResponseEntity.ok(payresDTO);
 	}
-
 
 }

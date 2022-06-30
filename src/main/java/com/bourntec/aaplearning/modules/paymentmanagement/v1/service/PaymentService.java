@@ -1,5 +1,6 @@
 package com.bourntec.aaplearning.modules.paymentmanagement.v1.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.bourntec.aaplearning.entity.Payment;
@@ -7,7 +8,10 @@ import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequ
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.search.SearchCriteria;
 
+import net.sf.jasperreports.engine.JRException;
+
 public interface PaymentService {
+	
 
 	List<Payment> findAll();
 
@@ -22,6 +26,8 @@ public interface PaymentService {
 	List<Payment> search(SearchCriteria searchRequest);
 
 	List<Payment> searchmultiple(PaymentRequestDTO paymentRequestDTO);
+	
+	String generatePdf() throws JRException, IOException;
 
 
 }
