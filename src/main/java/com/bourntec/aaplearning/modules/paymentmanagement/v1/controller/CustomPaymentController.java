@@ -12,6 +12,7 @@ import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentRes
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.CustomPaymentService;
 
 @RestController
+
 @RequestMapping("/custompayments")
 
 public class CustomPaymentController {
