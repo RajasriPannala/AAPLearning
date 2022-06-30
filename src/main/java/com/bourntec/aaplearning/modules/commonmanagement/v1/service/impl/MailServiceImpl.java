@@ -19,12 +19,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.bourntec.aaplearning.entity.Payment;
-import com.bourntec.aaplearning.entity.Shipping;
+
 import com.bourntec.aaplearning.modules.commonmanagement.v1.request.EmailRequestDTO;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.service.MailService;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
-import com.bourntec.aaplearning.modules.shippingmanagement.v1.dto.response.ShippingResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;

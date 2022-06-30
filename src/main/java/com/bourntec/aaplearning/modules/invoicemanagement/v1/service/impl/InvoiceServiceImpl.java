@@ -206,8 +206,6 @@ public class InvoiceServiceImpl implements InvoiceService{
 
         Page<Invoice> pagedResult = invoiceRepository.findAll(paging);
 
-        
-        
         System.out.println("total element.... "  +   pagedResult.getTotalElements());
         System.out.println("total pages.... "  +   pagedResult.getTotalPages());
         System.out.println("current page.... "  +   pagedResult.getNumber());
