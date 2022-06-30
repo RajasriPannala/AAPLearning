@@ -3,23 +3,19 @@ package com.bourntec.aaplearning.modules.invoicemanagement.v1.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bourntec.aaplearning.entity.Invoice;
-import com.bourntec.aaplearning.modules.customermanagement.v1.service.impl.CustomerServiceImpl;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.repository.InvoiceRepository;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceRequestDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
