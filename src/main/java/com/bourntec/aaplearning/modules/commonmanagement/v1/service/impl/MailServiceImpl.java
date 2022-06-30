@@ -42,6 +42,8 @@ public class MailServiceImpl implements MailService {
 	HttpServletRequest httpServletRequest;
 
 
+	@Autowired
+	RestTemplate restTemplate;
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 
