@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+
+
 /**
  * @author Karthika J
  *
@@ -14,6 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @ComponentScan({"com.bourntec.aaplearning.modules.ordermanagement","com.bourntec.aaplearning.utility"})
 @SpringBootApplication
 @EnableJpaAuditing
+
 public class OrderManagementApplication {
 
 	public static void main(String[] args) {

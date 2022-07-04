@@ -3,6 +3,7 @@ package com.bourntec.aaplearning.modules.customermanagement.v1.response;
 import org.springframework.beans.BeanUtils;
 
 import com.bourntec.aaplearning.entity.Customer;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class CustomerResponseDTO {
 
 	String responseMessage;

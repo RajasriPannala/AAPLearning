@@ -1,5 +1,7 @@
 package com.bourntec.aaplearning.modules.commonmanagement.v1.controller;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,15 +11,22 @@ import com.bourntec.aaplearning.modules.commonmanagement.v1.request.EmailRequest
 import com.bourntec.aaplearning.modules.commonmanagement.v1.service.MailService;
 
 @RestController
-public class CoustmController {
-
-	@Autowired
-	private MailService emailService;
-
-	// Sending a simple Email
-	@PostMapping("/sendMail")
-	public String sendMail(@RequestBody EmailRequestDTO details) {
-		return emailService.sendSimpleMail(details);
+public class CustomController {
+	
+	
+	@Autowired private 
+	MailService emailService;
+	 
+    // Sending a simple Email
+    @PostMapping("/sendMail")
+    public String sendMail(@RequestBody EmailRequestDTO details)
+    {
+        String status
+            = emailService.sendSimpleMail(details);
+ 
+        return status;
+    }
+ 
 	}
 
-}
+

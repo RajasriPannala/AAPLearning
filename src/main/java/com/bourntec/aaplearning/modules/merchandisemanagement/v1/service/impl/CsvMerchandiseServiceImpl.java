@@ -18,7 +18,6 @@ public class CsvMerchandiseServiceImpl implements CsvMerchandiseService{
 
 	
 	
-	
 
 	@Override
 	public List<Merchandise> read(String fileName) throws Exception {
