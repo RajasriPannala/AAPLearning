@@ -45,7 +45,6 @@ public interface CustomerService {
 	 * find  customer using customer id
 	 * @throws Exception
 	 */
-	
 	CustomerResponseDTO findById(int customerId) throws Exception;
 
 	String findPincode(int id);

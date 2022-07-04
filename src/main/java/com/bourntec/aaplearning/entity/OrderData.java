@@ -29,7 +29,6 @@ import lombok.Setter;
 @Entity
 @Table(name="orderData")
 
-
 @Getter
 @Setter
 

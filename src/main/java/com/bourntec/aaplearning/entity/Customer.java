@@ -1,18 +1,16 @@
 package com.bourntec.aaplearning.entity;
 
+import javax.persistence.Column;
+
+
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +19,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Table;
 
 /**
  * @author Sarath G Krishnan
@@ -34,12 +34,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 @Table(name = "aapcustomer")
-public class Customer {
+//@JsonFilter("customerDetails")
+public class Customer extends DateFields {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
-	
 	private String name;
 	private String address;
 	private Integer pinCode;
@@ -50,7 +50,4 @@ public class Customer {
 	private String status;
 	//@Column(length = 1)
 	private String recordStatus;
-	
-	}
-	
-
+}
