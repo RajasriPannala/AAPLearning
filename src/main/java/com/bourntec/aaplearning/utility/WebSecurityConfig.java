@@ -1,4 +1,4 @@
-package com.bourntec.aaplearning.modules.shippingmanagement.v1.util;
+package com.bourntec.aaplearning.utility;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	JwtFilter jwtFilter;
+	JwtTokenFilter jwtFilter;
+	
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {

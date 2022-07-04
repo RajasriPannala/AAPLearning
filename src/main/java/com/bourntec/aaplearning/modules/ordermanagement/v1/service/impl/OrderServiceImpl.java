@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.OrderData;
@@ -186,4 +187,11 @@ public class OrderServiceImpl implements OrderService {
 
 
 }
+	
+
+	@Override
+	public List<OrderData> findAllOrderData(@Param("customer_id") int customer_id) {
+		
+		return orderRepository.findAllOrderData(customer_id);
+	}
 }

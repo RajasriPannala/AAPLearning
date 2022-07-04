@@ -15,14 +15,17 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-//import org.springframework.retry.annotation.CircuitBreaker;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.bourntec.aaplearning.entity.OrderData;
 import com.bourntec.aaplearning.entity.Payment;
+
 import com.bourntec.aaplearning.entity.Shipping;
+
 import com.bourntec.aaplearning.modules.commonmanagement.v1.request.EmailRequestDTO;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.service.MailService;
+import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
 import com.bourntec.aaplearning.modules.shippingmanagement.v1.dto.response.ShippingResponseDTO;
@@ -39,6 +42,8 @@ public class MailServiceImpl implements MailService {
 	HttpServletRequest httpServletRequest;
 
 
+	@Autowired
+	RestTemplate restTemplate;
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -71,7 +76,24 @@ public class MailServiceImpl implements MailService {
 				mailMessage.setText(details.getMessage() + payment.getPaymentType() + payment.getPaidAmount());
 			
 						javaMailSender.send(mailMessage);
-		}
+		}			
+			
+			else if (details.getModule().equalsIgnoreCase(Constant.ORDERDATA)) {
+
+				ResponseEntity<OrderResponseDTO> response = restTemplate
+						.getForEntity("http://localhost:8081/orders/" + details.getKeyValue(), OrderResponseDTO.class);
+
+
+				OrderData orderData = mapper.convertValue(response.getBody().getPaylod(), OrderData.class);
+			
+				if (orderData.getAddress() != null && orderData.getOrderStatus() != null) {
+					mailMessage.setText(details.getMessage() + orderData.getAddress() + orderData.getOrderStatus());
+
+					javaMailSender.send(mailMessage);
+
+					return "Mail Sent Successfully...";
+				}
+			}
 		
 		else if (details.getModule().equalsIgnoreCase(Constant.SHIPPING)) {
 
@@ -110,6 +132,7 @@ public class MailServiceImpl implements MailService {
 			return sender;
 
 	}
+
 public String getPaymentFallback(Exception e) {
 logger.info("---RESPONSE FROM FALLBACK METHOD---");
 
@@ -122,39 +145,4 @@ return "---RESPONSE FROM FALLBACK METHOD !---";
 
 
 
-
-
-
-//	@Override
-//	public String sendSimpleMails(EmailRequestDTO details) {
-//		// TODO Auto-generated method stub
-//		RestTemplate restTemplate = new RestTemplate();
-//
-//		Shipping shippings = new Shipping();
-//
-//		final ObjectMapper mapper = new ObjectMapper();
-//		try {
-//
-//			SimpleMailMessage mailMessage = new SimpleMailMessage();
-//			mailMessage.setFrom(sender);
-//			mailMessage.setTo(details.getToMail());
-//			mailMessage.setSubject(details.getSubject());
-//			if (details.getModule().equalsIgnoreCase(Constant.SHIPPING)) {
-//				ShippingResponseDTO shypsdto = restTemplate.getForObject(
-//						"http://localhost:8081/shippings/" + details.getKeyValue(), ShippingResponseDTO.class);
-//				Shipping shipping = mapper.convertValue(shypsdto.getPayload(), Shipping.class);
-//				mailMessage.setText(details.getMessage() + shipping.getShipDate() + shipping.getShipStatus());
-//			}
-//						javaMailSender.send(mailMessage);
-//			
-//			return "Mail Sent Successfully...";
-//
-//		}
-//
-//		catch (Exception e) {
-//			throw e;
-//
-//		}
-//	}
-//}
 

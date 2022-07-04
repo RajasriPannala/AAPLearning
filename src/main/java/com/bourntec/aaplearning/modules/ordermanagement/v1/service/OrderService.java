@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.OrderData;
@@ -47,21 +48,14 @@ public interface OrderService {
 
 
 
-//	List<OrderData> findAll();
-
-
-//	void generatePdf();
-
-
-	List<OrderData> findAllOrderData(int customer_id);
 
 
 
-	/**
-	 * find order by id
-	 * @param id:order id
-	 * 
-	 */
+	List<OrderData> findAllOrderData(@Param("customer_id") int customer_id);
+
+
+
+	
 	List<OrderData> findAll();
 
 

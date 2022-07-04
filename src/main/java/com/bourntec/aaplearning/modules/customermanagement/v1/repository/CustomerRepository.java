@@ -34,6 +34,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>, Jp
 	 * find customer using customer id and record status
 	 * @return
 	 */
+	
 	Customer findByCustomerIdAndRecordStatus(Integer customerId, String active);
 
 	Optional<Customer> findById(Integer customerId);

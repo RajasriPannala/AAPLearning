@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -24,20 +27,21 @@ import lombok.Setter;
  *
  */
 @Entity
-@Table(name = "orderData")
+@Table(name="orderData")
 
 @Getter
 @Setter
 
 @AllArgsConstructor
 @NoArgsConstructor
-//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 //@Where(clause="order_id=:orderId")
 
 public class OrderData extends DateFields {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 
 	private Integer orderId;
 	private Integer inventoryId;
@@ -45,14 +49,20 @@ public class OrderData extends DateFields {
 	private Integer itemCode;
 	private String address;
 	private Integer itemcount;
-
-	@JsonSerialize(using = LocalDateSerializer.class)
-	@JsonDeserialize(using = LocalDateDeserializer.class)
-//	@JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
+	
+	 @JsonSerialize(using = LocalDateSerializer.class)
+	 @JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate orderDate;
 	private Integer trackingId;
+	
+	
+	 @Column(length=1)
+	    String orderStatus;
 
-	@Column(length = 1)
-	String orderStatus;
+
+
+
+
+	
 
 }

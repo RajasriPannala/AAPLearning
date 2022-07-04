@@ -43,6 +43,7 @@ public interface OrderRepository extends JpaRepository<OrderData, Integer>, JpaS
 			+ "and payment.customer_id = order_data.cust_id and aapcustomer.customer_id = :customer_id",nativeQuery=true)
 	List<OrderData> findAllOrderData(@Param("customer_id") int customer_id);
 
+	
 
 	
 
