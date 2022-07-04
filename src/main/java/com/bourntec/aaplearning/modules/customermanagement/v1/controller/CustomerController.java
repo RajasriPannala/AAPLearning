@@ -93,20 +93,6 @@ public class CustomerController {
 		}
 		return customerDTO;
 	}
-//	/**
-//	 * @param customerId
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	@GetMapping("filter/{customerId}")
-//	public MappingJacksonValue filter1(@PathVariable int customerId) throws Exception {
-//		//CustomerRequestDTO customerRequestDTO;
-//		CustomerResponseDTO list= customerService.findById(customerId);
-//		SimpleBeanPropertyFilter filter=SimpleBeanPropertyFilter.filterOutAllExcept("customerId","name","address","pinCode");
-//		FilterProvider filters = new SimpleFilterProvider().addFilter("customerDetails", filter);
-//		MappingJacksonValue mappingJacksonValue= new MappingJacksonValue(list);
-//		mappingJacksonValue.setFilters(filters);
-//		return mappingJacksonValue;
-//	}
+
 
 }

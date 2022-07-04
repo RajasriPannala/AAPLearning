@@ -15,6 +15,7 @@ import com.bourntec.aaplearning.entity.OrderData;
  * @author Karthika J
  *
  */
+
 @Repository
 
 public interface OrderRepository extends JpaRepository<OrderData, Integer>, JpaSpecificationExecutor<OrderData> {

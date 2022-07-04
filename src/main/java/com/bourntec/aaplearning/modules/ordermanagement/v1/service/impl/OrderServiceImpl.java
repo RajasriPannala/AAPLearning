@@ -13,7 +13,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.OrderData;
-import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.controller.OrderController;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.repository.OrderRepository;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.request.OrderRequestDTO;
@@ -165,7 +164,7 @@ public class OrderServiceImpl implements OrderService {
 
 		} else {
 
-			ordersDTO.setResponseMessage("Coud not fetch data");
+			ordersDTO.setResponseMessage("Coud not fetch data"); 
 			ordersDTO.setStatus("Failed");
 			return ordersDTO;
 		}
@@ -184,8 +183,6 @@ public class OrderServiceImpl implements OrderService {
 	return "generated";
 
 	
-
-
 }
 	
 
