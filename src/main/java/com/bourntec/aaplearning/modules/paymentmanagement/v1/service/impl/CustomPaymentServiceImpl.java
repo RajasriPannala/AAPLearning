@@ -160,7 +160,7 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 
 				HttpEntity<Inventory> requestEntity2 = new HttpEntity<>(inventory);
 				HttpEntity<InventoryResponseDTO> response2 = restTemplate.exchange(
-						"http://localhost:8084/inventory/" + orderData.getInventoryId(), HttpMethod.PUT, requestEntity2,
+					"http://localhost:8084/inventory/" + orderData.getInventoryId(), HttpMethod.PUT, requestEntity2,
 						InventoryResponseDTO.class);
 
 				payresDTO.setPayload(payment);

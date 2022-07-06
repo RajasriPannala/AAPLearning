@@ -21,7 +21,7 @@ import com.bourntec.aaplearning.modules.returnmanagement.v1.service.ReturnServic
  *
  */
 @RestController
-@RequestMapping("/return")
+@RequestMapping("/returnmanagement/v1")
 public class ReturnController {
 	
 	@Autowired

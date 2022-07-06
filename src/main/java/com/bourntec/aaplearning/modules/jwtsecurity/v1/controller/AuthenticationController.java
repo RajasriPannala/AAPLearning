@@ -33,6 +33,7 @@ import com.bourntec.aaplearning.modules.jwtsecurity.v1.response.MessageResponse;
 import com.bourntec.aaplearning.modules.jwtsecurity.v1.service.SecurityService;
 import com.bourntec.aaplearning.modules.jwtsecurity.v1.service.impl.UserDetailsImpl;
 
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -95,7 +96,7 @@ public class AuthenticationController {
  * @throws Exception 
  */
 @GetMapping("/decode")
-public String decodeToken(@RequestHeader("AUTHORIZATION") String token)   {
+public Claims decodeToken(@RequestHeader("AUTHORIZATION") String token)   {
 	log.info("validating token");
 	return securityService.validateJwtToken(token);
 

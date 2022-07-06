@@ -1,5 +1,7 @@
 package com.bourntec.aaplearning.modules.returnmanagement.v1.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpEntity;
@@ -12,15 +14,18 @@ import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.entity.Return;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.InventoryResponseDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
+import com.bourntec.aaplearning.modules.ordermanagement.v1.exception.RecordNotFoundException;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.repository.ReturnRepository;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.request.ReturnRequestDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.response.ReturnResponseDTO;
+import com.bourntec.aaplearning.modules.returnmanagement.v1.service.CustomReturnService;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.util.Constants;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 @Primary
-public class CustomReturnServiceImpl {
+public class CustomReturnServiceImpl implements CustomReturnService{
 	
 	@Autowired
 	ReturnRepository returnRepository;
@@ -80,9 +85,50 @@ public class CustomReturnServiceImpl {
 		retresDTO.setResponsemessage("Data save sucessfully");
 		retresDTO.setStatus("Success");
 		return retresDTO;
+	}
 		
+		
+		
+			
+			
 
 
-}
+
+
+	@Override
+	public String findByRetAmt(int id) {
+		String category = null;
+		Optional<Return> returnOptional = returnRepository.findById(id);
+		
+		if (returnOptional.isPresent()) {
+			int retAmnt = returnOptional.get().getRetAmt();
+			if (retAmnt <10) {
+				category = "below";
+			}
+			else if (retAmnt <5) {
+				category = "above";
+			}
+			else if (retAmnt <3) {
+				category = "high";
+			}
+			else {
+				category = "equal";
+			}
+			return category;
+			
+		}
+		
+		else
+		{
+			throw new RecordNotFoundException("Record not found");
+		
+		
+	}
+
+
+	}
+
+
+		
 	
 }

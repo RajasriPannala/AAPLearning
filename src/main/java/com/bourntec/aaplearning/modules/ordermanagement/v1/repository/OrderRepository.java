@@ -38,7 +38,6 @@ public interface OrderRepository extends JpaRepository<OrderData, Integer>, JpaS
 	OrderData findByOrderIdAndOrderStatus(Integer orderId, String orderStatus);
 
 	OrderData findByOrderId(Integer orderId);
-
 	
 	@Query(value="select order_data.*  from order_data inner join "
 			+ "payment on order_data.cust_id = payment.customer_id join aapcustomer"

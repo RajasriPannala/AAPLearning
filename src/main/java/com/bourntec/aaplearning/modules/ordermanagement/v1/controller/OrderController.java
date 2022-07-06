@@ -6,6 +6,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.repository.query.Param;
+
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -99,7 +103,17 @@ public class OrderController {
 		OrderResponseDTO ordersDTO = orderService.save(orderRequestDTO);
 
 		return ResponseEntity.ok(ordersDTO);
+
 	}
+
+		}
+	
+	
+	@GetMapping("/details")
+    public List<OrderData> findAllOrderData(@Param("customer_id") int customer_id)
+    {
+        return orderService.findAllOrderData(customer_id);
+    }
 
 	/**
 	 * @return
@@ -112,6 +126,14 @@ public class OrderController {
 		orderService.generatePdf();
 		return "generated";
 
+
 	}
 
+
+}	
+	
+	
+	
+
 }
+
