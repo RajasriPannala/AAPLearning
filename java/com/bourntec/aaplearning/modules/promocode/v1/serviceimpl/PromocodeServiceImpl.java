@@ -22,6 +22,10 @@ import com.bourntec.aaplearning.modules.promocode.v1.request.PromocodeRequestDTO
 import com.bourntec.aaplearning.modules.promocode.v1.response.PromocodeResponseDTO;
 import com.bourntec.aaplearning.modules.promocode.v1.service.PromocodeService;
 //import com.bourntec.aaplearning.modules.promocode.v1.util.Constants;
+/**
+ * @author Jeena Thomas
+ *
+ */
 @Service
 public class PromocodeServiceImpl implements PromocodeService{
 	@Autowired

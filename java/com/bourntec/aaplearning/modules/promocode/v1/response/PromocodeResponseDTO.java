@@ -12,9 +12,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * @author Jeena Thomas
+ *
+ */
 public class PromocodeResponseDTO {
-	
-
 String responsemessage;
 Object payload;
 String Status;

@@ -12,6 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * @author Jeena Thomas
+ *
+ */
 public class PromocodeRequestDTO {
 	
 	private Integer promoCode;

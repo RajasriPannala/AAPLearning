@@ -5,6 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+/**
+ * @author Jeena Thomas
+ *
+ */
 @SpringBootApplication
 @EntityScan("com.bourntec.aaplearning.entity")
 @ComponentScan({"com.bourntec.aaplearning.modules.promocode","com.bourntec.aaplearning.utility"})

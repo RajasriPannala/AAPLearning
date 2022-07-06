@@ -1,23 +1,21 @@
 package com.bourntec.aaplearning.modules.promocode.v1.controller;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bourntec.aaplearning.entity.Promocode;
 import com.bourntec.aaplearning.modules.promocode.v1.request.PromocodeRequestDTO;
 import com.bourntec.aaplearning.modules.promocode.v1.response.PromocodeResponseDTO;
 import com.bourntec.aaplearning.modules.promocode.v1.service.PromocodeService;
 
+/**
+ * @author Jeena Thomas
+ *
+ */
 @RestController
 @RequestMapping("/promocode")  
 public class PromocodeController {

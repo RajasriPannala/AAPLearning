@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import com.bourntec.aaplearning.entity.Promocode;
 import com.bourntec.aaplearning.modules.promocode.v1.request.PromocodeRequestDTO;
 import com.bourntec.aaplearning.modules.promocode.v1.response.PromocodeResponseDTO;
-
+/**
+ * @author Jeena Thomas
+ *
+ */
 @Service
 public interface PromocodeService {
 
