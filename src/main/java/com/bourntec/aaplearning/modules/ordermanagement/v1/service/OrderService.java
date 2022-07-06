@@ -1,10 +1,14 @@
 package com.bourntec.aaplearning.modules.ordermanagement.v1.service;
 
+
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
+
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.OrderData;
@@ -43,11 +47,15 @@ public interface OrderService {
 	OrderResponseDTO updateById(Integer id, OrderRequestDTO orderRequestDTO);
 
 
-	/**
-	 * find order by id
-	 * @param id:order id
-	 * 
-	 */
+
+
+
+
+	List<OrderData> findAllOrderData(@Param("customer_id") int customer_id);
+
+
+
+	
 	List<OrderData> findAll();
 
 
@@ -66,6 +74,7 @@ public interface OrderService {
 		
 		
 	}
+
 
 
 
