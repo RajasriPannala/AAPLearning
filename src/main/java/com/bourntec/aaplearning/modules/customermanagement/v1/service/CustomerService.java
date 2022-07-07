@@ -1,5 +1,8 @@
 package com.bourntec.aaplearning.modules.customermanagement.v1.service;
 
+import java.util.List;
+
+import com.bourntec.aaplearning.entity.Customer;
 import com.bourntec.aaplearning.modules.customermanagement.v1.request.CustomerRequestDTO;
 import com.bourntec.aaplearning.modules.customermanagement.v1.response.CustomerResponseDTO;
 
@@ -8,6 +11,11 @@ import com.bourntec.aaplearning.modules.customermanagement.v1.response.CustomerR
  *
  */
 public interface CustomerService {
+	
+	/**
+	 * @return
+	 */
+	List<Customer> findAll();
 	
 	/**
 	 * @param customerRequestDTO
@@ -40,4 +48,8 @@ public interface CustomerService {
 	CustomerResponseDTO findById(int customerId) throws Exception;
 
 	String findPincode(int id);
+	
+
+	List<Customer>  CustomerFilter() throws Exception;
 }
+

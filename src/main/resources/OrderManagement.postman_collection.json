@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "e5c876d7-67a9-4d78-b536-e1677150d381",
+		"name": "OrderManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8081/ordermanagement/v1/orders/9",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \r\n\"custId\":555,\r\n\"itemCode\":16555,\r\n\"address\":\"hgg\",\r\n\"itemcount\":99,\r\n\"orderDate\":\"2022-02-22\",\r\n\"trackingId\":99999\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/ordermanagement/v1/orders/9",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"ordermanagement",
+						"v1",
+						"orders",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8081/ordermanagement/v1/orders/1",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTcxOTA2NDksImlhdCI6MTY1NzEwNTc0OX0.GId02gU1771r8cQbXJq3BDhLIpaxYvqcelQKJwDjfjw25JmCHjAHJu_889Shr45X2II-EvUwl8HcPpvYNlJ8NA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"custId\": 5,\r\n        \"itemCode\": 2345,\r\n        \"address\": \"aaa\",\r\n        \"itemcount\": 3,\r\n        \"trackingId\": 1234,\r\n        \"orderStatus\": \"c\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/ordermanagement/v1/orders/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"ordermanagement",
+						"v1",
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8081/ordermanagement/v1/orders",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTcxOTA2NDksImlhdCI6MTY1NzEwNTc0OX0.GId02gU1771r8cQbXJq3BDhLIpaxYvqcelQKJwDjfjw25JmCHjAHJu_889Shr45X2II-EvUwl8HcPpvYNlJ8NA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"custId\": 6,\r\n        \"itemCode\": 245,\r\n        \"address\": \"aaa\",\r\n        \"itemcount\": 3,\r\n        \"trackingId\": 1234,\r\n        \"orderStatus\": \"c\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/ordermanagement/v1/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"ordermanagement",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/ordermanagement/v1/orders/1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{auth}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/ordermanagement/v1/orders/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"ordermanagement",
+						"v1",
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

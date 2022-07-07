@@ -18,11 +18,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import lombok.AllArgsConstructor;
-
 import lombok.Data;
 
 @MappedSuperclass
@@ -40,18 +35,23 @@ public class DateFields {
 	    @CreatedDate
 	    @Column(name="created_date",nullable = false, updatable=false)
 
-//	    
+	    
 	    @JsonSerialize(using = LocalDateTimeSerializer.class)
 	    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
 
-	    @JsonFormat( pattern = "yyyy-MM-dd")
+////	    @JsonFormat( pattern = "yyyy-MM-dd'T'HH:mm:ss",shape = JsonFormat.Shape.STRING)
+//	    
+//	    @JsonFormat( pattern = "yyyy-MM-dd")
+//	    
+//	    @DateTimeFormat(iso = DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 	    
+//	    @JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
 
 	    LocalDateTime createdDate;
-
+	    
 	    @LastModifiedBy
 	    private String lastModifiedBy;
-
+//	    @JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
 	    @LastModifiedDate
 	    @JsonSerialize(using = LocalDateTimeSerializer.class)
 	    @JsonDeserialize(using = LocalDateTimeDeserializer.class)

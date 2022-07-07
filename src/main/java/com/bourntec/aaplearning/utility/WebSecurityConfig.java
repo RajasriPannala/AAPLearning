@@ -1,5 +1,4 @@
 package com.bourntec.aaplearning.utility;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -9,44 +8,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 /**
  * @author Jeena Thomas
  *
  */
+
 @Configuration
-@EnableWebSecurity //allows Spring to find and automatically apply the class to the global Web Security.
-@EnableGlobalMethodSecurity(prePostEnabled = true)//provides  security on methods. It enables @PreAuthorize, @PostAuthorize
-  
-   
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {//It tells Spring Security how we configure, when we want to require all users to be authenticated or not, which filter (AuthTokenFilter) and when we want it to work (filter before UsernamePasswordAuthenticationFilter), which Exception Handler is chosen
-  
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//  @Autowired
-//  private AuthEntryPointJwt unauthorizedHandler;
-//  
-  @Autowired
-  private JwtTokenFilter jwtTokenFilter;
+	@Autowired
 
-
-  /**
-   * This method to authenticate based on a token
- * @return
- */
-//@Bean
-// public AuthTokenFilter authenticationJwtTokenFilter() {
-//   return new AuthTokenFilter();
-// }
-  
-
-// @Bean
-//@Override
-//public AuthenticationManager authenticationManagerBean() throws Exception {
-//  return super.authenticationManagerBean();
-//}
+	JwtTokenFilter jwtFilter;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {//It tells Spring Security how we configure, when we want to require all users to be authenticated or not, which filter (AuthTokenFilter) and when we want it to work (filter before UsernamePasswordAuthenticationFilter), which Exception Handler is chosen (AuthEntryPointJwt).
-    http.cors().and().csrf().disable()
+    http.cors().and().csrf().disable().addFilterBefore(jwtFilter,
+			UsernamePasswordAuthenticationFilter.class)
   //    .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests().antMatchers("/api/auth/**").permitAll()  // Our endpoints
@@ -55,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {//It tells 
       .permitAll()
       .anyRequest().authenticated();// Reject every unauthenticated request and send error code 401.
 
-    http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);// Add a filter to validate the tokens with every request
-  }
 }
+}
+
+

@@ -6,8 +6,9 @@ import com.bourntec.aaplearning.entity.OrderData;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import lombok.Setter;
 
 /**
  * @author Karthika J
@@ -15,31 +16,26 @@ import lombok.NoArgsConstructor;
  */
 
 @Data
-//@Getter
-//@Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
+/**
+ * @param OrderRequestDTO : order
+ */
 public class OrderResponseDTO {
-	
-	
+
 	String responseMessage;
 	Object paylod;
 	String status;
-	 
-	 
 
-		/**
-		 * @param order : order
-		 */
-		public void OrderResponseDto(OrderData order)  {
+	/**
+	 * @param order : order
+	 */
+	public void OrderResponseDto(OrderData order) {
 
-			BeanUtils.copyProperties(order,this);
-		}
+		BeanUtils.copyProperties(order, this);
+	}
 
-
-
-	
-
-	
 }

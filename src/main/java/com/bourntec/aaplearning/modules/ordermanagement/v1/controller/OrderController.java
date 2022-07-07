@@ -1,17 +1,15 @@
 package com.bourntec.aaplearning.modules.ordermanagement.v1.controller;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.hibernate.criterion.Order;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+
+import org.springframework.data.repository.query.Param;
+
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,17 +24,8 @@ import com.bourntec.aaplearning.entity.OrderData;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.request.OrderRequestDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.service.OrderService;
-import com.bourntec.aaplearning.modules.ordermanagement.v1.util.Constants;
 
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-
-
 
 /**
  * @author Karthika J
@@ -44,23 +33,26 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  */
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("ordermanagement/v1/orders")
 
 public class OrderController {
-	
+
 	@Autowired
-	
+
 	OrderService orderService;
 
-	
-	
-	
+	Logger logger = LoggerFactory.getLogger(OrderController.class);
+
+	/**
+	 * @return
+	 */
 	@GetMapping()
 	public List<OrderData> findAll() {
 
 		return orderService.findAll();
 
 	}
+
 	/**
 	 * @param id:order id
 	 * @return :responsedto
@@ -68,39 +60,39 @@ public class OrderController {
 	@GetMapping("/{id}")
 	public ResponseEntity<OrderResponseDTO> findByOrderId(@PathVariable Integer id) {
 		OrderResponseDTO ordersDTO = orderService.findByOrderId(id);
-		
+		logger.info("fasdsd");
+
 		return ResponseEntity.ok(ordersDTO);
 	}
 
 	/**
-	 * @param id :order id
-	 * response:response message
+	 * @param id :order id response:response message
 	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<OrderResponseDTO> deleteById(@PathVariable Integer id) {
-		
+
 		OrderResponseDTO ordersDTO = orderService.deleteById(id);
 		return ResponseEntity.ok(ordersDTO);
-		
+
 	}
 
-	
 	/**
-	 * @param id ::order id
+	 * @param id              ::order id
 	 * @param orderRequestDTO
 	 * @return
 	 * @throws Exception
 	 */
 	@PutMapping("/{id}")
-	public ResponseEntity<OrderResponseDTO> updateById(@PathVariable Integer id, @RequestBody OrderRequestDTO orderRequestDTO) throws Exception {
-		
-	OrderResponseDTO ordersDTO=	orderService.updateById(id,orderRequestDTO);
-		
+	public ResponseEntity<OrderResponseDTO> updateById(@PathVariable Integer id,
+			@RequestBody OrderRequestDTO orderRequestDTO) throws Exception {
+
+		OrderResponseDTO ordersDTO = orderService.updateById(id, orderRequestDTO);
+
 		return ResponseEntity.ok(ordersDTO);
 
 	}
-
 	
+
 	/**
 	 * @param :orderRequestDTO
 	 * @return
@@ -108,28 +100,40 @@ public class OrderController {
 	@PostMapping
 	public ResponseEntity<OrderResponseDTO> save(@RequestBody OrderRequestDTO orderRequestDTO) {
 
-		OrderResponseDTO ordersDTO=orderService.save(orderRequestDTO);
+		OrderResponseDTO ordersDTO = orderService.save(orderRequestDTO);
 
 		return ResponseEntity.ok(ordersDTO);
-		}
 
-	
-//	@GetMapping("/pdf")
-//	public JRBeanCollectionDataSource generatePdf() {
-//		
-//		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(orderService.findAll());
-//		return beanCollectionDataSource;
-//		
-//	}
-	@GetMapping("/pdf")
-	public String generatePdf()throws JRException, IOException{
+	}
+
 		
+	
+	
+	@GetMapping("/details")
+    public List<OrderData> findAllOrderData(@Param("customer_id") int customer_id)
+    {
+        return orderService.findAllOrderData(customer_id);
+    }
+
+	/**
+	 * @return
+	 * @throws JRException
+	 * @throws IOException
+	 */
+	@GetMapping("/pdf")
+	public String generatePdf() throws JRException, IOException {
+
 		orderService.generatePdf();
 		return "generated";
-		
-		
+
+
+	}
 
 
 }	
+	
+	
+	
 
-}
+
+

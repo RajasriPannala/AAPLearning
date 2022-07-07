@@ -8,7 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -19,9 +23,11 @@ import lombok.Data;
 @Table(name="returnManagement")
 @EntityListeners(AuditingEntityListener.class)
 @Data
-
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Return {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
@@ -35,8 +41,11 @@ public class Return {
 	private Integer qty;
 	private String description;
 	private String Status ;
+	
+	
+	}
 
 		
-	}
+//	}
 	
 

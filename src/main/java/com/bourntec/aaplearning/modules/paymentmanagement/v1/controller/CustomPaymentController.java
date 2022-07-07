@@ -15,11 +15,10 @@ import com.bourntec.aaplearning.modules.paymentmanagement.v1.service.CustomPayme
 @RequestMapping("/custompayments")
 
 public class CustomPaymentController {
-	
-	
+
 	@Autowired
 	CustomPaymentService custPaymentService;
-	
+
 	@PostMapping
 	public ResponseEntity<PaymentResponseDTO> saveCustomPayment(@RequestBody PaymentRequestDTO paymentReqDTO) {
 
@@ -27,6 +26,5 @@ public class CustomPaymentController {
 
 		return ResponseEntity.ok(payresDTO);
 	}
-
 
 }
