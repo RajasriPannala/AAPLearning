@@ -13,5 +13,4 @@ public static final String CONFIRMED="C";
 public static final String ACTIVE = "A";
 
 
-
 }

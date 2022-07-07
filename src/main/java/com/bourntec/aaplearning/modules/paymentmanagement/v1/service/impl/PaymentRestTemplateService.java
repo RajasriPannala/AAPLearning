@@ -20,11 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableRetry
 public class PaymentRestTemplateService {
 	
-	@Bean
-	RestTemplate restTemplate () {
-		
-		return new RestTemplate();
-	}
+	
 	
 	@Bean
 	 public RetryTemplate retryTemplate() {
