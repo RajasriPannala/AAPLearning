@@ -1,9 +1,7 @@
 package com.bourntec.aaplearning.utility;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -59,6 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {//It tells 
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests().antMatchers("/api/auth/**").permitAll()  // Our endpoints
       .antMatchers("/api/test/**").permitAll()
+      .antMatchers("/swagger-ui*/**","/v3/api-docs/**")
+      .permitAll()
       .anyRequest().authenticated();// Reject every unauthenticated request and send error code 401.
 
     http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);// Add a filter to validate the tokens with every request

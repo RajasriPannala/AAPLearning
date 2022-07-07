@@ -32,6 +32,7 @@ public class SecurityServiceImpl implements SecurityService {
 	@Override
 	public String validateJwtToken(String authToken)  {
 		 try {
+			 authToken=authToken.replace("Bearer ","");
 			
 			 Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
 			 return "success";
@@ -52,7 +53,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public String generateJwtToken(Authentication authentication) {
-		// TODO Auto-generated method stub
+
 		 UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 		 Map<String, Object> claims = new HashMap<>();
 		    return Jwts.builder()
@@ -66,7 +67,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public String getUserNameFromJwtToken(String token) {
-		// TODO Auto-generated method stub
+
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
 }
