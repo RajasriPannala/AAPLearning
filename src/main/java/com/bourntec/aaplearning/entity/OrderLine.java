@@ -34,6 +34,11 @@ public class OrderLine {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name = "OrderLineId")
 	private Integer orderLineId;
+	private Integer itemCode;
+	private Integer itemprice;
+	private Integer itemQuantity;
+	private Integer totalPrice;
+	
 	
 
 

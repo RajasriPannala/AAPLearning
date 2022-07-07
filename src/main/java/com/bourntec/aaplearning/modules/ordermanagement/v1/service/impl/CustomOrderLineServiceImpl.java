@@ -21,7 +21,7 @@ import com.bourntec.aaplearning.modules.ordermanagement.v1.service.CustomOrderLi
 @Service
 public class CustomOrderLineServiceImpl implements CustomOrderLineService{
 
-//	
+	
 	@Autowired
 
 	OrderLineRepository orderLineRepository;
@@ -31,36 +31,58 @@ public class CustomOrderLineServiceImpl implements CustomOrderLineService{
 	OrderRepository orderRepository;
 	
 	Logger logger =LoggerFactory.getLogger(OrderController.class);
+
+	private Integer orderId;
+	
 	
 	
 //	@Override
 	public CustomOrderLineResponseDTO save(CustomOrderLineRequestDTO customOrderLineRequestDTO) {
 		CustomOrderLineResponseDTO ordersDTO = new CustomOrderLineResponseDTO();
 		
-		OrderData order = customOrderLineRequestDTO.converToModel();
-//		order.setOrderStatus(Constants.OPEN);
-		order = orderRepository.save(order);
+		
+		OrderData orderData = customOrderLineRequestDTO.converToModel();
+
+
+		Integer	total = 0;
+		Integer totalCount=0;
+		
+
+		for(OrderLine orderLine:customOrderLineRequestDTO.getOrderList() ) {
+		if (orderLine.getItemprice() > 0 && orderLine.getItemprice() != null){
+			total +=  orderLine.getItemprice() * orderLine.getItemQuantity() ;
+			totalCount += orderLine.getItemQuantity();
+			
+			
+		}}
+		orderData.setItemcount(totalCount);
+		orderData.setTotalPrice(total);
+			
+		orderData = orderRepository.save(orderData);
 		List<OrderLine> OrderLineList=customOrderLineRequestDTO.getOrderList();
-		OrderLine orderLine=null;
-//		CustomOrderLineRequestDTO customOrderLineRequestDTO=new CustomOrderLineRequestDTO();
-//		List<CustomOrderLineRequestDTO> customOrderLineRequestDTOList=new ArrayList<>();
+
+
 		if (!OrderLineList.isEmpty()) {
 		for(OrderLine orderLineDTO:customOrderLineRequestDTO.getOrderList())
 		{
-			orderLineDTO.setOrderData(order);
+			OrderLine orderLine = new OrderLine();
+			orderLineDTO.setOrderData(orderData);
 			orderLine = orderLineRepository.save(orderLineDTO);
+
 		}}
 		ordersDTO.setPaylod(customOrderLineRequestDTO);
 		ordersDTO.setResponseMessage("order data saved sucessfully");
-//		ordersDTO.setStatus("Sucess");
+
 		logger.info("order saved");
 		
 		return ordersDTO;
-	}
+
+
+	}}
 	
 	
 		
-}
+
 	
 
 

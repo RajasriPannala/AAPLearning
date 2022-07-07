@@ -83,11 +83,11 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 				retryTemplate.execute(context -> {
 					logger.info("Sending to invoice service()");
 					return  restTemplate.getForObject("http://localhost:8085/invoice/" + invoiceId, InvoiceResponseDTO.class);
-
+//				return null;
 				
 				});
 				
-//				 invResponse = restTemplate.getForObject("http://localhost:8085/invoice/" + payment.getInvoiceId(), InvoiceResponseDTO.class);
+//				InvoiceResponseDTO invResponse = restTemplate.getForObject("http://localhost:8085/invoice/" + payment.getInvoiceId(), InvoiceResponseDTO.class);
 				// Invoice invoice = (Invoice) impResponse.getInvpayload();
 
 
@@ -103,6 +103,8 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 				// invoice = restTemplate.exchange("http://localhost:8082/invoice/"+payment.getInvoiceId(), HttpMethod.GET,invoice , Invoice.class);
 
 				
+				
+				invoice.setPaidAmnt(payment.getPaidAmount());
 				
 //	
 

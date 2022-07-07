@@ -17,7 +17,7 @@ import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.Inventor
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory,Integer>,JpaSpecificationExecutor<Inventory> {
 
-	//List<Inventory> findAll();
+//	List<Inventory> findAll();
 	
 	//Inventory findByRecordStatus(String recordStatus);
 	

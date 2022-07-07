@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bourntec.aaplearning.entity.OrderData;
 import com.bourntec.aaplearning.entity.OrderLine;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.request.CustomOrderLineRequestDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.request.OrderLineRequestDTO;
@@ -77,6 +78,12 @@ public List<OrderLine> findAll() {
 	
 	return orderLineService.findAll();
 }
+
+//@GetMapping("{orderId}")
+//public List<OrderLine> findByOrderId(Integer orderId) {
+//	
+//	return orderLineService.findByOrderId(orderId);
+//}
 
 }
 
