@@ -52,7 +52,6 @@ public class OrderData extends DateFields {
 	private Integer itemcount;
 	private Integer totalPrice;
 	
-	
 	 @JsonSerialize(using = LocalDateSerializer.class)
 	 @JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate orderDate;
