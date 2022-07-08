@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 	   
 	    
 	    /**
-	     * interceptor added
+	     * common restTemplate to add headers
 	     */
 	    @Autowired
 	    private HeaderInterceptor headerInterceptor;

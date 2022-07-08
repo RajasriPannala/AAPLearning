@@ -6,5 +6,6 @@ import com.bourntec.aaplearning.modules.returnmanagement.v1.response.ReturnRespo
 public interface CustomReturnService {
 	
 	ReturnResponseDTO customSave(ReturnRequestDTO returnManagement);
+       String findByRetAmt(int id);
 
 }

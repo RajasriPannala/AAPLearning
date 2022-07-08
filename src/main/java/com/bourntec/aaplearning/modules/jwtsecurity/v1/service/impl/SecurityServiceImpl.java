@@ -40,8 +40,12 @@ public class SecurityServiceImpl implements SecurityService {
 	@Override
 	public Claims validateJwtToken(String authToken)  {
 		Claims claims=null;
+		 authToken=authToken.replace("Bearer ","");
+
+		
 		 try {
 				  claims=Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody();
+
 				  claims.put("status","success");
 				  
 		 return  claims;
@@ -70,10 +74,11 @@ public class SecurityServiceImpl implements SecurityService {
 		  //  return "fail";
 		return null;
 		  }
+	
 
 	@Override
 	public String generateJwtToken(Authentication authentication) {
-		// TODO Auto-generated method stub
+
 		 UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 		 Map<String, Object> claims = new HashMap<>();
 		 claims.put("username", userPrincipal.getUsername());
@@ -105,7 +110,11 @@ public class SecurityServiceImpl implements SecurityService {
 	public
 	
 	String getUserNameFromJwtToken(String token) {
+
+
+
 		// TODO Auto-generated method stub
+
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
 }

@@ -2,7 +2,6 @@ package com.bourntec.aaplearning.modules.commonmanagement.v1.service.impl;
 
 import java.util.Arrays;
 import java.util.Map;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +36,7 @@ import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
 import com.bourntec.aaplearning.modules.shippingmanagement.v1.dto.response.ShippingResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import freemarker.template.Configuration;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
@@ -47,6 +47,9 @@ public class MailServiceImpl implements MailService {
 
 	@Autowired
 	HttpServletRequest httpServletRequest;
+	
+	@Autowired
+	Configuration fmConfiguration;
 
 	@Autowired
 	RestTemplate restTemplate;
@@ -131,8 +134,8 @@ public class MailServiceImpl implements MailService {
 			}
 		
 		else if (details.getModule().equalsIgnoreCase(Constants.CUSTOMER)) {
-
-            ResponseEntity<CustomerResponseDTO> response = restTemplate
+		
+             ResponseEntity<CustomerResponseDTO> response = restTemplate
                     .getForEntity("http://localhost:8080/customermanagement/v1/" + details.getKeyValue(), CustomerResponseDTO.class);
 
              Customer customer = mapper.convertValue(response.getBody().getPayLoad(), Customer.class);
@@ -145,48 +148,49 @@ public class MailServiceImpl implements MailService {
             }
         }
 
+
 		catch (Exception e) {
 			throw e;
 		}
 		return sender;
 	}
-
 	 public String sendEmailWithTemplate(EmailRequestDTO mail) {
-         MimeMessage mimeMessage =javaMailSender.createMimeMessage();
-            try {
+	     MimeMessage mimeMessage =javaMailSender.createMimeMessage();
+	        try {
+	 
+	            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+	 
+	            mimeMessageHelper.setSubject(mail.getSubject());
+	            mimeMessageHelper.setFrom(sender);
+	            mimeMessageHelper.setTo(mail.getToMail());
+	              mail.setContent(getContentFromTemplate(mail.getModel()));
+	            mimeMessageHelper.setText(mail.getContent(), true);
+	 
+	            javaMailSender.send(mimeMessageHelper.getMimeMessage());
+	        } catch (MessagingException e) {
+	            e.printStackTrace();
+	        }
+			return "Mail send Successully";
+	    }
+	 
+	    public String getContentFromTemplate(Map < String, Object >model)     { 
+	        StringBuffer content = new StringBuffer();
+	 
+	        try {
+	            content.append(FreeMarkerTemplateUtils.processTemplateIntoString(fmConfiguration.getTemplate("email-template.flth"), model));
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return content.toString();
+	    }
 
-                MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-
-                mimeMessageHelper.setSubject(mail.getSubject());
-                mimeMessageHelper.setFrom(sender);
-                mimeMessageHelper.setTo(mail.getToMail());
-                  mail.setContent(getContentFromTemplate(mail.getModel()));
-                mimeMessageHelper.setText(mail.getContent(), true);
-
-                javaMailSender.send(mimeMessageHelper.getMimeMessage());
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-            return "Mail send Successully";
-        }
-
-        public String getContentFromTemplate(Map < String, Object >model)     { 
-            StringBuffer content = new StringBuffer();
-
-            try {
-                content.append(FreeMarkerTemplateUtils.processTemplateIntoString(fmConfiguration.getTemplate("email-template.flth"), model));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return content.toString();
-        }
+	
 
 	public String getPaymentFallback(Exception e) {
 		logger.info("---RESPONSE FROM FALLBACK METHOD---");
 
 		return "---RESPONSE FROM FALLBACK METHOD !---";
 
-	
 
 
 

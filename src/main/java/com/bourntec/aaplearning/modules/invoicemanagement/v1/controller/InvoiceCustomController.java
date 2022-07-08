@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.InvoiceService;
 @RestController
+
 public class InvoiceCustomController {
 	
 	@Autowired

@@ -48,7 +48,6 @@ public class DateFields {
 //	    @JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
 
 	    LocalDateTime createdDate;
-
 	    
 	    @LastModifiedBy
 	    private String lastModifiedBy;
