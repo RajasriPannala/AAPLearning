@@ -24,7 +24,6 @@
 	<field name="itemcount" class="java.lang.Integer"/>
 	<field name="orderDate" class="java.time.LocalDate"/>
 	<field name="trackingId" class="java.lang.Integer"/>
-	<field name="Field_1" class="java.time.LocalDate"/>
 	<background>
 		<band height="822" splitType="Stretch">
 			<frame>
