@@ -56,7 +56,7 @@ public class PaymentController {
 	}
 
 	/**
-	 * @Request ResponseDTO Save method for Payment Managemnet Entity
+	 * @Request ResponseDTO Save method for Payment Management Entity
 	 *
 	 */
 
@@ -112,8 +112,13 @@ public class PaymentController {
 			   @ApiResponse(responseCode = "500",description = "Server Error")},
 		parameters= {@Parameter(name="deleteById", description = "Delete using id",example = "21",in = ParameterIn.PATH)}
 	)
-	public PaymentResponseDTO deleteById(@PathVariable int id) {
-		return paymentService.deleteById(id);
+	public ResponseEntity<PaymentResponseDTO>deleteById(@PathVariable int id) {
+		
+		PaymentResponseDTO paymentResDTO = paymentService.deleteById(id);
+
+		return ResponseEntity.ok(paymentResDTO);
+		
+		
 	}
 
 	@GetMapping("/{id}")
@@ -126,8 +131,12 @@ public class PaymentController {
 				parameters= {@Parameter(name="findById", description = "provide any id",example = "21")
 					
 })
-	public PaymentResponseDTO findByPaymentId(@PathVariable Integer id) {
-		return paymentService.findByPaymentId(id);
+	public ResponseEntity<PaymentResponseDTO> findByPaymentId(@PathVariable Integer id) {
+		
+		PaymentResponseDTO paymentResDTO = paymentService.findByPaymentId(id);
+
+		return ResponseEntity.ok(paymentResDTO);
+		
 	}
 	/**
 	 * @Request Search using generic specification,based on a single criteria.

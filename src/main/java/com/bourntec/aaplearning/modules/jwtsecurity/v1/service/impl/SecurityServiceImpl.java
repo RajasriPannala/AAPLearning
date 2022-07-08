@@ -42,8 +42,7 @@ public class SecurityServiceImpl implements SecurityService {
 		Claims claims=null;
 		 authToken=authToken.replace("Bearer ","");
 
-		 try {				  claims=Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody();
-
+		
 		 try {
 				  claims=Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody();
 
@@ -75,6 +74,7 @@ public class SecurityServiceImpl implements SecurityService {
 		  //  return "fail";
 		return null;
 		  }
+	
 
 	@Override
 	public String generateJwtToken(Authentication authentication) {

@@ -24,7 +24,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 @SpringBootApplication
 @EnableJpaAuditing         //for automatically create the created and modified date
 @EnableCaching
-@EnableHystrix
+
 
 /**
  * @OpenAPIDefinition specifies it is swagger3
