@@ -23,7 +23,7 @@ import com.bourntec.aaplearning.modules.merchandisemanagement.v1.util.Constant;
 @Service
 public class MerchandiseServiceImpl implements MerchandiseService {
 	
-	@Value("${csv.download.path}")
+	@Value("${csv.merchandise.download.path}")
 	String fileName;
 	
 	@Autowired

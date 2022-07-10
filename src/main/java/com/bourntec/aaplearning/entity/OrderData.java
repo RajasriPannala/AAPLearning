@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -52,21 +50,17 @@ public class OrderData extends DateFields {
 	private Integer itemcount;
 	private Integer totalPrice;
 
+	private Double totalAmount;
+	private Double discount;
+	private Double amountPay;
 
-	 @JsonSerialize(using = LocalDateSerializer.class)
-	 @JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate orderDate;
 	private Integer trackingId;
 	
 	
-	 @Column(length=1)
-	    String orderStatus;
-
-
-	 
-
-
-
-	
+	@Column(length=1)
+	String orderStatus;
 
 }
