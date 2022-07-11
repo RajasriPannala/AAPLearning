@@ -63,7 +63,7 @@ public class SecurityServiceImpl implements SecurityService {
 	@Override
 	public String validateJwtToken(String authToken)  {
 		 try {
-			
+			 authToken=authToken.replace("Bearer ","");
 			 Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
 			 return "success";
 			 

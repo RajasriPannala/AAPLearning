@@ -57,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {//It tells 
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests().antMatchers("/api/auth/**").permitAll()  // Our endpoints
       .antMatchers("/api/test/**").permitAll()
+      .antMatchers("/swagger-ui*/**","/v3/api-docs/**").permitAll()
       .anyRequest().authenticated();// Reject every unauthenticated request and send error code 401.
 
     http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);// Add a filter to validate the tokens with every request
