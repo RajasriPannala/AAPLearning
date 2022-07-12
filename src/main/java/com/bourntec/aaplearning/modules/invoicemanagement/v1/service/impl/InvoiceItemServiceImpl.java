@@ -82,7 +82,7 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 		invoiceOptional.get();
 		if (invoiceOptional.isPresent()) {
 			InvoiceItem invoiceitem = invoiceitemRequestDTO.converToModel();
-			invoiceitem.setId(id);
+			invoiceitem.setInvoiceItemId(id);
 			invoiceitemRepository.save(invoiceitem);
 			invresDTO.setPayload(invoiceitem);
 			invresDTO.setResponsemessage(" data save sucessfully");

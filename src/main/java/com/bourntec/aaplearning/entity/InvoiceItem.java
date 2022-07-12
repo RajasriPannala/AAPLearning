@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.bourntec.aaplearning.entity;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -11,8 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import lombok.Data;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 /**
  * @author Aryalekshmi
  *
@@ -20,13 +22,16 @@ import lombok.Data;
 @Table(name="InvoiceItem")
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class InvoiceItem 
 {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private Integer id;
-	 private Integer invoiceId ;
+//	 private Integer id;
+	 private Integer invoiceItemId ;
 	 private Integer itemCode;
 	 private Integer quantity;
 	 private Integer price;
@@ -35,4 +40,13 @@ public class InvoiceItem
 	 @JoinColumn(name = "return_Id")
 	 @ManyToOne(fetch = FetchType.EAGER)
 	 private Return returnItem;
+	 
+	 @JoinColumn(name = "invoiceId")
+	 @ManyToOne(fetch = FetchType.EAGER)
+	 private Invoice invoice;
+	 
+	 
+	 
+	 
+	
 }
