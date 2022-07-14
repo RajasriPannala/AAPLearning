@@ -37,7 +37,53 @@ public class CustomController {
  
         return status;
     }
-    
+    @PostMapping("/sendTemplateMail")
+    public String sendEmailWithTemplate(@RequestBody EmailRequestDTO email)
+    {
+    	
+    	RestTemplate restTemplate = new RestTemplate();
+    	
+    	final ObjectMapper mapper = new ObjectMapper();
+    	
+    	Map<String, Object> templateData = new HashMap<>();
+		templateData.put("name", "Customer");
+		if (email.getModule().equalsIgnoreCase(Constant.INVOICE)) {
+
+			ResponseEntity<InvoiceResponseDTO> response = restTemplate
+					.getForEntity("http://localhost:8083//invoice/" + email.getKeyValue(), InvoiceResponseDTO.class);
+
+			 Invoice invoices = mapper.convertValue(response.getBody().getPayload(), Invoice.class);
+			
+
+		
+		List<String> invoice = Arrays.asList("custId:"+invoices.getCustId(), "orderId:"+invoices.getOrderId(),
+				"itemCode:"+invoices.getItemCode(),"invAmnt:"+invoices.getInvAmnt(),"paidAmnt:"+invoices.getPaidAmnt());
+		
+		
+		templateData.put("field1", "custId");
+		templateData.put("field2", "orderId");
+		templateData.put("field3", "itemcode");
+		templateData.put("field4", "invAmnt");
+		templateData.put("field5", "paidAmnt");
+		templateData.put("field6", "Status");
+		
+		templateData.put("data1", invoices.getCustId());
+		templateData.put("data2", invoices.getOrderId());
+		templateData.put("data3", invoices.getItemCode());
+		templateData.put("data4", invoices.getInvAmnt());
+		templateData.put("data5", invoices.getPaidAmnt());
+		templateData.put("data6", invoices.getStatus());
+		
+		
+		templateData.put("teamMembers", invoice);
+		templateData.put("location", "Thrissur");
+		
+		email.setModel(templateData);
+		}
+        return emailService.sendEmailWithTemplate(email);
+		
+    }
+
     /**
      * @param mail
      * @return

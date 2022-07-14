@@ -42,7 +42,6 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 //@EnableScheduling
 //@ComponentScan({"com.bourntec.aaplearning.entity"})
 
-//@EnableHystrix
 
 
 
