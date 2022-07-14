@@ -7,6 +7,7 @@ public interface MailService {
 	
 	 String sendEmailWithTemplate(EmailRequestDTO mail);
 	String sendSimpleMail(EmailRequestDTO details);
+	String sendMailWithAttachment(EmailRequestDTO mail);
 	
 
 }

@@ -152,36 +152,19 @@ public class MailServiceImpl implements MailService {
                 javaMailSender.send(mailMessage);
                return "Mail Sent Successfully...";
             }
-        }
-
-
-		catch (Exception e) {
-			throw e;
 		
-		else if (details.getModule().equalsIgnoreCase(Constants.CUSTOMER)) {
-		
-             ResponseEntity<CustomerResponseDTO> response = restTemplate
-                    .getForEntity("http://localhost:8080/customermanagement/v1/" + details.getKeyValue(), CustomerResponseDTO.class);
 
-             Customer customer = mapper.convertValue(response.getBody().getPayLoad(), Customer.class);
-
-            if (customer.getAddress() != null && customer.getName() != null) 
-                mailMessage.setText(details.getMessage() + "Address:"+","+customer.getAddress() +"Name:"+","+ customer.getName());
-
-                javaMailSender.send(mailMessage);
-               return "Mail Sent Successfully...";
-            }
-        }
-		catch (Exception e) {
-			throw e;
 		}
+			catch (Exception e) {
+				throw e;
+			}
 
 		return sender;
 	}
 
 	
 	
-	public String sendMailWithAttachment(EmailRequestDTO mail) throws Exception  {
+	public String sendMailWithAttachment(EmailRequestDTO mail)   {
 		try {
 		
 		MimeMessage msg = javaMailSender.createMimeMessage();
@@ -205,8 +188,9 @@ public class MailServiceImpl implements MailService {
 		
 	}
 		catch (Exception e) {
-			throw e;
+			
 		}
+		return sender;
 		
 	}
 
