@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -176,6 +178,7 @@ public class MailServiceImpl implements MailService {
 
 		return sender;
 	}
+
 	
 	
 	public String sendMailWithAttachment(EmailRequestDTO mail) throws Exception  {
@@ -206,6 +209,7 @@ public class MailServiceImpl implements MailService {
 		}
 		
 	}
+
 	 public String sendEmailWithTemplate(EmailRequestDTO mail) {
 	     MimeMessage mimeMessage =javaMailSender.createMimeMessage();
 	        try {
@@ -249,6 +253,7 @@ public class MailServiceImpl implements MailService {
 	}
 	}
 		
+
 
 
 

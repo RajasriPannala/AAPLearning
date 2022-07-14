@@ -11,6 +11,12 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
+
+/**
+ * @author Sandra Diraj
+ *
+ * @param <T>
+ */
 public class GenericSpecification<T> implements Specification<T> {
 
 	private SimpleDateFormat localeIta = new SimpleDateFormat("dd/MM/yyyy");

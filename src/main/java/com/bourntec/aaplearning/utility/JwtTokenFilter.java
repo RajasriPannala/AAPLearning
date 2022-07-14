@@ -77,12 +77,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 			//if (Objects.nonNull(decodeResponse)) {
 				JSONObject json = XML.toJSONObject(decodeResponse.getBody());
 				
-//				String userName=json.getJSONObject("Claims").getString("username");
+			String userName=json.getJSONObject("Claims").getString("username");
 				
 
 				final List<GrantedAuthority> grantedAuthorities=new ArrayList<GrantedAuthority>();
 				String username=getFilterName() != null ? getFilterName().trim() : "";
-//				contextUtil.setCurrentUser(userName);
+				contextUtil.setCurrentUser(userName);
 			
 			UsernamePasswordAuthenticationToken authentication =new UsernamePasswordAuthenticationToken(username,null, grantedAuthorities);
 			authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));

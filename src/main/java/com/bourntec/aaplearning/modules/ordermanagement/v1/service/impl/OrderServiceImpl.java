@@ -126,14 +126,14 @@ public class OrderServiceImpl implements OrderService {
 		OrderResponseDTO ordersDTO = new OrderResponseDTO();
 		OrderData order = orderRequestDTO.convertToModel();
 		order.setOrderStatus(Constants.OPEN);
+		order.setAmountPay(order.getTotalAmount()-(order.getTotalAmount()*(order.getDiscount()/100)));
 		order = orderRepository.save(order);
 		ordersDTO.setPaylod(order);
 		ordersDTO.setResponseMessage("order data saved sucessfully");
 		ordersDTO.setStatus("Sucess");
 		logger.info("order saved");
 		
-		return ordersDTO;
-	}
+		return ordersDTO;}
 
 	/**
 	 * update order by id
