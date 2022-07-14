@@ -1,3 +1,4 @@
+
 package com.bourntec.aaplearning.entity;
 
 import java.time.LocalDate;
@@ -8,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -40,26 +39,29 @@ import lombok.Setter;
 public class OrderData extends DateFields {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
 
-	private Integer orderId;
-	private Integer inventoryId;
-	private Integer custId;
-	private Integer itemCode;
-	private String address;
-	private Integer itemcount;
-	private Integer totalPrice;
-	
-	
-	 @JsonSerialize(using = LocalDateSerializer.class)
-	 @JsonDeserialize(using = LocalDateDeserializer.class)
-	private LocalDate orderDate;
-	private Integer trackingId;
-	
-	
-	 @Column(length=1)
-	    String orderStatus;
+    private Integer orderId;
+    private Integer inventoryId;
+    private Integer custId;
+    private Integer itemCode;
+    private String address;
+    private Integer itemcount;
+    private Integer totalPrice;
+
+    private Double totalAmount;
+	private Double discount;
+	private Double amountPay;
+
+     @JsonSerialize(using = LocalDateSerializer.class)
+     @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate orderDate;
+    private Integer trackingId;
+
+
+     @Column(length=1)
+        String orderStatus;
 
 
 	 

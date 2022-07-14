@@ -9,6 +9,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+/**
+ * @author Rohini P M
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +21,11 @@ public class OrderLineResponseDTO {
 	
 	String responseMessage;
 	Object paylod;
-//	String status;
+
 	
+	/**
+	 * @param orderLine : orderLine
+	 */
 	public  OrderLineResponseDTO(OrderLine orderLine)  {
 
 		

@@ -1,13 +1,19 @@
 package com.bourntec.aaplearning.modules.commonmanagement.v1.service.impl;
 
+import java.io.File;
 import java.util.Arrays;
-
+import java.util.Map;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -15,20 +21,26 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.client.RestTemplate;
 
+import com.bourntec.aaplearning.entity.Customer;
 import com.bourntec.aaplearning.entity.OrderData;
 import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.entity.Shipping;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.request.EmailRequestDTO;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.service.MailService;
+import com.bourntec.aaplearning.modules.customermanagement.v1.response.CustomerResponseDTO;
+import com.bourntec.aaplearning.modules.customermanagement.v1.util.Constants;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
 import com.bourntec.aaplearning.modules.shippingmanagement.v1.dto.response.ShippingResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import freemarker.template.Configuration;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
@@ -39,6 +51,9 @@ public class MailServiceImpl implements MailService {
 
 	@Autowired
 	HttpServletRequest httpServletRequest;
+	
+	@Autowired
+	Configuration fmConfiguration;
 
 	@Autowired
 	RestTemplate restTemplate;
@@ -64,12 +79,17 @@ public class MailServiceImpl implements MailService {
 			mailMessage.setSubject(details.getSubject());
 			if (details.getModule().equalsIgnoreCase(Constant.PAYMENT)) {
 				PaymentResponseDTO payrsdto = restTemplate.getForObject(
-						"http://localhost:8082/payments/" + details.getKeyValue(), PaymentResponseDTO.class);
+						"http://localhost:8087/v1/paymentmanagement/" + details.getKeyValue(), PaymentResponseDTO.class);
 
 				Payment payment = mapper.convertValue(payrsdto.getPayload(), Payment.class);
+				
+				if (payment.getPaymentType() != null && payment.getPaidAmount() != null) {
 				mailMessage.setText(details.getMessage() + payment.getPaymentType() + payment.getPaidAmount());
+				
 				javaMailSender.send(mailMessage);
-
+				
+				return "Mail Sent Successfully...";
+				}
 			}
 
 			else if (details.getModule().equalsIgnoreCase(Constant.ORDERDATA)) {
@@ -116,12 +136,57 @@ public class MailServiceImpl implements MailService {
 				return "Mail Sent Successfully...";
 
 			}
-		}
+		
+		else if (details.getModule().equalsIgnoreCase(Constants.CUSTOMER)) {
+		
+             ResponseEntity<CustomerResponseDTO> response = restTemplate
+                    .getForEntity("http://localhost:8080/customermanagement/v1/" + details.getKeyValue(), CustomerResponseDTO.class);
+
+             Customer customer = mapper.convertValue(response.getBody().getPayLoad(), Customer.class);
+
+            if (customer.getAddress() != null && customer.getName() != null) 
+                mailMessage.setText(details.getMessage() + "Address:"+","+customer.getAddress() +"Name:"+","+ customer.getName());
+
+                javaMailSender.send(mailMessage);
+               return "Mail Sent Successfully...";
+            }
+        }
+
 
 		catch (Exception e) {
 			throw e;
 		}
 		return sender;
+	}
+	
+	
+	public String sendMailWithAttachment(EmailRequestDTO mail) throws Exception  {
+		try {
+		
+		MimeMessage msg = javaMailSender.createMimeMessage();
+		
+		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+
+		helper.setTo(mail.getToMail());
+		helper.setFrom(sender);
+		helper.setSubject(mail.getSubject());
+		helper.setText(mail.getContent());
+		
+		
+
+		FileSystemResource file = new FileSystemResource(new File("D:\\orderdata.pdf"));
+		 helper.addAttachment("Order data",file);
+		 
+		 
+		 javaMailSender.send(msg);
+		return "send mail attached with order data successfully";
+		
+		
+	}
+		catch (Exception e) {
+			throw e;
+		}
+		
 	}
 
 	public String getPaymentFallback(Exception e) {
@@ -129,11 +194,11 @@ public class MailServiceImpl implements MailService {
 
 		return "---RESPONSE FROM FALLBACK METHOD !---";
 
-	
 
 
 
-	}}
+	}
+	}
 		
 
 
