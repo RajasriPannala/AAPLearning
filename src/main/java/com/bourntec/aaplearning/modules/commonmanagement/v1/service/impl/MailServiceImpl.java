@@ -1,15 +1,21 @@
 package com.bourntec.aaplearning.modules.commonmanagement.v1.service.impl;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -146,14 +152,48 @@ public class MailServiceImpl implements MailService {
                 javaMailSender.send(mailMessage);
                return "Mail Sent Successfully...";
             }
-        }
+		
 
-
-		catch (Exception e) {
-			throw e;
 		}
+			catch (Exception e) {
+				throw e;
+			}
+
 		return sender;
 	}
+
+	
+	
+	public String sendMailWithAttachment(EmailRequestDTO mail)   {
+		try {
+		
+		MimeMessage msg = javaMailSender.createMimeMessage();
+		
+		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+
+		helper.setTo(mail.getToMail());
+		helper.setFrom(sender);
+		helper.setSubject(mail.getSubject());
+		helper.setText(mail.getContent());
+		
+		
+
+		FileSystemResource file = new FileSystemResource(new File("D:\\orderdata.pdf"));
+		 helper.addAttachment("Order data",file);
+		 
+		 
+		 javaMailSender.send(msg);
+		return "send mail attached with order data successfully";
+		
+		
+	}
+		catch (Exception e) {
+			
+		}
+		return sender;
+		
+	}
+
 	 public String sendEmailWithTemplate(EmailRequestDTO mail) {
 	     MimeMessage mimeMessage =javaMailSender.createMimeMessage();
 	        try {
@@ -194,8 +234,10 @@ public class MailServiceImpl implements MailService {
 
 
 
-	}}
+	}
+	}
 		
+
 
 
 

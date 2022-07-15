@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "c82fed91-fe42-4d7e-922d-8d89c7188949",
+		"name": "Paymnet ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8087/v1/paymentmanagement/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTY1MjExNTcsImlhdCI6MTY1NjQzNjI1N30.JmK_cCl2te4jqE0W7Lc8L3bbrOj2q5p8xdD_h0Jhfj9iI2BPFqjlx0Pi2VtTKif3fBSOO60i9ZJDDF2VV-aVIg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"customerId\":62,\r\n    \"invoiceId\":62,\r\n    \"paidAmount\":25000,\r\n   \"paymentType\":\"DC\",\r\n   \"tax\":5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8087/v1/paymentmanagement/",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"v1",
+						"paymentmanagement",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8087/v1/paymentmanagement/26",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTY0MDk2MTUsImlhdCI6MTY1NjMyNDcxNX0.d2AB-137TiSaSKngfXT7tAnF5whL0423DDwhh0PLXOxinLPvxhqCrIrnKUgZ24nDP58WxIIlzH3eBi7-XwXsbw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"customerId\":55,\r\n    \"invoiceId\":55,\r\n    \"paidAmount\":8900,\r\n   \"paymentType\":\"DD\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8087/v1/paymentmanagement/26",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"v1",
+						"paymentmanagement",
+						"26"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8087/v1/paymentmanagement/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTc4NjgwNDYsImlhdCI6MTY1Nzc4MzE0NiwidXNlcm5hbWUiOiJzYW5kcmEifQ.dw6FjDq8UzilHtlvLzVd-SN-Bg6PQtQ_V3exL808remZCjqDSTO0NvyoFWCqstDiA9c8ajdF00rw8xmQK_1PaQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"customerId\":62,\r\n    \"invoiceId\":62,\r\n    \"paidAmount\":25000,\r\n   \"paymentType\":\"DC\",\r\n   \"tax\":5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8087/v1/paymentmanagement/",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"v1",
+						"paymentmanagement",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8087/v1/paymentmanagement/4",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTc4NjgwNDYsImlhdCI6MTY1Nzc4MzE0NiwidXNlcm5hbWUiOiJzYW5kcmEifQ.dw6FjDq8UzilHtlvLzVd-SN-Bg6PQtQ_V3exL808remZCjqDSTO0NvyoFWCqstDiA9c8ajdF00rw8xmQK_1PaQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"tax\":5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8087/v1/paymentmanagement/4",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"v1",
+						"paymentmanagement",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8087/v1/paymentmanagement/pdf1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTc4NjgwNDYsImlhdCI6MTY1Nzc4MzE0NiwidXNlcm5hbWUiOiJzYW5kcmEifQ.dw6FjDq8UzilHtlvLzVd-SN-Bg6PQtQ_V3exL808remZCjqDSTO0NvyoFWCqstDiA9c8ajdF00rw8xmQK_1PaQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"tax\":5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8087/v1/paymentmanagement/pdf1",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"v1",
+						"paymentmanagement",
+						"pdf1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

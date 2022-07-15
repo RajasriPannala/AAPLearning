@@ -1,6 +1,5 @@
 package com.bourntec.aaplearning.modules.ordermanagement.v1.request;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -12,6 +11,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Rohini P M
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,3 +43,4 @@ public class CustomOrderLineRequestDTO {
 
 	}
 }
+

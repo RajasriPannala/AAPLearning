@@ -23,6 +23,10 @@ import com.bourntec.aaplearning.modules.ordermanagement.v1.service.OrderLineServ
 
 
 
+/**
+ * @author Rohini P M
+ *
+ */
 @Primary
 @Service
 public class OrderLineServiceImpl implements OrderLineService{
@@ -40,6 +44,12 @@ public class OrderLineServiceImpl implements OrderLineService{
 	Logger logger =LoggerFactory.getLogger(OrderController.class);
 
 
+	
+	/**
+	 *find orderline by id
+	 * @param id:orderline id
+	 * @return :responsedto
+	 */
 	@Override
 	public List<OrderLine> findAll() {
 
@@ -47,6 +57,12 @@ public class OrderLineServiceImpl implements OrderLineService{
 	}
 
 
+	
+	/**
+	 *Delete orderline by id
+	 * @param id:orderline id
+	 * @return :responsedto
+	 */
 	@Override
 	public OrderLineResponseDTO deleteById(Integer id) {
 		
@@ -57,14 +73,14 @@ public class OrderLineServiceImpl implements OrderLineService{
 				orderLineResponseDTO.setResponseMessage("Deleted successfully");
 				
 
-//				orderLineResponseDTO.setStatus("Sucess");
+
 				logger.info("order deleted by id number :{}",id);
 				return orderLineResponseDTO;
 
 			} else
 
 				orderLineResponseDTO.setResponseMessage("Data not found");
-//			orderLineResponseDTO.setStatus("Failure");
+
 			logger.info("order deletion failured");
 			return orderLineResponseDTO;
 
@@ -110,34 +126,30 @@ public class OrderLineServiceImpl implements OrderLineService{
 	for(OrderLineRequestDTO orderLineDTO:orderLineRequestDTOList )
 	{
 		
-//		OrderData order = orderRepository.findByOrderId(orderLineDTO.getOrderId());
 	orderLine=orderLineDTO.converToModel();
 
 	orderLine.setOrderData(order);
 
 	orderLineList.add(orderLine);
-//	ordersDTO.setPaylod(orderLine);
-//	ordersDTO.setResponseMessage("order data saved sucessfully");
 
 
 	}
 
-	// orderLineRepository.saveAll(orderLineList).stream().
-	// map(OrderLineResponseDTO::new).toList());
-
-
+	
 	List<OrderLineResponseDTO> res= orderLineRepository.saveAll(orderLineList).stream().
 	map(OrderLineResponseDTO::new).toList();
-//	ordersDTO.setPaylod(res);
+
 	return res;
 
 	}
 
-
-
-
-
-
+	/**
+	 * find orderline by id
+	 * @param id ::orderline id
+	 * @param orderRequestDTO
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
 	public OrderLineResponseDTO findByOrderLineId(Integer orderLineId) {
 
@@ -161,6 +173,13 @@ public class OrderLineServiceImpl implements OrderLineService{
 	}
 
 
+	/**
+	 * update orderline by id
+	 * @param id ::orderline id
+	 * @param orderRequestDTO
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
 	public OrderLineResponseDTO updateById(Integer id, OrderLineRequestDTO orderLineRequestDTO) {
 
@@ -175,7 +194,7 @@ public class OrderLineServiceImpl implements OrderLineService{
 			ordersDTO.setPaylod(orderLine);
 
 			ordersDTO.setResponseMessage("Fetched data successfully");
-//			ordersDTO.setStatus("Sucess");
+
 			
 			logger.info("order updated");
 
@@ -184,7 +203,7 @@ public class OrderLineServiceImpl implements OrderLineService{
 		} else {
 
 			ordersDTO.setResponseMessage("Coud not fetch data");
-//			ordersDTO.setStatus("Failed");
+
 			return ordersDTO;
 		}
 	}

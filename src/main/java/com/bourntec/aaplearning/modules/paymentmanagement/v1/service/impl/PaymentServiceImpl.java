@@ -248,12 +248,12 @@ public class PaymentServiceImpl implements PaymentService {
 				paymentRepository.findAllDetails());
 
 		JasperReport compileReport = JasperCompileManager
-				.compileReport(new FileInputStream("src/main/resources/Invoi.jrxml"));
+				.compileReport(new FileInputStream("src/main/resources/PaymentInvoice.jrxml"));
 
 		HashMap<String, Object> map = new HashMap<>();
 
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
-		JasperExportManager.exportReportToPdfFile(report, "invoi.pdf");
+		JasperExportManager.exportReportToPdfFile(report, "paymntinvo.pdf");
 
 		logger.info(" details pdf generated");
 		return "generated";

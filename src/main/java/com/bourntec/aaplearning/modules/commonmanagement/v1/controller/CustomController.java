@@ -37,6 +37,21 @@ public class CustomController {
  
         return status;
     }
+
+    
+
+    /**
+     * @param mail
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/sendMailWithAttachment")
+    public String sendMailWithAttachment(@RequestBody EmailRequestDTO mail) throws Exception {
+    	String status
+        = emailService.sendMailWithAttachment(mail);
+
+        return status;
+        }
     
     @PostMapping("/sendTemplateMail")
     public String sendEmailWithTemplate(@RequestBody EmailRequestDTO email)
@@ -86,7 +101,11 @@ public class CustomController {
     }
     
    
+
  
+    
+    
 	}
+
 
 
