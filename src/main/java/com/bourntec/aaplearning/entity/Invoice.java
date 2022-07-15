@@ -2,10 +2,8 @@ package com.bourntec.aaplearning.entity;
 
 import java.time.LocalDate;
 
-
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,17 +19,17 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-/**
- * @author Esther Tomy
- *
- */
+
 
 @Table(name="Invoice")
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -46,11 +44,10 @@ public class Invoice extends DateFields {
  private Integer paidAmnt;
  private Integer retAmnt;
  private String status;
+ 
  @JsonSerialize(using = LocalDateSerializer.class)
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	private LocalDate orderDate;
- 
- 
-	
+
 
 }
