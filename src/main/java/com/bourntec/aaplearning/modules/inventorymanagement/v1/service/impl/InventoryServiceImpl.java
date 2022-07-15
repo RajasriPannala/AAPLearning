@@ -1,5 +1,6 @@
 package com.bourntec.aaplearning.modules.inventorymanagement.v1.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,7 @@ public class InventoryServiceImpl implements InventoryService {
 	@Autowired
 	InventoryRepository inventoryRepository;
 
-	/*@Override
-	public List<Inventory> findAll() {
-		
-		return inventoryRepository.findAll();
-	}*/
+	
 	@Override
 	public InventoryResponseDTO findById(Integer id) {
 
@@ -144,5 +141,12 @@ public class InventoryServiceImpl implements InventoryService {
 		
 
 	
+	}
+
+	@Override
+	public List<Inventory> findAll() {
+		
+		
+		return inventoryRepository.findAll();
 	}
 }

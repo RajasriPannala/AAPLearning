@@ -4,7 +4,11 @@ import com.bourntec.aaplearning.modules.commonmanagement.v1.request.EmailRequest
 
 public interface MailService {
 
+	
+	 String sendEmailWithTemplate(EmailRequestDTO mail);
 	String sendSimpleMail(EmailRequestDTO details);
-//	 String sendSimpleMails(EmailRequestDTO details);
+	String sendMailWithAttachment(EmailRequestDTO mail);
+	
 
 }
+
