@@ -33,7 +33,7 @@ public interface InvoiceRepository extends JpaRepository<Invoice,Integer>,JpaSpe
 	 Invoice save(Invoice invoice);
 	 
 	 Page<Invoice> findAll(Pageable requestedPage);
-
+ 
 
 
 }

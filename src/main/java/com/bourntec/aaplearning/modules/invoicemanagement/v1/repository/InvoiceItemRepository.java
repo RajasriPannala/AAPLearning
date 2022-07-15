@@ -19,8 +19,8 @@ public interface InvoiceItemRepository extends JpaRepository<InvoiceItem,Integer
 {
 //List<InvoiceItemRequestDTO> findAll(InvoiceItemRequestDTO invoiceItemRequestDTO);
 	InvoiceItem save(CustomInvoiceItemResponseDTO invResponseDTO);
-
+ 
 }
-
+ 
 
 

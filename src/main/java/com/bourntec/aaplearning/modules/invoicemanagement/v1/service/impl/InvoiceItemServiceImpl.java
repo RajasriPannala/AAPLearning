@@ -232,5 +232,5 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
 		invresDTO.setResponsemessage("sold and unsold each item count");
 		return invresDTO;
 	}
-
+ 
 }

@@ -44,5 +44,5 @@ public class InvoiceItem
 	 @JoinColumn(name = "invoiceId")
 	 @ManyToOne(fetch = FetchType.EAGER)
 	 private Invoice invoice;
-	 
+	  
 }
