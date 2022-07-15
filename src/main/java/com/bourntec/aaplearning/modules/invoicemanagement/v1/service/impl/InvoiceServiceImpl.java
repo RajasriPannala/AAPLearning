@@ -220,6 +220,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 		return invoiceRepository.findAll(requestedPage);
 	
 	}
+
+	
 	@Override
 	public InvoiceResponseDTO getInvoiceDetails(InvoiceDateSearchDTO invoiceDateSearchDTO) throws ParseException {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
