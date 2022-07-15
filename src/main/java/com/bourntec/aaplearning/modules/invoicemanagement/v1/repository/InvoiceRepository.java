@@ -3,8 +3,15 @@ package com.bourntec.aaplearning.modules.invoicemanagement.v1.repository;
 
 
 
-import java.util.List;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -22,12 +29,11 @@ import com.bourntec.aaplearning.entity.Invoice;
  */
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice,Integer>,JpaSpecificationExecutor<Invoice>,PagingAndSortingRepository<Invoice, Integer>{
-//	 List<Invoice> findAll();
 
 	 Invoice save(Invoice invoice);
-//	 InvoiceResponseDTO findById(int id) throws Exception;
+	 
+	 Page<Invoice> findAll(Pageable requestedPage);
 
-//	 void updateById(int id);
-//	 InvoiceResponseDTO findAll();
+
 
 }
