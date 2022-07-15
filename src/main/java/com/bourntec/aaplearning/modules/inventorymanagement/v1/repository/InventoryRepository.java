@@ -12,7 +12,7 @@ import com.bourntec.aaplearning.entity.Inventory;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.request.InventoryRequestDTO;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.InventoryResponseDTO;
 
-/**0
+/**
  * @author Allan George
  *
  */

@@ -41,4 +41,5 @@ public class Merchandise {
 	private String status;
 	
 	
+	
 }
