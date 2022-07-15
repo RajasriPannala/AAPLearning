@@ -15,6 +15,11 @@ import org.springframework.stereotype.Component;
  * @author Karthika J
  *
  */
+
+/**
+ * interceptor to add the header before sending the request 
+ *
+ */
 @Component
 public class HeaderInterceptor implements ClientHttpRequestInterceptor {
 
@@ -27,9 +32,6 @@ public class HeaderInterceptor implements ClientHttpRequestInterceptor {
 		request.getHeaders().set("AUTHORIZATION", httpServletRequest.getHeader("AUTHORIZATION"));
 		ClientHttpResponse response = execution.execute(request, body);
 		
-//        org.springframework.http.HttpHeaders header = new org.springframework.http.HttpHeaders();
-//        header.set("AUTHORIZATION", request.getHeader("AUTHORIZATION"));
-//        header.set("AUTHORIZATION","hiii" );
 		return response;
 	}
 }

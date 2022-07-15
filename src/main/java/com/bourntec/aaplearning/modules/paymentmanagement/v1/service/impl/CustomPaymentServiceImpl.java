@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 import com.bourntec.aaplearning.entity.Inventory;
 import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.entity.OrderData;
@@ -41,12 +43,18 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 
 	@Autowired
 	RestTemplate restTemplate;
+	
+	@Autowired
+	RetryTemplate retryTemplate;
+
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 
-//@Transactional(rollbackFor = Exception.class)
+
+//	@Transactional
+//	@Retryable( maxAttemptsExpression = "${retry.maxAttempts}",backoff = @Backoff(delayExpression = "${retry.backOffDelay}",multiplierExpression =  "${retry.multiplier}" ))
 	public PaymentResponseDTO saveCustomPayment(PaymentRequestDTO paymentRequestDTO) {
 		PaymentResponseDTO payresDTO = new PaymentResponseDTO();
 
@@ -67,15 +75,38 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 		/**
 		 * update invoice database and set payment
 		 */
+		
+		
+		//RetryTemplate retryTemplate = new RetryTemplate();
+				final Integer invoiceId = payment.getInvoiceId();
+				InvoiceResponseDTO invResponse  =
+				retryTemplate.execute(context -> {
+					logger.info("Sending to invoice service()");
+					return  restTemplate.getForObject("http://localhost:8085/invoice/" + invoiceId, InvoiceResponseDTO.class);
+//				return null;
+				
+				});
+				
+//				InvoiceResponseDTO invResponse = restTemplate.getForObject("http://localhost:8085/invoice/" + payment.getInvoiceId(), InvoiceResponseDTO.class);
+				// Invoice invoice = (Invoice) impResponse.getInvpayload();
 
-//	    if(payment.getPaidAmount() != null) {
 
-		InvoiceResponseDTO invResponse = restTemplate
+				Invoice invoice = mapper.convertValue(invResponse.getPayload(), Invoice.class);
 
-				.getForObject("http://localhost:8085/invoice/" + payment.getInvoiceId(), InvoiceResponseDTO.class);
-		// Invoice invoice = (Invoice) impResponse.getInvpayload();
 
-		Invoice invoice = mapper.convertValue(invResponse.getPayload(), Invoice.class);
+				// BeanUtils.copyProperties(impResponse.getPayload(), invoice);
+
+
+				// update the invoice object
+
+
+				// invoice = restTemplate.exchange("http://localhost:8082/invoice/"+payment.getInvoiceId(), HttpMethod.GET,invoice , Invoice.class);
+
+				
+				
+				invoice.setPaidAmnt(payment.getPaidAmount());
+				
+//	
 
 		if (invoice.getInvoiceId() != null) {
 
@@ -131,7 +162,7 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 
 				HttpEntity<Inventory> requestEntity2 = new HttpEntity<>(inventory);
 				HttpEntity<InventoryResponseDTO> response2 = restTemplate.exchange(
-						"http://localhost:8084/inventory/" + orderData.getInventoryId(), HttpMethod.PUT, requestEntity2,
+					"http://localhost:8084/inventory/" + orderData.getInventoryId(), HttpMethod.PUT, requestEntity2,
 						InventoryResponseDTO.class);
 
 				payresDTO.setPayload(payment);
@@ -147,3 +178,4 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 	}
 
 }
+

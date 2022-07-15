@@ -2,11 +2,6 @@ package com.bourntec.aaplearning.modules.ordermanagement.v1.request;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import org.springframework.beans.BeanUtils;
 
 import com.bourntec.aaplearning.entity.OrderData;
@@ -23,18 +18,10 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-//@Getter
-//@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderRequestDTO {
 	
-	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
-
-//	private Integer orderId;
 	private Integer custId;
 	private Integer itemCode;
 	private String address;
@@ -42,14 +29,14 @@ public class OrderRequestDTO {
 	private LocalDate orderDate;
 	private Integer trackingId;
 	
+	private Double totalAmount;
+	private Double discount;
+	private Double amountPay;
 	private String orderStatus;
 	
-	  public OrderData convertToModel() {
-			
-		 OrderData order=new OrderData();
-
-			BeanUtils.copyProperties(this, order);
-			return order;
-
-}
+	public OrderData convertToModel() {
+		OrderData order=new OrderData();
+		BeanUtils.copyProperties(this, order);
+		return order;
+	}
 }

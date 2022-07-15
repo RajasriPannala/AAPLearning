@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.OrderData;
@@ -125,14 +126,14 @@ public class OrderServiceImpl implements OrderService {
 		OrderResponseDTO ordersDTO = new OrderResponseDTO();
 		OrderData order = orderRequestDTO.convertToModel();
 		order.setOrderStatus(Constants.OPEN);
+		order.setAmountPay(order.getTotalAmount()-(order.getTotalAmount()*(order.getDiscount()/100)));
 		order = orderRepository.save(order);
 		ordersDTO.setPaylod(order);
 		ordersDTO.setResponseMessage("order data saved sucessfully");
 		ordersDTO.setStatus("Sucess");
 		logger.info("order saved");
 		
-		return ordersDTO;
-	}
+		return ordersDTO;}
 
 	/**
 	 * update order by id
@@ -182,7 +183,14 @@ public class OrderServiceImpl implements OrderService {
 	return "generated";
 
 	
-
-
 }
+	
+	
+
+	@Override
+	public List<OrderData> findAllOrderData(@Param("customer_id") int customer_id) {
+		
+		return orderRepository.findAllOrderData(customer_id);
+	}
 }
+

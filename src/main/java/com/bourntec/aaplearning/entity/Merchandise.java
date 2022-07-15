@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * 
  * @author Aryalekshmi
  *
  */
@@ -39,7 +40,6 @@ public class Merchandise {
 	private Double discount;
     LocalDate purchaseDate;
 	private String status;
-	
 	
 	
 }

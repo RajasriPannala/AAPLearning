@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 /**
- * 
  * @author Sandra Diraj
  *
  */

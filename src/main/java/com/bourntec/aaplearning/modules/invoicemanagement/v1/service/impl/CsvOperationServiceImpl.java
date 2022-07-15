@@ -29,14 +29,14 @@ public class CsvOperationServiceImpl implements CsvOperationService{
 		String[] invoiceDetails=scanner.nextLine().split(",");
 		Invoice invoice=new Invoice();
 		
-//		invoice.setInvoiceId(Integer.parseInt(invoiceDetails[0]));
-		invoice.setCustId(Integer.parseInt(invoiceDetails[0]));
-		invoice.setOrderId(Integer.parseInt(invoiceDetails[1]));
-		invoice.setItemCode(Integer.parseInt(invoiceDetails[2]));
-		invoice.setInvAmnt(Integer.parseInt(invoiceDetails[3]));
-		invoice.setPaidAmnt(Integer.parseInt(invoiceDetails[4]));
-		invoice.setRetAmnt(Integer.parseInt(invoiceDetails[5]));
-//		invoice.setStatus(invoiceDetails[6]);
+		invoice.setInvoiceId(Integer.parseInt(invoiceDetails[0]));
+		invoice.setCustId(Integer.parseInt(invoiceDetails[1]));
+		invoice.setOrderId(Integer.parseInt(invoiceDetails[2]));
+		invoice.setItemCode(Integer.parseInt(invoiceDetails[3]));
+		invoice.setInvAmnt(Integer.parseInt(invoiceDetails[4]));
+		invoice.setPaidAmnt(Integer.parseInt(invoiceDetails[5]));
+		invoice.setRetAmnt(Integer.parseInt(invoiceDetails[6]));
+		invoice.setStatus(invoiceDetails[7]);
 		
 		
 		
@@ -55,11 +55,21 @@ public class CsvOperationServiceImpl implements CsvOperationService{
 
 	@Override
 	public void write(List<Invoice> invoiceList, String fileName) throws Exception {
+		
+//		csvFile.createNewFile();
+//		writer csvWrite = new CSVWriter(new FileWriter(csvFile));
+		
+//		csvWrite.writeNext(new String[]{heading});
+		
+		
 		FileWriter file=null;
 		try {
 		file = new FileWriter(fileName);
+		String heading = "invoiceId,custId,orderId,itemCode,invAmnt,paidAmnt,retAmnt,status \n";
+		file.write(heading);
 		for (int i = 0; i < invoiceList.size(); i++) {
 		String data = convertTocsv(invoiceList.get(i));
+		
 		file.write(data);}
 		} catch (Exception e) {
 		

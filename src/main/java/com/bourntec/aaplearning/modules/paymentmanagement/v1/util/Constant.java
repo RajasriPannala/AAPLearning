@@ -10,8 +10,10 @@ public class Constant {
 	public static final String ORDERDATA = "O";
 
 	public static final String MERCHANDISE = "M";
+	public static final String CUSTOMER = "C";
 
-
+	
 	public static final String SHIPPING = "S";
 
+	
 }

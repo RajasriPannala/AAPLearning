@@ -17,13 +17,12 @@ public class EmailRequestDTO {
 	private String toMail;
 	private String subject;
 	private String message;
-	private String module;//payment//Shipping
+	private String module;// payment//Shipping
 	private String  keyValue;//id
 	private String content;
     private Map< String, Object > model;
   
 	
-    
 
 }
 

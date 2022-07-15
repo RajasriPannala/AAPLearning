@@ -100,12 +100,16 @@ public class CustomController {
 		
     }
     
+    @PostMapping("/sendSms")
+    public void sendSms(@Valid @RequestBody SmsRequest smsRequest) {	
    
 
- 
+    	service.sendSms(smsRequest);
+    	logger.info("SMS send successfully");
+    	
+    }
     
-    
-    
+
 	}
 
 

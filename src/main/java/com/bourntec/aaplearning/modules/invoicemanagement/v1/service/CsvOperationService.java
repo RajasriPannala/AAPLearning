@@ -15,12 +15,13 @@ public interface CsvOperationService {
 
 
 
-		return new StringBuffer (invoice.getCustId()).append(",")
+		return new StringBuffer (invoice.getInvoiceId()).append(invoice.getCustId()).append(",")
 		.append(invoice.getOrderId()).append(", ")
 		.append(invoice.getItemCode()).append(",").append(invoice.getInvAmnt()).append(",").append(invoice.getPaidAmnt()).append(",")
-		.append(invoice.getRetAmnt()).append("\n").toString();
+		.append(invoice.getRetAmnt()).append(invoice.getStatus()).append("\n").toString();
 
 
 
 		}
+	
 }

@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 /**
  * @author Karthika J
  *
@@ -22,26 +21,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
+/**
+ * @param OrderRequestDTO : order
+ */
 public class OrderResponseDTO {
-	
-	
+
 	String responseMessage;
 	Object paylod;
 	String status;
-	 
-	 
 
-		/**
-		 * @param order : order
-		 */
-		public void OrderResponseDto(OrderData order)  {
+	/**
+	 * @param order : order
+	 */
+	public void OrderResponseDto(OrderData order) {
 
-			BeanUtils.copyProperties(order,this);
-		}
+		BeanUtils.copyProperties(order, this);
+	}
 
-
-
-	
-
-	
 }

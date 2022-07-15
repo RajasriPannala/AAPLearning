@@ -5,7 +5,14 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+
+/**
+ * @author Jeena Thomas
+ *
+ */
 
 @Configuration
 @EnableWebSecurity
@@ -16,23 +23,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	JwtTokenFilter jwtFilter;
 
-	
-
-
-	@Override
-	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors().and().csrf().disable().addFilterBefore(jwtFilter,
-				UsernamePasswordAuthenticationFilter.class);
-//	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-//		 auth.inMemoryAuthentication()
-//		  .withUser("user1").password(getpassword().encode("password")).roles("USER").and()
-//		  .withUser("user2").password(getpassword().encode("password2")).roles("ADMIN");
-//		}
-//
-//	@Bean
-//	public PasswordEncoder getpassword() {
-//	return new BCryptPasswordEncoder();
-
-	}
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {//It tells Spring Security how we configure, when we want to require all users to be authenticated or not, which filter (AuthTokenFilter) and when we want it to work (filter before UsernamePasswordAuthenticationFilter), which Exception Handler is chosen (AuthEntryPointJwt).
+    http.cors().and().csrf().disable().addFilterBefore(jwtFilter,
+			UsernamePasswordAuthenticationFilter.class)
+  //    .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+      .authorizeRequests().antMatchers("/api/auth/**").permitAll()  // Our endpoints
+      .antMatchers("/api/test/**").permitAll()
+      .antMatchers("/swagger-ui*/**","/v3/api-docs/**")
+      .permitAll()
+      .anyRequest().authenticated();// Reject every unauthenticated request and send error code 401.
 
 }
+}
+
+
+

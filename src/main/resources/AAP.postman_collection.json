@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "1bc252e6-f3c2-4e0f-9e50-b7a268492f18",
+		"name": "AAP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "return",
+			"item": [
+				{
+					"name": "http://localhost:8086/returnmanagement/v1/13",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n        \"invoiceId\": 47,\r\n        \"custId\": 235,\r\n        \"itemCode\": 345354,\r\n        \"retAmt\": 1000,\r\n        \"qty\": 1,\r\n        \"description\": \"bad color quality\"\r\n        \r\n\t\r\n\t\r\n\t\r\n\t\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/returnmanagement/v1/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"returnmanagement",
+								"v1",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8086/returnmanagement/v1/8",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n        \"invoiceId\": 47,\r\n        \"custId\": 235,\r\n        \"itemCode\": 345354,\r\n        \"retAmt\": 1000,\r\n        \"qty\": 1,\r\n        \"description\": \"bad color quality\"\r\n        \r\n\t\r\n\t\r\n\t\r\n\t\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/returnmanagement/v1/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"returnmanagement",
+								"v1",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8086/returnmanagement/v1/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n        \"invoiceId\": 47,\r\n        \"custId\": 235,\r\n        \"itemCode\": 65952,\r\n        \"retAmt\": 100,\r\n        \"qty\": 1,\r\n        \"description\": \"bad color quality\"\r\n        \r\n\t\r\n\t\r\n\t\r\n\t\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/returnmanagement/v1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"returnmanagement",
+								"v1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8086/returnmanagement/v1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n        \"invoiceId\": 47,\r\n        \"custId\": 235,\r\n        \"itemCode\": 65952,\r\n        \"retAmt\": 100,\r\n        \"qty\": 1,\r\n        \"description\": \"bad color quality\"\r\n        \r\n\t\r\n\t\r\n\t\r\n\t\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8086/returnmanagement/v1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8086",
+							"path": [
+								"returnmanagement",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Print Invoice",
+			"item": [
+				{
+					"name": "http://localhost:8080/invoice/download/csv",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n        \"invoiceId\": 5,\r\n        \"custId\": 1,\r\n        \"itemCode\": 1,\r\n        \"retAmount\": 61,\r\n        \"qty\": 1,\r\n        \"description\":\"good\"\r\n\r\n        \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/invoice/download/csv",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"invoice",
+								"download",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Retry",
+			"item": [
+				{
+					"name": "http://localhost:8082/custompayments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"invoiceId\":5,\r\n\"paidAmount\":6\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/custompayments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"custompayments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "JPA Implementation",
+			"item": [
+				{
+					"name": "http://localhost:8081/custom",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    \r\n    {\r\n   \"inventoryId\":5,\r\n\t\"custId\":100,\r\n\t\"itemCode\":110,\r\n    \"address\":\"joykghf\",\r\n\t\"itemcount\":110,\r\n    \"trackingId\":170,\r\n     \"orderList\":[\r\n\r\n        {\r\n\r\n            \"itemcount\":110\r\n\r\n        }\r\n\r\n    ]\r\n}\r\n\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/custom",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"custom"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Native Query",
+			"item": [
+				{
+					"name": "http://localhost:8081/orders/details?customer_id=6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "3",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/orders/details?customer_id=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"orders",
+								"details"
+							],
+							"query": [
+								{
+									"key": "customer_id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mail service",
+			"item": [
+				{
+					"name": "http://localhost:8080/sendMail",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n       \"toMail\": \"rohinideviprasadam@gmail.com\",\r\n\r\n\r\n\r\n        \"subject\": \"PaymentDetails\",\r\n\r\n\r\n\r\n        \"module\": \"A\",\r\n\r\n\r\n\r\n        \"message\":\"demo\",\r\n\r\n\r\n\r\n        \"keyValue\": 1  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sendMail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sendMail"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

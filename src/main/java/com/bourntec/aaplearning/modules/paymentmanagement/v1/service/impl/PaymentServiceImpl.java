@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.bourntec.aaplearning.entity.Payment;
+import com.bourntec.aaplearning.entity.PaymentCustomerDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.controller.PaymentController;
+import com.bourntec.aaplearning.modules.paymentmanagement.v1.enumeration.PaymentType;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.repository.PaymentRepository;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.request.PaymentRequestDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.response.PaymentResponseDTO;
@@ -38,6 +40,10 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  * @author Sandra Diraj
  *
  */
+/**
+ * @author Sandra Diraj
+ *
+ */
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
@@ -47,16 +53,19 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	RestTemplate restTemplate;
 
-//	@Autowired
-//	InvoiceService invoiceService;
+	Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
-	Logger logger =LoggerFactory.getLogger(PaymentController.class);
 	@Override
 	public List<Payment> findAll() {
 
 		return paymentRepository.findAll();
 
 	}
+
+	/**
+	 * Added caching mechanism. for delete all the cached contents
+	 *
+	 */
 
 	@Override
 	@CacheEvict(cacheNames = "payments", key = "#id")
@@ -81,19 +90,36 @@ public class PaymentServiceImpl implements PaymentService {
 	 * Request Param: Payment DTO
 	 */
 
-	
 	@Override
 	public PaymentResponseDTO save(PaymentRequestDTO paymentRequestDTO) {
+
 		PaymentResponseDTO payresDTO = new PaymentResponseDTO();
+		double total;
 
 		Payment payment = paymentRequestDTO.convertToModel();
+
 		payment.setStatus(Constant.ACTIVE);
 
-		payment = paymentRepository.save(payment);
+		if (payment.getPaymentType().equals(PaymentType.CC) || payment.getPaymentType().equals(PaymentType.UPI)) {
 
-		payresDTO.setPayload(payment);
-		payresDTO.setResponsemessage("Payment data saved sucessfully");
-		payresDTO.setStatus("Sucess");
+			{
+
+				double tax = (payment.getPaidAmount() * payment.getTax()) / 100;
+				total = tax + payment.getPaidAmount();
+
+			}
+			payment.setTotalAmount(total);
+
+			payment = paymentRepository.save(payment);
+			payresDTO.setPayload(payment);
+			payresDTO.setResponsemessage("Payment data saved sucessfully");
+			payresDTO.setStatus("Sucess");
+		} else {
+			payresDTO.setPayload(payment);
+			payresDTO.setResponsemessage("No needed to pay the tax.");
+			payresDTO.setStatus("Sucess");
+
+		}
 		return payresDTO;
 	}
 
@@ -122,29 +148,21 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	/**
-	 * Request Param:id-Payment id Request Param Payment ResponseDTO
+	 * Request Param:id-Payment id Request Param Payment ResponseDTO Added cachable
+	 * mechanism
 	 */
-	@CachePut(cacheNames = "payments", key = "#payment.id")
+	@CachePut(cacheNames = "payments", key = "#id")
 	public PaymentResponseDTO updateById(Integer id, PaymentRequestDTO paymentRequestDTO) throws Exception {
 
 		PaymentResponseDTO paymentResponseDTO = new PaymentResponseDTO();
 		Optional<Payment> paymentOptional = paymentRepository.findById(id);
 		if (paymentOptional.isPresent()) {
 			Payment foundPayment = paymentOptional.orElseThrow(() -> null);
-
-
 			paymentRequestDTO.setPaymentId(id);
-			// BeanUtils.copyProperties(
-			// paymentRequestDTO,foundPayment,getNullPropertyNames(paymentRequestDTO));
-			// foundPayment.get();
 			Payment payment = paymentRequestDTO.convertToModel(foundPayment);
 			foundPayment.setPaymentId(id);
-			// foundPayment.setPaymentId(paymentRequestDTO.getPaymentId()!=null?paymentRequestDTO.getPaymentId(),this.);
-
 			Payment payments = paymentRequestDTO.convertToModel();
 			payment.setPaymentId(id);
-		
-
 			paymentRepository.save(payment);
 			paymentResponseDTO.setPayload(payment);
 			paymentResponseDTO.setResponsemessage(" data save sucessfully");
@@ -207,20 +225,62 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Override
 	public String generatePdf() throws JRException, IOException {
-		
-		
-		
-	
-		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(paymentRepository.findAll());
-		JasperReport compileReport=JasperCompileManager.compileReport(new FileInputStream("src/main/resources/PaymentDetails.jrxml"));
+
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(
+				paymentRepository.findAll());
+		JasperReport compileReport = JasperCompileManager
+				.compileReport(new FileInputStream("src/main/resources/Payment.jrxml"));
+
 		HashMap<String, Object> map = new HashMap<>();
-		JasperPrint report  =  JasperFillManager.fillReport(compileReport, map,beanCollectionDataSource);
-		JasperExportManager.exportReportToPdfFile(report,"paymentdetails.pdf");
+
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		JasperExportManager.exportReportToPdfFile(report, "paymentdemo2.pdf");
 
 		logger.info("payment details pdf generated");
 		return "generated";
-	
+
 	}
 
-	
+	@Override
+	public String generatePdf2() throws JRException, IOException {
+
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(
+				paymentRepository.findAllDetails());
+
+		JasperReport compileReport = JasperCompileManager
+				.compileReport(new FileInputStream("src/main/resources/PaymentInvoice.jrxml"));
+
+		HashMap<String, Object> map = new HashMap<>();
+
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		JasperExportManager.exportReportToPdfFile(report, "paymntinvo.pdf");
+
+		logger.info(" details pdf generated");
+		return "generated";
+
+	}
+
+	@Override
+	public List<PaymentCustomerDTO> findAllDetails() {
+
+		return paymentRepository.findAllDetails();
+	}
+
+//	
+//public double findTaxByPaymentType(PaymentType  type)
+//{
+//	
+//	Payment payment=new Payment();
+//	double totalamount=0;
+//	if(payment.getPaymentType()==type)
+//	{
+//		double tax=payment.getTax() * payment.getPaidAmount();
+//		totalamount=tax+payment.getPaidAmount();
+//	
+//	}
+//	return totalamount;
+//	
+//	
+//	
+//}
 }

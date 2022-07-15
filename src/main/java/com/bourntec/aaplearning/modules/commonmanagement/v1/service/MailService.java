@@ -10,6 +10,5 @@ public interface MailService {
 	String sendMailWithAttachment(EmailRequestDTO mail);
 	
 
-	
 }
 

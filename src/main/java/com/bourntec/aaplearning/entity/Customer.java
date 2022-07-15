@@ -36,7 +36,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Builder
 @Table(name = "aapcustomer")
-//@JsonFilter("customerDetails")
+// @JsonFilter("customerDetails")
 public class Customer extends DateFields {
 
 	@Id

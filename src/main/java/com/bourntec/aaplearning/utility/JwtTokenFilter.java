@@ -76,7 +76,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 			if (claims.contains("success")){
 			//if (Objects.nonNull(decodeResponse)) {
 				JSONObject json = XML.toJSONObject(decodeResponse.getBody());
-				String userName=json.getJSONObject("Claims").getString("username");
+				
+			String userName=json.getJSONObject("Claims").getString("username");
 				
 
 				final List<GrantedAuthority> grantedAuthorities=new ArrayList<GrantedAuthority>();

@@ -19,7 +19,6 @@ import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.Inventor
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.service.InventoryService;
 
 /**
- * 
  * @author Allan George
  *
  */
@@ -92,4 +91,11 @@ public class InventoryController {
 
 
 	}
+
+@PostMapping("/search")
+    public Page<Inventory> sortingInventoryDetails(@RequestBody CustomRequestDTO customRequestDTO){
+
+        return  inventoryService.sortingAndFilteringInventoryDetails(customRequestDTO);
+
+    }
 }

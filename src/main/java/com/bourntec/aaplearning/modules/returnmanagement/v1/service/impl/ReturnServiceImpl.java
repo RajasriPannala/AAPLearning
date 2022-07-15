@@ -2,23 +2,18 @@ package com.bourntec.aaplearning.modules.returnmanagement.v1.service.impl;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.bourntec.aaplearning.entity.Inventory;
-import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.entity.Return;
-import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.InventoryResponseDTO;
-import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.repository.ReturnRepository;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.request.ReturnRequestDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.response.ReturnResponseDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.service.ReturnService;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.util.Constants;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Rohini P M
@@ -26,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Service
 public class ReturnServiceImpl implements ReturnService{
-	
+	Logger logger = LoggerFactory.getLogger(ReturnServiceImpl.class);
 	@Autowired
 	ReturnRepository returnRepository;
 	
@@ -56,6 +51,7 @@ public class ReturnServiceImpl implements ReturnService{
 	retresDTO.setPayload(returnValue);
 	retresDTO.setResponsemessage("Data save sucessfully");
 	retresDTO.setStatus("Success");
+	logger.info("data saved successfully");
 	return retresDTO;
 	}
 
@@ -68,11 +64,13 @@ public class ReturnServiceImpl implements ReturnService{
 		returnResponseDTO.setResponsemessage("Deleted successfully");
 
 		returnResponseDTO.setStatus("Success");
+		logger.info("data deleted successfully");
 	return returnResponseDTO;
 	} else
 
 		returnResponseDTO.setResponsemessage("Data not found");
 	returnResponseDTO.setStatus("Failure");
+	logger.info("data not found");
 	return returnResponseDTO;
 
 
@@ -84,8 +82,17 @@ public class ReturnServiceImpl implements ReturnService{
 		ReturnResponseDTO retresDTO=new ReturnResponseDTO();
 		Optional<Return> returnOptional = returnRepository.findById(id);
 		if (returnOptional.isPresent()) {
+			Return foundReturn = returnOptional.orElseThrow(() -> null);
+			
+			returnRequestDTO.setReturnId(id);
+			Return returnManagement= returnRequestDTO.convertToModel(foundReturn);
+			foundReturn.setReturnId(id);
+			//Return returnManagements= returnRequestDTO.convertToModel();
+			
+			//returnManagement.setReturnId(id);
+			
+			//Return existingreturnManagement = returnOptional.get();
 
-			Return returnManagement= returnRequestDTO.convertToModel();
 
 		
 		returnManagement.setReturnId(id);
@@ -93,11 +100,13 @@ public class ReturnServiceImpl implements ReturnService{
 		retresDTO.setPayload(returnManagement);
 		retresDTO.setResponsemessage("Data updated sucessfully");
 		retresDTO.setStatus("Sucess");
+		logger.info("data updated successfully");
 		return retresDTO;
 		} else
 		{
 		retresDTO.setResponsemessage("invalid id");
 		retresDTO.setStatus("failed");
+		logger.info("id is invalid");
 		return retresDTO;
 		}
 
@@ -115,15 +124,43 @@ public class ReturnServiceImpl implements ReturnService{
 	retresDTO.setPayload(returnOptional.get());
 	retresDTO.setResponsemessage(" data got sucessfully");
 	retresDTO.setStatus("Success");
+	logger.info("Successfull");
 	return retresDTO;
 
 	}
 	else {
 		retresDTO.setResponsemessage("invalid id");
 		retresDTO.setStatus("failed");
+		logger.info("failed");
 		return retresDTO;
 	}
 	}
+
+
+	
+	
+//	@Override
+//	public String FindByRetAmt(int id) {
+//
+//		Optional<Return> returnOptional = returnRepository.findById(id);
+//		if (returnOptional.isPresent()) {
+//			int retAmnt = returnOptional.get().getRetAmt();
+//			String category = null;
+//			if (retAmnt < 2)
+//				category = "below";
+//			else if (retAmnt < 5)
+//				category = "above";
+//			else if (retAmnt < 10)
+//				category = "high";
+//			else
+//				category = "equal";
+//			return category;
+//		} else {
+//			throw new RecordNotFoundException("Record not found");
+//		}
+//		
+//	
+//	}
 }
 
 	

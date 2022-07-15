@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Payment" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d21e5fa8-e050-4b70-9f56-07226cb96a37">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="paymentId" class="java.lang.Integer"/>
+	<field name="customerId" class="java.lang.Integer"/>
+	<field name="invoiceId" class="java.lang.Integer"/>
+	<field name="paidAmount" class="java.lang.Integer"/>
+	<field name="paymentType" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="111" splitType="Stretch">
+			<staticText>
+				<reportElement x="60" y="10" width="481" height="101" uuid="014d3679-d4c5-4126-abb5-d4853a93d51a"/>
+				<textElement>
+					<font size="47" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[PAYMENT DETAILS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="-10" y="9" width="121" height="41" uuid="ba24438d-f032-48b5-9927-27e50a077d34"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Payment ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="10" width="121" height="41" uuid="6256b169-4a03-458f-b1bf-7d588e4e3535"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Paid Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="10" width="121" height="41" uuid="dfdccac4-da34-49a8-afee-74ad48fd1e56"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Invoice ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="10" width="121" height="41" uuid="7c255b03-287e-4850-b3e0-b8ffbcbe30ed"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Customer ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="9" width="121" height="41" uuid="2a6fe872-5f20-4084-8ca3-00ce29ed38d0"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Payment Type]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="80" width="100" height="40" uuid="e211d720-47e7-4e4b-a25b-b5327e60e6fa"/>
+				<textFieldExpression><![CDATA[$F{customerId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="80" width="100" height="40" uuid="d2735ed0-c455-4cab-b70a-23edd6eecade"/>
+				<textFieldExpression><![CDATA[$F{invoiceId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="80" width="100" height="40" uuid="be193cf8-9066-4cde-abc9-1d83271ec881"/>
+				<textFieldExpression><![CDATA[$F{paidAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-11" y="80" width="100" height="40" uuid="417830dd-6f34-4517-94eb-11201c85cb1e"/>
+				<textFieldExpression><![CDATA[$F{paymentId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="80" width="100" height="40" uuid="d1950b84-724a-4cd9-b1da-c6cc78b6834d"/>
+				<textFieldExpression><![CDATA[$F{paymentType}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
