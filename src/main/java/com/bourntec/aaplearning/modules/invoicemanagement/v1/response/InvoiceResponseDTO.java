@@ -27,13 +27,6 @@ String responsemessage;
 Object payload;
 
 String Status;
-//private Integer invoiceId ;
-//private Integer custId;
-//private Integer orderId;
-//private Integer itemCode;
-//private  Integer invAmnt;
-//private Integer paidAmnt;
-//private  Integer retAmnt;
 
 public InvoiceResponseDTO(Invoice invoice)
 {

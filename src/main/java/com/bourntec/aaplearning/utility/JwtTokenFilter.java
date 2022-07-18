@@ -95,8 +95,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 			
 			//			return;
 				
-
-			//	if (Objects.nonNull(decodeResponse)) {
+            //	if (Objects.nonNull(decodeResponse)) {
 			//			Map filterResult = objectMapper.readValue(decodeResponse.getBody(),Map.class);
 			//		jwtSecurityContext.setId((String) filterResult.get("id"));
 			//		httpServletResponse.setStatus(200);

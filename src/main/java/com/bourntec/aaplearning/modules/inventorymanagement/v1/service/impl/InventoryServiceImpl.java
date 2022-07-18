@@ -149,4 +149,31 @@ public class InventoryServiceImpl implements InventoryService {
 		
 		return inventoryRepository.findAll();
 	}
+
+	@Override
+    public Page<Inventory>sortingAndFilteringInventoryDetails(CustomRequestDTO customRequestDTO) {
+		
+        List<SortList> sortList=customRequestDTO.getSort();
+        List<Sort.Order> sortOrder= new ArrayList<>();
+        for(SortList s:sortList) 
+        {
+
+        String sort = null;
+        if ((s.getOrderd()).equals("descending"))
+        {
+        	sort=s.getField();
+        	sortOrder.add(new Sort.Order(Sort.Direction.DESC,sort));
+        }
+        else if ((s.getOrderd()).equals("ascending"))
+        {
+        	sort=s.getField();
+        	sortOrder.add(new Sort.Order(Sort.Direction.ASC,sort));
+        }
+            }
+       
+        Pageable requestedPage =PageRequest.of(customRequestDTO.getPage(),customRequestDTO.getSize() , Sort.by(sortOrder));
+        return inventoryRepository.findAll(requestedPage);
+
+    }
+
 }

@@ -2,6 +2,8 @@ package com.bourntec.aaplearning.modules.inventorymanagement.v1.repository;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
@@ -11,6 +13,7 @@ import com.bourntec.aaplearning.modules.inventorymanagement.v1.request.Inventory
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.InventoryResponseDTO;
 
 /**
+ * 
  * @author Allan George
  *
  */
@@ -27,5 +30,8 @@ public interface InventoryRepository extends JpaRepository<Inventory,Integer>,Jp
 	
 	//Optional<Inventory> findById(Integer id);
 	
-	
+	   
+	//   List<Inventory>  inventoryFilter(CustomRequestDTO customRequestDTO) throws Exception;
+
+	 Page<Inventory> findAll(Pageable requestedPage);
 }

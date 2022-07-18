@@ -29,4 +29,5 @@ public interface InventoryService {
 	List<Inventory> findAll();
 	
 
+	Page<Inventory> sortingAndFilteringInventoryDetails(CustomRequestDTO customRequestDTO);
 }

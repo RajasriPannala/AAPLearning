@@ -22,6 +22,10 @@ import com.bourntec.aaplearning.modules.ordermanagement.v1.service.OrderLineServ
 
 
 
+/**
+ * @author Rohini P M
+ *
+ */
 @RestController
 @RequestMapping("/orderLine")
 public class OrderLineController {
@@ -35,6 +39,10 @@ public class OrderLineController {
 
 
 
+/**
+ * @param id:Orderline id
+ * @return:responsedto
+ */
 @GetMapping("/{id}")
 public ResponseEntity<OrderLineResponseDTO> findByOrderLineId(@PathVariable Integer id) {
 	OrderLineResponseDTO orderLineresDTO = orderLineService.findByOrderLineId(id);
@@ -44,6 +52,10 @@ public ResponseEntity<OrderLineResponseDTO> findByOrderLineId(@PathVariable Inte
 
 
 
+/**
+ * @param id:id
+ * 
+ */
 @DeleteMapping("/{id}")
 public ResponseEntity<OrderLineResponseDTO> deleteById(@PathVariable Integer id) {
 	
@@ -51,6 +63,12 @@ public ResponseEntity<OrderLineResponseDTO> deleteById(@PathVariable Integer id)
 	return ResponseEntity.ok(orderlineresDTO);
 	
 }
+/**
+ * @param id:id
+ * @param orderLineRequestDTO
+ * @return
+ * @throws Exception
+ */
 @PutMapping("/{id}")
 public ResponseEntity<OrderLineResponseDTO> updateById(@PathVariable Integer id, @RequestBody OrderLineRequestDTO orderLineRequestDTO) throws Exception {
 	
@@ -68,22 +86,25 @@ OrderLineResponseDTO orderlineresDTO=	orderLineService.updateById(id,orderLineRe
 //	return ResponseEntity.ok(orderlineresDTO);
 //	}
 
+/**
+ * @param orderLineList
+ * @return
+ */
 @PostMapping
 public List<OrderLineResponseDTO> createAll(@RequestBody List<OrderLineRequestDTO> orderLineList) {
 return orderLineService.saveAll(orderLineList);
 }
 
+/**
+ * @return
+ */
 @GetMapping
 public List<OrderLine> findAll() {
 	
 	return orderLineService.findAll();
 }
 
-//@GetMapping("{orderId}")
-//public List<OrderLine> findByOrderId(Integer orderId) {
-//	
-//	return orderLineService.findByOrderId(orderId);
-//}
+
 
 }
 

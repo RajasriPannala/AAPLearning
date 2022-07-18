@@ -91,4 +91,11 @@ public class InventoryController {
 
 
 	}
+
+@PostMapping("/search")
+    public Page<Inventory> sortingInventoryDetails(@RequestBody CustomRequestDTO customRequestDTO){
+
+        return  inventoryService.sortingAndFilteringInventoryDetails(customRequestDTO);
+
+    }
 }

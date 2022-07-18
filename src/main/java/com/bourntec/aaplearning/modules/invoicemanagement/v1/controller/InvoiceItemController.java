@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bourntec.aaplearning.entity.InvoiceItem;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceItemRequestDTO;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.CustomInvoiceResponseDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceItemResponseDTO;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.InvoiceItemService;
 
 /**
@@ -91,6 +93,18 @@ public class InvoiceItemController
 		 List<InvoiceItem> invoiceitem = invoiceItemService.getInvoiceItemList(pageNo-1,pageSize);
 		return invoiceitem;
 
+	}
+	@GetMapping("/invoiceitem2")
+	public InvoiceItemResponseDTO getCountInvoiceItemCode()
+	{
+		
+		return invoiceItemService.getCountInvoiceItemCode();
+	}
+	@GetMapping("/invoicesoldandunsolditemcount")
+	public InvoiceResponseDTO getCountInvoiceItemUnsoldAndSoldCodeCount()
+	{
+		
+		return invoiceItemService.getCountInvoiceItemUnsoldAndSoldCodeCount();
 	}
 }
 

@@ -1,17 +1,23 @@
 package com.bourntec.aaplearning.modules.commonmanagement.v1.service.impl;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -146,6 +152,11 @@ public class MailServiceImpl implements MailService {
 
 				Customer customer = mapper.convertValue(response.getBody().getPayLoad(), Customer.class);
 
+                javaMailSender.send(mailMessage);
+               return "Mail Sent Successfully...";
+            }
+		
+
 				if (customer.getAddress() != null && customer.getName() != null)
 					mailMessage.setText(details.getMessage() + "Address:" + "," + customer.getAddress() + "Name:" + ","
 							+ customer.getName());
@@ -156,9 +167,77 @@ public class MailServiceImpl implements MailService {
 		} catch (Exception e) {
 			throw e;
 		}
+			catch (Exception e) {
+				throw e;
+			}
+
 		return sender;
 		
 	}
+
+
+	
+	
+	public String sendMailWithAttachment(EmailRequestDTO mail)   {
+		try {
+		
+		MimeMessage msg = javaMailSender.createMimeMessage();
+		
+		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+
+		helper.setTo(mail.getToMail());
+		helper.setFrom(sender);
+		helper.setSubject(mail.getSubject());
+		helper.setText(mail.getContent());
+		
+		
+
+		FileSystemResource file = new FileSystemResource(new File("D:\\orderdata.pdf"));
+		 helper.addAttachment("Order data",file);
+		 
+		 
+		 javaMailSender.send(msg);
+		return "send mail attached with order data successfully";
+		
+		
+	}
+		catch (Exception e) {
+			
+		}
+		return sender;
+		
+	}
+
+	 public String sendEmailWithTemplate(EmailRequestDTO mail) {
+	     MimeMessage mimeMessage =javaMailSender.createMimeMessage();
+	        try {
+	 
+	            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+	 
+	            mimeMessageHelper.setSubject(mail.getSubject());
+	            mimeMessageHelper.setFrom(sender);
+	            mimeMessageHelper.setTo(mail.getToMail());
+	              mail.setContent(getContentFromTemplate(mail.getModel()));
+	            mimeMessageHelper.setText(mail.getContent(), true);
+	 
+	            javaMailSender.send(mimeMessageHelper.getMimeMessage());
+	        } catch (MessagingException e) {
+	            e.printStackTrace();
+	        }
+			return "Mail send Successully";
+	    }
+	 
+	    public String getContentFromTemplate(Map < String, Object >model)     { 
+	        StringBuffer content = new StringBuffer();
+	 
+	        try {
+	            content.append(FreeMarkerTemplateUtils.processTemplateIntoString(fmConfiguration.getTemplate("email-template.flth"), model));
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return content.toString();
+	    }
+
 
 	public String sendEmailWithTemplate(EmailRequestDTO mail) {
 
@@ -232,5 +311,12 @@ public class MailServiceImpl implements MailService {
 		logger.info("---RESPONSE FROM FALLBACK METHOD---");
 
 		return "---RESPONSE FROM FALLBACK METHOD !---";
+
 	}
 }
+
+
+	}
+	}
+		
+

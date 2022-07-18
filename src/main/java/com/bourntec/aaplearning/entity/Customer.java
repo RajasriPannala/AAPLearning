@@ -53,4 +53,5 @@ public class Customer extends DateFields {
 	//@Column(length = 1)
 	private String recordStatus;
 	
+	
 }

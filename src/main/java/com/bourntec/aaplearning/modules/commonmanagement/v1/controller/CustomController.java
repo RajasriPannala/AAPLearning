@@ -22,19 +22,50 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class CustomController {
+	
+	
+	@Autowired private 
+	MailService emailService;
+	 
+    // Sending a simple Email
+    @PostMapping("/sendMail")
+    public String sendSimpleMail(@RequestBody EmailRequestDTO details)
+    {
+        String status
+            = emailService.sendSimpleMail(details);
+ 
+        return status;
+    }
 
-	@Autowired
-	private MailService emailService;
+    
 
-	@Autowired
-	RestTemplate restTemplate;
+    /**
+     * @param mail
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/sendMailWithAttachment")
+    public String sendMailWithAttachment(@RequestBody EmailRequestDTO mail) throws Exception {
+    	String status
+        = emailService.sendMailWithAttachment(mail);
 
-	// Sending a simple Email
-	@PostMapping("/sendMail")
-	public String sendSimpleMail(@RequestBody EmailRequestDTO details) {
-		String status = emailService.sendSimpleMail(details);
-return status;
+        return status;
+        }
+    @PostMapping("/sendTemplateMail")
+	public String sendEmailWithTemplate(@RequestBody EmailRequestDTO mail) {
+		return emailService.sendEmailWithTemplate(mail);
 
+	}
+    
+    @PostMapping("/sendSms")
+    public void sendSms(@Valid @RequestBody SmsRequest smsRequest) {	
+   
+
+    	service.sendSms(smsRequest);
+    	logger.info("SMS send successfully");
+    	
+    }
+    
 	}
 
 	@PostMapping("/sendTemplateMail")
