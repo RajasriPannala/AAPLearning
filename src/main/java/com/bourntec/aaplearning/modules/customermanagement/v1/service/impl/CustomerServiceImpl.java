@@ -8,9 +8,12 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.bourntec.aaplearning.entity.Customer;
+import com.bourntec.aaplearning.modules.commonmanagement.v1.request.SmsRequest;
 import com.bourntec.aaplearning.modules.customermanagement.v1.repository.CustomerRepository;
 import com.bourntec.aaplearning.modules.customermanagement.v1.request.CustomerRequestDTO;
 import com.bourntec.aaplearning.modules.customermanagement.v1.response.CustomerResponseDTO;
@@ -18,6 +21,7 @@ import com.bourntec.aaplearning.modules.customermanagement.v1.service.CustomerSe
 import com.bourntec.aaplearning.modules.customermanagement.v1.util.Constants;
 
 /**
+ * 
  * @author Sarath G Krishnan
  *
  */
@@ -26,6 +30,11 @@ public class CustomerServiceImpl implements CustomerService {
 	Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 	@Autowired
 	CustomerRepository customerRepository;
+	
+	RestTemplate restTemplate=new RestTemplate();
+	
+//	@Value("${email.url}")
+//	String url;
 
 	/**
 	 * find customer using id
@@ -69,9 +78,8 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerResponseDTO;
 	}
 
-	/**
-	 * save customer details
-	 */
+	
+	
 	@Override
 	public CustomerResponseDTO save(CustomerRequestDTO customerRequestDTO) {
 		CustomerResponseDTO custResDTO = new CustomerResponseDTO();
@@ -80,11 +88,29 @@ public class CustomerServiceImpl implements CustomerService {
 		customer.setRecordStatus(Constants.ACTIVE);
 		customer = customerRepository.save(customer);
 		custResDTO.setPayLoad(customer);
-		custResDTO.setResponseMessage("Payment data save sucessfully");
+		custResDTO.setResponseMessage("Customer data save sucessfully");
 		logger.info("data saved successfully");
 		custResDTO.setStatus("Sucess");
+		
+		SmsRequest smsRequest=new SmsRequest();
+		smsRequest.setMessage(customer.getName()+" Registered Successfully");
+		smsRequest.setPhoneNumber("+91"+customer.getPhoneNumber().toString());
+		sendSms(smsRequest);
+		
+		
 		return custResDTO;
 	}
+
+	/**'
+	 * @param smsRequest
+	 */
+	private void sendSms(SmsRequest smsRequest) 
+	{
+		String url="http://localhost:8090/sendSms/";
+	    restTemplate.postForObject(url, smsRequest, SmsRequest.class);
+		
+	}
+	
 
 	/**
 	 * update customer details
