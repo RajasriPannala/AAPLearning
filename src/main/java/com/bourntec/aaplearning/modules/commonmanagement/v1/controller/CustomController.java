@@ -34,6 +34,7 @@ public class CustomController {
 	public String sendSimpleMail(@RequestBody EmailRequestDTO details) {
 		String status = emailService.sendSimpleMail(details);
 return status;
+
 	}
 
 	@PostMapping("/sendTemplateMail")

@@ -157,6 +157,7 @@ public class MailServiceImpl implements MailService {
 			throw e;
 		}
 		return sender;
+		
 	}
 
 	public String sendEmailWithTemplate(EmailRequestDTO mail) {
