@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +18,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.request.EmailRequestDTO;
+import com.bourntec.aaplearning.modules.commonmanagement.v1.request.SmsRequest;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.service.MailService;
+import com.bourntec.aaplearning.modules.commonmanagement.v1.service.SmsService;
+import com.bourntec.aaplearning.modules.commonmanagement.v1.service.impl.SmsServiceImpl;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
@@ -23,9 +30,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 public class CustomController {
 	
-	
+	private static final Logger logger = LoggerFactory.getLogger(SmsServiceImpl.class);
+	 
 	@Autowired private 
 	MailService emailService;
+	@Autowired
+	SmsService service;
 	 
     // Sending a simple Email
     @PostMapping("/sendMail")
@@ -51,11 +61,11 @@ public class CustomController {
 
         return status;
         }
-    @PostMapping("/sendTemplateMail")
-	public String sendEmailWithTemplate(@RequestBody EmailRequestDTO mail) {
-		return emailService.sendEmailWithTemplate(mail);
-
-	}
+//    @PostMapping("/sendTemplateMail")
+//	public String sendEmailWithTemplate(@RequestBody EmailRequestDTO mail) {
+//		return emailService.sendEmailWithTemplate(mail);
+//
+//	}
     
     @PostMapping("/sendSms")
     public void sendSms(@Valid @RequestBody SmsRequest smsRequest) {	
@@ -66,7 +76,6 @@ public class CustomController {
     	
     }
     
-	}
 
 	@PostMapping("/sendTemplateMail")
 	public String sendEmailWithTemplate(@RequestBody EmailRequestDTO mail) {

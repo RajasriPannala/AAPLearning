@@ -1,13 +1,20 @@
 package com.bourntec.aaplearning.modules.inventorymanagement.v1.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.Inventory;
+import com.bourntec.aaplearning.entity.SortList;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.repository.InventoryRepository;
+import com.bourntec.aaplearning.modules.inventorymanagement.v1.request.CustomRequestDTO;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.request.InventoryRequestDTO;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.InventoryResponseDTO;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.service.InventoryService;
