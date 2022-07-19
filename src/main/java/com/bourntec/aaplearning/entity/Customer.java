@@ -4,6 +4,7 @@ import javax.persistence.Column;
 
 
 
+
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Builder
 @Table(name = "aapcustomer")
-//@JsonFilter("customerDetails")
+// @JsonFilter("customerDetails")
 public class Customer extends DateFields {
 
 	@Id
@@ -51,4 +52,6 @@ public class Customer extends DateFields {
 	private String status;
 	//@Column(length = 1)
 	private String recordStatus;
+	
+	
 }

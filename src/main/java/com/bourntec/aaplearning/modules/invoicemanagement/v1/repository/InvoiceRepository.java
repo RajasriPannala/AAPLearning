@@ -35,3 +35,4 @@ public interface InvoiceRepository extends JpaRepository<Invoice,Integer>,JpaSpe
 
 	 Page<Invoice> pagingFilteringAndSortingInvoicesByItemCode(CustomRequestDTO customRequestDTO);
 }
+
