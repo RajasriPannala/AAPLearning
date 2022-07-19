@@ -18,6 +18,7 @@ import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceRequestDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.InvoiceService;
+import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
 
 
 
@@ -95,4 +96,12 @@ public class InvoiceController {
 		return invoice;
 
 	}
+	
+	@GetMapping("/custid/{custId}")
+	public ResponseEntity <InvoiceResponseDTO> findByCustId(@PathVariable Integer custId) {
+		InvoiceResponseDTO invoicesDTO = invoiceService.findByCustId(custId);
+	
+		return ResponseEntity.ok(invoicesDTO);
+	}
+
 }

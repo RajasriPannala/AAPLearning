@@ -34,6 +34,12 @@ public class OrderRequestDTO {
 	private Double amountPay;
 	private String orderStatus;
 	
+	private double price;
+	private  String currency;
+	private  String method;
+	private  String intent;
+	private String description; 
+	
 	public OrderData convertToModel() {
 		OrderData order=new OrderData();
 		BeanUtils.copyProperties(this, order);

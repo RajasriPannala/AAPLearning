@@ -100,7 +100,7 @@ public class MailServiceImpl implements MailService {
 						"http://localhost:8081/ordermanagement/v1/orders/" + details.getKeyValue(),
 						OrderResponseDTO.class);
 
-				OrderData orderData = mapper.convertValue(response.getBody().getPaylod(), OrderData.class);
+				OrderData orderData = mapper.convertValue(response.getBody().getPayload(), OrderData.class);
 
 				if (orderData.getAddress() != null && orderData.getOrderStatus() != null) {
 					mailMessage.setText(details.getMessage() + orderData.getAddress() + orderData.getOrderStatus());
@@ -114,9 +114,6 @@ public class MailServiceImpl implements MailService {
 			else if (details.getModule().equalsIgnoreCase(Constant.SHIPPING)) {
 
 				HttpHeaders headers = new HttpHeaders();
-				// headers.add("Authorization",
-				// "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTUyNjQ3MjAsImlhdCI6MTY1NTE3OTgyMH0.nKeOMaqcxh_PAWr5b7nn02gYPrGpLDF6cLJhDkJEq7GqOXS9-C7enQdVI-atjgwIhqdbmGjkPWOkTjFaOk_l7A");
-
 				headers.add("Authorization", httpServletRequest.getHeader("AUTHORIZATION"));
 
 				headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

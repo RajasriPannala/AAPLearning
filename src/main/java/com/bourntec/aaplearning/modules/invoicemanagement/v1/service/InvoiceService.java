@@ -43,6 +43,10 @@ public interface InvoiceService {
 
 
 
+	InvoiceResponseDTO findByCustId(Integer custId);
+
+
+
 	
 
 
