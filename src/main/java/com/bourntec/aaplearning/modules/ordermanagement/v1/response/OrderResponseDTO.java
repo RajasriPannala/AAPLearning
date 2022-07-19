@@ -27,7 +27,7 @@ import lombok.Setter;
 public class OrderResponseDTO {
 
 	String responseMessage;
-	Object paylod;
+	Object payload;
 	String status;
 
 	/**

@@ -128,9 +128,20 @@ public class OrderController {
 
 
 	}
+	
+	
+	@GetMapping("/custid/{custId}")
+	public ResponseEntity <OrderResponseDTO> findByCustId(@PathVariable Integer custId) {
+		OrderResponseDTO ordersDTO = orderService.findByCustId(custId);
+	
+		return ResponseEntity.ok(ordersDTO);
+	}
 
-
+	
+	
 }	
+
+
 	
 	
 	

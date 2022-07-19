@@ -73,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
 		
 		if (orderList != null) {
 
-			orderResponseDTO.setPaylod(orderList.get());
+			orderResponseDTO.setPayload(orderList.get());
 			orderResponseDTO.setResponseMessage("Data found");
 			orderResponseDTO.setStatus("Sucess");
 			logger.info("order found with id number :{}",orderId);
@@ -128,7 +128,7 @@ public class OrderServiceImpl implements OrderService {
 		order.setOrderStatus(Constants.OPEN);
 		order.setAmountPay(order.getTotalAmount()-(order.getTotalAmount()*(order.getDiscount()/100)));
 		order = orderRepository.save(order);
-		ordersDTO.setPaylod(order);
+		ordersDTO.setPayload(order);
 		ordersDTO.setResponseMessage("order data saved sucessfully");
 		ordersDTO.setStatus("Sucess");
 		logger.info("order saved");
@@ -153,7 +153,7 @@ public class OrderServiceImpl implements OrderService {
 			order.setOrderId(id);
 			
 			order = orderRepository.save(order);
-			ordersDTO.setPaylod(order);
+			ordersDTO.setPayload(order);
 
 			ordersDTO.setResponseMessage("Fetched data successfully");
 			ordersDTO.setStatus("Sucess");
@@ -192,5 +192,15 @@ public class OrderServiceImpl implements OrderService {
 		
 		return orderRepository.findAllOrderData(customer_id);
 	}
-}
+
+	@Override
+	public OrderResponseDTO findByCustId(Integer custId) {
+		// TODO Auto-generated method stub
+		OrderResponseDTO orderDTO = new OrderResponseDTO();
+		List<OrderData> orders = orderRepository.findByCustId(custId);
+			orderDTO.setPayload(orders);
+		return orderDTO;
+	}
+	}
+
 

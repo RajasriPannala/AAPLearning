@@ -19,6 +19,3 @@ public interface InvoiceItemRepository extends JpaRepository<InvoiceItem,Integer
 	InvoiceItem save(CustomInvoiceItemResponseDTO invResponseDTO);
 
 }
-
-
-

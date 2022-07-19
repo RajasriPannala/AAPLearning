@@ -3,7 +3,9 @@ import java.util.List;
 
 import com.bourntec.aaplearning.entity.InvoiceItem;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceItemRequestDTO;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.CustomInvoiceResponseDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceItemResponseDTO;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
 /**
  * @author Aryalekshmi
  *
@@ -16,4 +18,8 @@ public interface InvoiceItemService
 	 	InvoiceItemResponseDTO save(InvoiceItemRequestDTO invoiceitem);
 	 	InvoiceItemResponseDTO findById(int id) throws Exception;
 	 	List<InvoiceItem> getInvoiceItemList(int i, Integer j);
+	 	InvoiceItemResponseDTO getCountInvoiceItemCode();
+		
+		
+		InvoiceResponseDTO getCountInvoiceItemUnsoldAndSoldCodeCount();
 	}

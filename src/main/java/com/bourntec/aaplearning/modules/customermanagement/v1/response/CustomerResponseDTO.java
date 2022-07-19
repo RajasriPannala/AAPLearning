@@ -3,6 +3,7 @@ package com.bourntec.aaplearning.modules.customermanagement.v1.response;
 import org.springframework.beans.BeanUtils;
 
 import com.bourntec.aaplearning.entity.Customer;
+import com.bourntec.aaplearning.entity.OrderData;
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import lombok.AllArgsConstructor;
@@ -34,4 +35,10 @@ public class CustomerResponseDTO {
 		BeanUtils.copyProperties(customer, this);
 
 	}
-}
+
+	
+	}
+
+	
+	
+

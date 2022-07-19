@@ -24,6 +24,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>, Jp
 	CustomerResponseDTO save(CustomerRequestDTO customerRequestDTO);
 
 	/**
+	 * 
 	 * @param customerId
 	 * @param active     find customer using customer id and record status
 	 * @return

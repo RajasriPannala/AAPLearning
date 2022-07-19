@@ -135,7 +135,7 @@ public class CustomPaymentServiceImpl implements CustomPaymentService {
 			OrderResponseDTO orderResponse = restTemplate
 					.getForObject("http://localhost:8081/orders/" + invoice.getOrderId(), OrderResponseDTO.class);
 
-			OrderData orderData = mapper.convertValue(orderResponse.getPaylod(), OrderData.class);
+			OrderData orderData = mapper.convertValue(orderResponse.getPayload(), OrderData.class);
 
 			if (orderData != null) {
 				orderData.setOrderStatus(Constants.CONFIRMED);

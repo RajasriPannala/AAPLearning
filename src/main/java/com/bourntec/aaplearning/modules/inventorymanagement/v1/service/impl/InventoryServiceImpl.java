@@ -1,13 +1,20 @@
 package com.bourntec.aaplearning.modules.inventorymanagement.v1.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.bourntec.aaplearning.entity.Inventory;
+import com.bourntec.aaplearning.entity.SortList;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.repository.InventoryRepository;
+import com.bourntec.aaplearning.modules.inventorymanagement.v1.request.CustomRequestDTO;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.request.InventoryRequestDTO;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.response.InventoryResponseDTO;
 import com.bourntec.aaplearning.modules.inventorymanagement.v1.service.InventoryService;
@@ -149,4 +156,31 @@ public class InventoryServiceImpl implements InventoryService {
 		
 		return inventoryRepository.findAll();
 	}
+
+	@Override
+    public Page<Inventory>sortingAndFilteringInventoryDetails(CustomRequestDTO customRequestDTO) {
+		
+        List<SortList> sortList=customRequestDTO.getSort();
+        List<Sort.Order> sortOrder= new ArrayList<>();
+        for(SortList s:sortList) 
+        {
+
+        String sort = null;
+        if ((s.getOrderd()).equals("descending"))
+        {
+        	sort=s.getField();
+        	sortOrder.add(new Sort.Order(Sort.Direction.DESC,sort));
+        }
+        else if ((s.getOrderd()).equals("ascending"))
+        {
+        	sort=s.getField();
+        	sortOrder.add(new Sort.Order(Sort.Direction.ASC,sort));
+        }
+            }
+       
+        Pageable requestedPage =PageRequest.of(customRequestDTO.getPage(),customRequestDTO.getSize() , Sort.by(sortOrder));
+        return inventoryRepository.findAll(requestedPage);
+
+    }
+
 }

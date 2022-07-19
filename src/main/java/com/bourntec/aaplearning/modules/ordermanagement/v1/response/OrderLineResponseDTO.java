@@ -1,7 +1,5 @@
 package com.bourntec.aaplearning.modules.ordermanagement.v1.response;
 
-import org.springframework.beans.BeanUtils;
-
 import com.bourntec.aaplearning.entity.OrderLine;
 
 import lombok.AllArgsConstructor;
