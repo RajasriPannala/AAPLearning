@@ -5,6 +5,7 @@ package com.bourntec.aaplearning.modules.invoicemanagement.v1.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 //import com.bourntec.aap.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.entity.InvoiceItem;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.CustomRequestDTO;
 
 
 
@@ -28,13 +30,14 @@ public interface InvoiceRepository extends JpaRepository<Invoice,Integer>,JpaSpe
 	 InvoiceItem save(InvoiceItem invoice);
 // InvoiceResponseDTO findById(int id);
 
-	List<Invoice> findByCustId(Integer custId);
-
 	// Invoice save(InvoiceRequestDto invoice);
 
 //	 void updateById(int id);
 //	 InvoiceResponseDTO findAll();
 	// Invoice saveInvoice(InvoiceItemRequestDto invoice);
 
-	
+	 List<Invoice> findByCustId(Integer custId);
+
+
+	 Page<Invoice> pagingFilteringAndSortingInvoicesByItemCode(CustomRequestDTO customRequestDTO);
 }
