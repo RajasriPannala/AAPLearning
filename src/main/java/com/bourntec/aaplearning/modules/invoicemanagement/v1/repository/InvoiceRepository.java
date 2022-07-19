@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 //import com.bourntec.aap.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.entity.InvoiceItem;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.CustomRequestDTO;
 
 
 
@@ -34,8 +35,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice,Integer>,JpaSpe
 //	 void updateById(int id);
 //	 InvoiceResponseDTO findAll();
 	// Invoice saveInvoice(InvoiceItemRequestDto invoice);
-
 	 List<Invoice> findByCustId(Integer custId);
-
-
+	 Page<Invoice> pagingFilteringAndSortingInvoicesByItemCode(CustomRequestDTO customRequestDTO);
 }

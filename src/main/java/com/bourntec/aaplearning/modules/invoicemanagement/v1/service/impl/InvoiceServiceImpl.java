@@ -1,8 +1,18 @@
 package com.bourntec.aaplearning.modules.invoicemanagement.v1.service.impl;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Period;
+import java.time.chrono.ChronoLocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -17,14 +27,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bourntec.aaplearning.entity.Invoice;
+import com.bourntec.aaplearning.entity.SortList;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.repository.InvoiceRepository;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.CustomRequestDTO;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceDateSearchDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.InvoiceRequestDTO;
+import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceItemResponseDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.CsvOperationService;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.service.InvoiceService;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.util.Constants;
 
-
+/**
+ * @author Esther Tomy
+ *
+ */
 @Service
 
 public class InvoiceServiceImpl implements InvoiceService {
@@ -180,18 +197,74 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 	
 
-	
-	
+	@Override
+	public Page<Invoice> pagingFilteringAndSortingInvoicesByItemCode(CustomRequestDTO customRequestDTO) {
+		List<SortList> sortList=customRequestDTO.getSort();
+		List<Sort.Order> sorts= new ArrayList<>();
+		for(SortList so:sortList) {
 
-@Override
-public InvoiceResponseDTO findByCustId(Integer custId) {
+		String sort = null;
+		if ((so.getOrderd()).equals("decending"))
+		{
+			sort=so.getField();
+		   sorts.add(new Sort.Order(Sort.Direction.DESC,sort));
+		} else if ((so.getOrderd()).equals("acending"))
+		{
+			sort =so.getField();
+		  sorts.add(new Sort.Order(Sort.Direction.ASC,sort));
+		}
+	
+			}
+		System.out.println(sorts);
+		Pageable requestedPage =PageRequest.of(customRequestDTO.getPage(),customRequestDTO.getSize() , Sort.by(sorts));
+		return invoiceRepository.findAll(requestedPage);
+	
+	}
 
-// TODO Auto-generated method stub
-InvoiceResponseDTO invoicesDTO = new InvoiceResponseDTO();
-List<Invoice> invoices = invoiceRepository.findByCustId(custId);
-invoicesDTO.setPayload(invoices);
-return invoicesDTO;
-}
+	
+	@Override
+	public InvoiceResponseDTO getInvoiceDetails(InvoiceDateSearchDTO invoiceDateSearchDTO) throws ParseException {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		InvoiceResponseDTO invresDTO = new InvoiceResponseDTO();
+		List<Invoice> invoiceList = new ArrayList<Invoice>();
+		
+		
+		String from=invoiceDateSearchDTO.getStartDate();
+		String to=invoiceDateSearchDTO.getEndDate();
+		LocalDate date1 = LocalDate.parse(from, dtf);
+		LocalDate date = LocalDate.parse(to, dtf);       
+        Integer custId=invoiceDateSearchDTO.getCustId();
+        List<Invoice> invoiceMasterList =
+        		invoiceRepository.findAll();
+     
+     for(Invoice so:invoiceMasterList) {
+
+    	 if(so.getOrderDate()!=null) 
+    	 {
+    	 if(so.getCustId().equals(custId) && so.getOrderDate().compareTo(date1) >= 0 && so.getOrderDate().compareTo(date) <=0)
+    	 {
+    		 invoiceList.add(so);
+    	
+   		 
+    	 }
+    	 }
+     } 
+   invresDTO.setPayload(invoiceList);
+	return invresDTO;
+		
+	}
+
+	@Override
+	public InvoiceResponseDTO findByCustId(Integer custId) {
+
+	// TODO Auto-generated method stub
+	InvoiceResponseDTO invoicesDTO = new InvoiceResponseDTO();
+	List<Invoice> invoices = invoiceRepository.findByCustId(custId);
+	invoicesDTO.setPayload(invoices);
+	return invoicesDTO;
+	}
+
+
 
 
 }
