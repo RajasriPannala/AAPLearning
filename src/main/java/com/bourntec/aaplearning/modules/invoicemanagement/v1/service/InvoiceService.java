@@ -64,5 +64,5 @@ public interface InvoiceService {
 
 //	List<InvoiceResponseDTO> findAll();
 
-	InvoiceResponseDTO findByCustId(Integer custId);
+
 }

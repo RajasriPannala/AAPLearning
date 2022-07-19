@@ -102,7 +102,7 @@ public class MailServiceImpl implements MailService {
 						"http://localhost:8082/ordermanagement/v1/orders/" + details.getKeyValue(),
 						OrderResponseDTO.class);
 
-				OrderData orderData = mapper.convertValue(response.getBody().getPaylod(), OrderData.class);
+				OrderData orderData = mapper.convertValue(response.getBody().getPayload(), OrderData.class);
 
 				if (orderData.getAddress() != null && orderData.getOrderStatus() != null) {
 					mailMessage.setText(details.getMessage() + orderData.getAddress() + orderData.getOrderStatus());
