@@ -51,6 +51,10 @@ public interface InvoiceService {
 
 	InvoiceResponseDTO getInvoiceDetails(InvoiceDateSearchDTO invoiceDateSearchDTO) throws ParseException;
 
+
+
+	InvoiceResponseDTO findByCustId(Integer custId);
+
 	
 
 

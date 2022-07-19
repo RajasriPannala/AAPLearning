@@ -117,5 +117,10 @@ public class InvoiceController {
 		
 		return  invoiceService.getInvoiceDetails(invoiceDateSearchDTO);
 	}
+	@GetMapping("/custid/{custId}")
+	public ResponseEntity <InvoiceResponseDTO> findByCustId(@PathVariable Integer custId) {
+		InvoiceResponseDTO invoicesDTO = invoiceService.findByCustId(custId);
 	
+		return ResponseEntity.ok(invoicesDTO);
+	}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 }
