@@ -1,7 +1,10 @@
 package com.bourntec.aaplearning.modules.returnmanagement.v1.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.bourntec.aaplearning.entity.Return;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.request.ReturnRequestDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.response.ReturnResponseDTO;
 
@@ -12,7 +15,7 @@ import com.bourntec.aaplearning.modules.returnmanagement.v1.response.ReturnRespo
 @Service
 public interface ReturnService {
 	
-//	List<Return> findAll();
+	
 
 	ReturnResponseDTO save(ReturnRequestDTO returnManagement);
 
@@ -23,6 +26,11 @@ public interface ReturnService {
 	ReturnResponseDTO findById(int id) throws Exception;
 	
 //	 String FindByRetAmt(int id);
+	 void downloadAsCsv();
 
+	/**
+	 * @return
+	 */
+	List<Return> listAll();
 
-		}
+}

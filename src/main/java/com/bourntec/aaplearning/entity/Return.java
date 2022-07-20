@@ -37,7 +37,7 @@ public class Return {
 	private Integer invoiceId;
 	private Integer custId;
 	private Integer itemCode;
-	private Integer retAmt;
+	private Double retAmt;
 	private Integer qty;
 	private String description;
 	private String Status ;
