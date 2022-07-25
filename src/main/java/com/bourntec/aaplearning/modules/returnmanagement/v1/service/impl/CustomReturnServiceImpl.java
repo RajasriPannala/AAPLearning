@@ -19,8 +19,6 @@ import com.bourntec.aaplearning.modules.returnmanagement.v1.repository.ReturnRep
 import com.bourntec.aaplearning.modules.returnmanagement.v1.request.ReturnRequestDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.response.ReturnResponseDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.service.CustomReturnService;
-import com.bourntec.aaplearning.modules.returnmanagement.v1.util.Constants;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -39,7 +37,7 @@ public class CustomReturnServiceImpl implements CustomReturnService{
 
 	Return returnValue = returnRequestDTO.convertToModel();
 
-	returnValue = returnRepository.save(returnValue);
+	
 	
 	final ObjectMapper mapper = new ObjectMapper(); 
 	
@@ -53,11 +51,12 @@ public class CustomReturnServiceImpl implements CustomReturnService{
 		
 		Invoice invoice = mapper.convertValue(impResponse.getPayload(),Invoice.class);
 		
+		Double discount = invoice.getDiscount();
+		Double amount = returnValue.getRetAmt() - (returnValue.getRetAmt()*discount)/100;
+		invoice.setRetAmnt(invoice.getRetAmnt() + amount);
 		
-		invoice.setPaidAmnt(returnValue.getRetAmt());
-		
-		
-		
+		returnValue.setRetAmt(amount);
+		returnValue = returnRepository.save(returnValue);
 		
 		HttpEntity<Invoice> requestEntity = new HttpEntity<>(invoice);
 		HttpEntity<InvoiceResponseDTO> response = restTemplate.exchange("http://localhost:8085/invoice/"+returnValue.getInvoiceId(), HttpMethod.PUT, requestEntity,InvoiceResponseDTO .class);
@@ -101,7 +100,7 @@ public class CustomReturnServiceImpl implements CustomReturnService{
 		Optional<Return> returnOptional = returnRepository.findById(id);
 		
 		if (returnOptional.isPresent()) {
-			int retAmnt = returnOptional.get().getRetAmt();
+			double retAmnt = returnOptional.get().getRetAmt();
 			if (retAmnt <10) {
 				category = "below";
 			}

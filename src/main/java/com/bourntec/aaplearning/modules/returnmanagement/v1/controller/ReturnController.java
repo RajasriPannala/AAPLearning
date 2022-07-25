@@ -1,5 +1,13 @@
 package com.bourntec.aaplearning.modules.returnmanagement.v1.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +24,7 @@ import com.bourntec.aaplearning.entity.Return;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.request.ReturnRequestDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.response.ReturnResponseDTO;
 import com.bourntec.aaplearning.modules.returnmanagement.v1.service.ReturnService;
+import com.bourntec.aaplearning.modules.returnmanagement.v1.service.impl.ReturnServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -130,5 +139,23 @@ public class ReturnController {
 
 
 	}
+	
+	
+	@GetMapping("/users/export/excel")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Return> listUsers = returnService.listAll();
+
+        ReturnServiceImpl excelExporter = new ReturnServiceImpl(listUsers);
+
+        excelExporter.export(response);  
+    }
 }
 

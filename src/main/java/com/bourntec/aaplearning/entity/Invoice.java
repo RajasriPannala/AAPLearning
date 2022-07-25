@@ -42,7 +42,8 @@ public class Invoice extends DateFields {
  private Integer itemCode;
  private Integer invAmnt;
  private Integer paidAmnt;
- private Integer retAmnt;
+ private Double retAmnt;
+ private Double discount;
  private String status;
  
  @JsonSerialize(using = LocalDateSerializer.class)

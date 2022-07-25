@@ -31,7 +31,7 @@ public class ReturnRequestDTO {
 	private Integer invoiceId;
 	private Integer custId;
 	private Integer itemCode;
-	private Integer retAmt;
+	private Double retAmt;
 	private Integer qty;
 	private String description;
 	
