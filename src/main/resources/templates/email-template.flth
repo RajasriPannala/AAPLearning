@@ -23,7 +23,7 @@
 <body>
 	<p>Dear ${name},...</p>
 
-	<p>A Sending mail to provide the invoice data ,please check it......!!!!.</p>
+	<p> Sending mail to provide the invoice data ,please check it......!!!!.</p>
 	<p> Here is the invoice:</p>
 	<head>
 	<style>
