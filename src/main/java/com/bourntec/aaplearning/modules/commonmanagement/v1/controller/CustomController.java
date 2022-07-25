@@ -1,5 +1,6 @@
 package com.bourntec.aaplearning.modules.commonmanagement.v1.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,12 +21,14 @@ import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.request.EmailRequestDTO;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.request.SmsRequest;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.service.MailService;
+import com.bourntec.aaplearning.modules.commonmanagement.v1.service.PlivoSmsService;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.service.SmsService;
 import com.bourntec.aaplearning.modules.commonmanagement.v1.service.impl.SmsServiceImpl;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.response.InvoiceResponseDTO;
 import com.bourntec.aaplearning.modules.ordermanagement.v1.response.OrderResponseDTO;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.util.Constant;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.plivo.api.exceptions.PlivoRestException;
 
 @RestController
 public class CustomController {
@@ -36,6 +39,9 @@ public class CustomController {
 	MailService emailService;
 	@Autowired
 	SmsService service;
+	
+	@Autowired
+	PlivoSmsService plivoSmsService;
 	 
     // Sending a simple Email
     @PostMapping("/sendMail")
@@ -82,4 +88,14 @@ public class CustomController {
 		return emailService.sendEmailWithTemplate(mail);
 
 	}
+	
+	@PostMapping("/sendingSms")
+    public void sendingSms(@Valid @RequestBody SmsRequest smsRqst) throws IOException, PlivoRestException {	
+   
+
+    	plivoSmsService.sendingSms(smsRqst);
+    	
+    	logger.info("SMS send successfully");
+    	
+    }
 }

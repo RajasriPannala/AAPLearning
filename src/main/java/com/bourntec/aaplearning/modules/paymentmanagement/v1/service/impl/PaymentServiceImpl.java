@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.bourntec.aaplearning.entity.Payment;
 import com.bourntec.aaplearning.entity.PaymentCustomerDTO;
+import com.bourntec.aaplearning.modules.commonmanagement.v1.request.SmsRequest;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.controller.PaymentController;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.enumeration.PaymentType;
 import com.bourntec.aaplearning.modules.paymentmanagement.v1.repository.PaymentRepository;
@@ -120,7 +121,24 @@ public class PaymentServiceImpl implements PaymentService {
 			payresDTO.setStatus("Sucess");
 
 		}
+		
+		SmsRequest smsRqst=new SmsRequest();
+		smsRqst.setMessage(payment.getPaidAmount()+"Payment Successful");
+		smsRqst.setPhoneNumber("91"+payment.getPhoneNumber());
+		sendingSms(smsRqst);
+		
+		
 		return payresDTO;
+	}
+	
+	/**'
+	 * @param smsRequest
+	 */
+	private void sendingSms(SmsRequest smsRqst) 
+	{
+//		String url="http://localhost:8081/sendSms/";
+	    restTemplate.postForObject("http://localhost:8081/sendingSms/", smsRqst, SmsRequest.class);
+		
 	}
 
 	/**

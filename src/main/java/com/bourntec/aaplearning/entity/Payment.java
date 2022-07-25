@@ -35,6 +35,7 @@ public class Payment extends DateFields {
 	private PaymentType paymentType;
     private Integer tax;
     private Double totalAmount;
+    private String phoneNumber;
 	//private String paymentType;
 	
 	

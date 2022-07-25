@@ -43,6 +43,7 @@ public class PaymentRequestDTO {
 	LocalDate paymentDate;
 	 private Integer tax;
 	 private Double totalAmount;
+	 private String phoneNumber;
 
 	
 	/**
