@@ -35,7 +35,7 @@ public class CsvOperationServiceImpl implements CsvOperationService{
 		invoice.setItemCode(Integer.parseInt(invoiceDetails[3]));
 		invoice.setInvAmnt(Integer.parseInt(invoiceDetails[4]));
 		invoice.setPaidAmnt(Integer.parseInt(invoiceDetails[5]));
-		invoice.setRetAmnt(Integer.parseInt(invoiceDetails[6]));
+		invoice.setRetAmnt(Double.parseDouble(invoiceDetails[6]));
 		invoice.setStatus(invoiceDetails[7]);
 		
 		

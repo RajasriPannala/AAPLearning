@@ -2,7 +2,6 @@ package com.bourntec.aaplearning.modules.invoicemanagement.v1.controller;
 
 import java.text.ParseException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.bourntec.aaplearning.entity.Invoice;
 import com.bourntec.aaplearning.modules.invoicemanagement.v1.request.CustomRequestDTO;
@@ -119,5 +117,10 @@ public class InvoiceController {
 		
 		return  invoiceService.getInvoiceDetails(invoiceDateSearchDTO);
 	}
+	@GetMapping("/custid/{custId}")
+	public ResponseEntity <InvoiceResponseDTO> findByCustId(@PathVariable Integer custId) {
+		InvoiceResponseDTO invoicesDTO = invoiceService.findByCustId(custId);
 	
+		return ResponseEntity.ok(invoicesDTO);
+	}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 }

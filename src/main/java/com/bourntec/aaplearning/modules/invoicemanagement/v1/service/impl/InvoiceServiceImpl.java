@@ -254,9 +254,20 @@ public class InvoiceServiceImpl implements InvoiceService {
 		
 	}
 
+	@Override
+	public InvoiceResponseDTO findByCustId(Integer custId) {
+		// TODO Auto-generated method stub
+		
+		InvoiceResponseDTO invoicesDTO = new InvoiceResponseDTO();
+		List<Invoice> invoices = invoiceRepository.findByCustId(custId);
+		invoicesDTO.setPayload(invoices);
+		return invoicesDTO;
+		}
 	
 
 
 
 
 }
+
+

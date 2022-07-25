@@ -29,7 +29,7 @@ public interface OrderService {
 	
 	
 
-
+	OrderResponseDTO findByCustId(Integer custId);
 	OrderResponseDTO deleteById(Integer id);
 	
 

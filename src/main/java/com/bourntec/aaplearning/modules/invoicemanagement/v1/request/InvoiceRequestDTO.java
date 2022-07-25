@@ -28,7 +28,8 @@ public class InvoiceRequestDTO {
 	private Integer itemCode;
 	private  Integer invAmnt;
 	private Integer paidAmnt;
-	private  Integer retAmnt;
+	private  Double retAmnt;
+	private Double discount;
 	 @Column(length=1)
 	 private String status;
 	 
