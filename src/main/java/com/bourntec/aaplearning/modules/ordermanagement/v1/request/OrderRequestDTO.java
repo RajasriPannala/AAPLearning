@@ -34,6 +34,7 @@ public class OrderRequestDTO {
 	private Double amountPay;
 	private String orderStatus;
 	
+	
 	private double price;
 	private  String currency;
 	private  String method;

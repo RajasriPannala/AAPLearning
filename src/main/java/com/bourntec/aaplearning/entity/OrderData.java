@@ -49,10 +49,10 @@ public class OrderData extends DateFields {
 	private String address;
 	private Integer itemcount;
 	private Integer totalPrice;
-
 	private Double totalAmount;
 	private Double discount;
 	private Double amountPay;
+	
 
 	@JsonSerialize(using = LocalDateSerializer.class)
 	@JsonDeserialize(using = LocalDateDeserializer.class)
